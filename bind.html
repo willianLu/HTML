@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+        <title>bind方法实现</title>
+    </head>
+
+    <body>
+        <script>
+            function p(say) {
+                console.log(this.name, ' say: ', say)
+            }
+            p('hello')
+            let obj = {
+                name: 'zhang san',
+            }
+            let b = p.bind(obj)
+            b('你好')
+            Function.prototype.mbind = function (context) {
+                if (typeof this !== 'function') {
+                    throw new TypeError('Function.prototype.bind - what is trying to be bound is not callable')
+                }
+                var args = Array.prototype.slice.call(arguments, 1)
+                var self = this
+                var F = function () {}
+                F.prototype = this.prototype
+                var bound = function () {
+                    var innerArgs = Array.prototype.slice.call(arguments)
+                    var finalArgs = args.concat(innerArgs)
+                    return self.apply(this instanceof F ? this : context || this, finalArgs)
+                }
+                bound.prototype = new F()
+                return bound
+            }
+            let c = p.mbind(obj)
+            c('哈哈')
+        </script>
+    </body>
+</html>

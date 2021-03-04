@@ -1,0 +1,41 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>拖拽上传</title>
+        <style>
+            body {
+                margin: 0;
+            }
+            #box {
+                width: 200px;
+                height: 200px;
+                background-color: green;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="box">拖拽文件到这里，开始上传</div>
+        <div>
+            <button>上传</button>
+        </div>
+        <script>
+            let box = document.getElementById('box')
+            console.log('------------------------box')
+            box.addEventListener('drag', function(e) {
+                e.preventDefault()
+                console.log('--------------------------drag');
+            })
+            box.addEventListener('dragstart', function(e) {
+                e.target.style.backgroundColor = 'blue'
+                console.log('------------------------------dragstart');
+            })
+            box.addEventListener('dragend', function(e) {
+                e.target.style.backgroundColor = 'green'
+                console.log('---------------------------------------dragend');
+            })
+            box.addEventListener('dragover', function(e) {
+                console.log('----------------------------------------------dragover')
+            })
+        </script>
+    </body>
+</html>

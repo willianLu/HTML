@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+        <title>图片滚动</title>
+        <style>
+            .box {
+                width: 700px;
+                height: 330px;
+                white-space: nowrap;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                font-size: 0;
+            }
+            .list {
+                display: inline-block;
+                scroll-snap-align: center;
+                font-size: 16px;
+            }
+            img {
+                display: block;
+                padding: 0;
+                margin: 0;
+                width: 500px;
+                height: 300px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="box">
+            <div class="list"><img src="./images/00001.png" /></div>
+            <div class="list"><img src="./images/00002.png" /></div>
+            <div class="list"><img src="./images/00001.png" /></div>
+            <div class="list"><img src="./images/00002.png" /></div>
+            <div class="list"><img src="./images/00001.png" /></div>
+            <div class="list"><img src="./images/00002.png" /></div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+        <title>js深拷贝</title>
+    </head>
+    <body>
+        <script>
+            function curry(fun, ...args) {
+                return function(..._args) {
+                    let new_args = args.concat(_args)
+                    if (fun.length <= new_args.length) {
+                        return fun.call(this, ...new_args)
+                    }
+                    return curry.call(this, fun, ...new_args)
+                }
+            }
+
+            const isType = curry((type, data) => {
+                return Object.prototype.toString.call(data).toLowerCase() === `[object ${type}]`.toLowerCase()
+            })
+
+            const isObject = data => isType('object', data)
+            const isSet = data => isType('set', data)
+            const isMap = data => isType('map', data)
+            const isArray = data => {
+                return isType('array', data)
+            }
+            const isArguments = data => isType('arguments', data)
+
+            function isNeedDeep(target) {
+                return isObject(target) || isArray(target) || isMap(target) || isSet(target) || isArguments(target)
+            }
+
+            function getInit(target) {
+                let ctor = target.constructor
+                return new ctor()
+            }
+
+            const clone = curry((map, target) => {
+                if (map.get(target)) {
+                    return target
+                }
+                let new_target
+                if (isNeedDeep(target)) {
+                    new_target = getInit(target)
+                } else {
+                    return target
+                }
+                map.set(target, new_target)
+
+                if (isSet(target)) {
+                    target.forEach(item => {
+                        new_target.add(clone(item, map))
+                    })
+                } else if (isMap(target)) {
+                    target.forEach((value, key) => {
+                        new_target.set(key, clone(value, map))
+                    })
+                } else {
+                    for (let key in target) {
+                        new_target[key] = clone(target[key], map)
+                    }
+                }
+                return new_target
+            }, new WeakMap())
+        </script>
+    </body>
+</html>

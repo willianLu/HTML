@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>hash和history</title>
+    </head>
+    <body>
+        <script>
+            let stateObj = {
+                foo: 'bar',
+            }
+
+            console.log(window.location, '---------xx')
+            history.pushState(stateObj, null, '?bar=1')
+            window.onpopstate = function () {
+                console.log('--->', arguments)
+            }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+        <title>react 异步加载页面进度条</title>
+        <style>
+            .pace-progress {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 99%;
+                height: 3px;
+                background-color: blue;
+                animation: progress 5s ease-in-out;
+            }
+            @keyframes progress {
+                from {
+                    width: 0;
+                }
+                to {
+                    width: 99%;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="pace-progress"></div>
+    </body>
+</html>

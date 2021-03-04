@@ -1,0 +1,218 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>css滑块动画</title>
+        <style>
+            body {
+                margin: 0;
+            }
+            .slide-block {
+                margin: 10px;
+                display: inline-block;
+                position: relative;
+                width: 48px;
+                height: 32px;
+                cursor: pointer;
+            }
+            .slide-block:before {
+                display: block;
+                content: '';
+                margin: 8px;
+                width: 32px;
+                height: 16px;
+                border-radius: 8px;
+                background-color: green;
+            }
+            .slide-block::after {
+                display: block;
+                content: '';
+                position: absolute;
+                top: 4px;
+                left: 0;
+                width: 24px;
+                height: 24px;
+                border-radius: 50%;
+                background-color: red;
+                transition: left 0.2s;
+            }
+            .active::after {
+                left: 24px;
+            }
+            .box {
+                position: relative;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin: 10px;
+                width: 200px;
+                height: 200px;
+                background-color: #777;
+            }
+            .box img {
+                max-width: 100%;
+                max-height: 100%;
+            }
+            .left,
+            .right {
+                position: absolute;
+                top: 0;
+                left: 48px;
+                width: 5px;
+                height: 100%;
+                cursor: e-resize;
+            }
+            .right {
+                left: 148px;
+            }
+            .vertical-dashed {
+                position: absolute;
+                left: 2px;
+                width: 1px;
+                height: 100%;
+                /* border-left: 1px dashed #fff; */
+                background-color: rgb(3, 206, 172);
+            }
+            .top,
+            .bottom {
+                position: absolute;
+                top: 48px;
+                left: 0;
+                width: 100%;
+                height: 5px;
+                cursor: n-resize;
+            }
+            .bottom {
+                top: 148px;
+            }
+            .crosswise-dashed {
+                position: absolute;
+                top: 2px;
+                width: 100%;
+                height: 1px;
+                background-color: rgb(3, 206, 172);
+            }
+            .save {
+                margin-left: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <div><span class="slide-block"></span></div>
+        <div>
+            <div class="box">
+                <div class="top dashed-bar" data-type="top">
+                    <span class="crosswise-dashed"></span>
+                </div>
+                <div class="bottom dashed-bar" data-type="bottom">
+                    <span class="crosswise-dashed"></span>
+                </div>
+                <div class="left dashed-bar" data-type="left">
+                    <span class="vertical-dashed"></span>
+                </div>
+                <div class="right dashed-bar" data-type="right">
+                    <span class="vertical-dashed"></span>
+                </div>
+            </div>
+        </div>
+        <button class="save">应用</button>
+        <script src="./js/jquery-2.1.4.min.js"></script>
+        <script>
+            init()
+            function init() {
+                var img = new Image()
+                img.src = './images/00001.png'
+                img.onload = function(e) {
+                    var w = img.width
+                    var h = img.height
+                    $(img).data('data', { width: w, height: h })
+                    $('.box').append(img)
+                }
+            }
+            $('.slide-block').on('click', function() {
+                $(this).toggleClass('active')
+            })
+            $('.dashed-bar').on('mousedown', function(e) {
+                //event的兼容性
+                var ev = e || event
+                ev.preventDefault()
+                //虚线类型
+                var type = $(this).attr('data-type')
+                //获取鼠标按下的坐标
+                var x = ev.clientX
+                var y = ev.clientY
+                //获取元素的left，top值
+                var left = $(this).position().left
+                var top = $(this).position().top
+                $('.box').data('param', { x, y, left, top, type })
+            })
+
+            $('.box').on('mousemove', function(e) {
+                var ev = e || event
+                ev.preventDefault()
+                var param = $('.box').data('param')
+                if (param) {
+                    var { x, y, left, top, type } = param
+                    //获取鼠标移动时的坐标
+                    var _x = ev.clientX
+                    var _y = ev.clientY
+                    //计算出鼠标的移动距离
+                    var x_distance = _x - x
+                    var y_distance = _y - y
+                    var move = {}
+                    var _left = left + x_distance
+                    var _top = top + y_distance
+                    switch (type) {
+                        case 'top':
+                        case 'bottom':
+                            _top = _top < -2 ? -2 : _top > 197 ? 197 : _top
+                            move.top = _top + 'px'
+                            break
+                        case 'left':
+                        case 'right':
+                            _left = _left < -2 ? -2 : _left > 197 ? 197 : _left
+                            move.left = _left + 'px'
+                            break
+                    }
+                    $('.' + type).css(move)
+                }
+            })
+
+            $(document).on('mouseup', function(e) {
+                $('.box').removeData('param')
+            })
+
+            $('.save').on('click', function() {
+                var top = $('.top').position().top + 2
+                var bottom = $('.bottom').position().top + 2
+                var left = $('.left').position().left + 2
+                var right = $('.right').position().left + 2
+                var params = {
+                    top: top,
+                    bottom: bottom + 1,
+                    left: left,
+                    right: right + 1,
+                }
+                if (top > bottom) {
+                    params.top = bottom
+                    params.bottom = top + 1
+                }
+                if (left > right) {
+                    params.left = right
+                    params.right = left + 1
+                }
+                var img = $('.box img')
+                var data = img.data('data')
+                var w = img.width()
+                var h = img.height()
+                var scale = data.width / w
+                var _x = (200 - w) / 2
+                var _y = (200 - h) / 2
+                params.top = (params.top - _y) * scale
+                params.bottom = (params.bottom - _y) * scale
+                params.left = (params.left - _x) * scale
+                params.right = (params.right - _x) * scale
+                console.log(params, scale, _x, _y, '------------数据')
+            })
+        </script>
+    </body>
+</html>

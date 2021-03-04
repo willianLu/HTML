@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>sticky定位测试</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+            }
+            h1 {
+                font-size: 24px;
+                line-height: 50px;
+            }
+            #box {
+                width: 100%;
+                height: calc(100vh - 50px);
+                overflow-y: auto;
+            }
+            #box li {
+                position: relative;
+            }
+            .title {
+                position: sticky;
+                top: 0;
+                height: 24px;
+                line-height: 24px;
+                background-color: #ee5353;
+                color: #fff;
+            }
+            .content {
+                height: 500px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>helloword<button onclick="window.location.reload()">刷新</button></h1>
+        <ul id="box">
+            <li>
+                <div class="title">标题1</div>
+                <div class="content">内容</div>
+            </li>
+            <li>
+                <div class="title">标题2</div>
+                <div class="content">内容</div>
+            </li>
+            <li>
+                <div class="title">标题3</div>
+                <div class="content">内容</div>
+            </li>
+            <li>
+                <div class="title">标题4</div>
+                <div class="content">内容</div>
+            </li>
+            <li>
+                <div class="title">标题5</div>
+                <div class="content">内容</div>
+            </li>
+        </ul>
+        <script>
+            // let html = "";
+            // for(let i = 0; i< 10; i++) {
+
+            // }
+        </script>
+    </body>
+</html>

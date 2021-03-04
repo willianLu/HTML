@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>测试滚动条</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+            }
+            .box {
+                display: none;
+                /* display: flex; */
+                position: relative;
+                margin: 0 auto;
+                width: 200px;
+                height: 300px;
+                border: 1px solid #ee5353;
+                overflow-y: hidden;
+            }
+            .test-box {
+                padding: 0 5px;
+                height: 100%;
+                background-color: #ee5353;
+                overflow-y: auto;
+                box-sizing: content-box;
+            } 
+            .test-box::-webkit-scrollbar {
+                width: 4px;  
+                height: 8px;  
+                background-color: transparent;
+            }
+            /*定义滚动条轨道 内阴影+圆角*/  
+            /* .test-box::-webkit-scrollbar-track  
+            {  
+                border-radius: 4px;  
+                background-color: transparent;  
+            }   */
+            
+            /*定义滑块 内阴影+圆角*/  
+            .test-box::-webkit-scrollbar-thumb  
+            {  
+                display: none;
+                border-radius: 4px;  
+                /* box-shadow: inset 0 0 6px #414141;   */
+                background-color: #757575;
+            }
+
+            .box:hover .test-box::-webkit-scrollbar-thumb {
+                display: block;
+            }
+
+            .test {
+                width: 100%;
+            }
+
+            ul,li {
+                list-style: none;
+            }
+            .title {
+                background-color: #f4f5f5;
+                line-height: 30px;
+                cursor: pointer;
+            }
+            .content {
+                display: none;
+                padding: 10px;
+                font-size: 14px;
+            }
+            .active .content {
+                display: block;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="box">
+            <div class="test-box">
+                <ul class="test"></ul>
+            </div>
+        </div>
+        <script src="./js/jquery-2.1.4.min.js"></script>
+        <script>
+            setTimeout(function() {
+                $(".box").show();
+                var html = "";
+                var str = `<li>
+                        <div class="title">测试1</div>
+                        <div class="content"> 
+                            一滴血而已，居然带动天地大势，滚滚而涌，让大漠沸腾，沙浪拍天，所有人都在颤栗！
+    
+                            异域百世
+                           一滴血，居然造成这种要灭世般的景象，怎能令人不畏？
+                           一滴血而已，居然带动天地大势，滚滚而涌，让大漠沸腾，沙浪拍天，所有人都在颤栗！
+    
+                            异域百世
+                           一滴血，居然造成这种要灭世般的景象，怎能令人不畏？
+                           一滴血而已，居然带动天地大势，滚滚而涌，让大漠沸腾，沙浪拍天，所有人都在颤栗！
+    
+                            异域百世
+                           一滴血，居然造成这种要灭世般的景象，怎能令人不畏？
+                        </div>
+                    </li>`;
+                for(let i = 0; i < 8; i++) {
+                    html += str;
+                }
+                $(".test").html(html);
+            }, 0)
+            $(document).on("click", ".title", function() {
+                var li = $(this).parent();
+                if(!li.hasClass("active")) {
+                    $(".active").removeClass("active");
+                    li.addClass("active");
+                } else {
+                    li.removeClass("active");
+                }
+            });
+            $(".content").on("click", function() {
+                $(this).attr("data-type", "内容");
+            })
+            // const myObserver = new ResizeObserver(entries => {
+            //     console.log("-------------->resize");
+            //     // 注意，entres是个数组，数组项为每个需要监听的DOM节点
+            //     entries.forEach(entry => {
+            //         console.log('大小位置 contentRect', entry.contentRect)
+            //         console.log('监听的DOM target', entry.target)
+            //     })
+            // })
+            // myObserver.observe(document.querySelector(".test"));
+        </script>
+    </body>
+</html>

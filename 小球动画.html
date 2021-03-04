@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>小球动画</title>
+        <style>
+            @charset "utf-8";
+            #box {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 100vh;
+                background-color: #171717;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="box"></div>
+        <script type="text/javascript">
+            ;(function() {
+                const box = document.getElementById('box')
+                const canvas = document.createElement('canvas')
+                box.appendChild(canvas)
+                canvas.width = box.clientWidth
+                canvas.height = box.clientHeight
+
+                function Gt(selector) {
+                    this.canvas = selector
+                    this.ctx = this.canvas.getContext('2d')
+                    this.density = 100
+                    this.dw = 200
+                    this.dy = 200
+                    this.speed = 6
+                    this.circles = []
+                    this.count = Math.floor((this.dw * this.dy) / this.density)
+                    this.init()
+                }
+
+                Gt.prototype.init = function() {
+                    for (let i = 0; i < this.count; i++) {
+                        this.circles.push(new Circle(this))
+                    }
+                    setInterval(() => {
+                        requestAnimationFrame(() => {
+                            this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
+                            for (let i = 0; i < this.circles.length; i++) {
+                                this.circles[i].update()
+                                if (this.circles[i].opacity <= 0) {
+                                    this.circles[i] = new Circle(this)
+                                }
+                            }
+                        })
+                    }, 20)
+                }
+
+                function Circle(parent, x, y) {
+                    this.canvas = parent.canvas
+                    this.ctx = parent.ctx
+                    this.opacity = 0
+                    this.isSwell = true
+                    this.scale = 0
+                    this.x = x || (this.canvas.width - parent.dw) / 2 + Math.random() * parent.dw
+                    this.y = y || (this.canvas.height - parent.dy) / 2 + Math.random() * parent.dy
+                    this.backgroundColor = getRandomColor()
+                    this.radius = getLimitedRandom(2, 30)
+                    this.velocity = {
+                        x: (Math.random() - 0.5) * parent.speed,
+                        y: (Math.random() - 0.5) * parent.speed,
+                    }
+                    this.draw()
+                }
+
+                Circle.prototype.update = function() {
+                    let velocity = parseInt(Math.random() * 2) / 10
+                    if (this.isSwell) {
+                        this.scale += velocity
+                        this.opacity += velocity
+                        if (this.opacity >= 1) {
+                            this.isSwell = false
+                        }
+                    } else {
+                        this.x += this.velocity.x
+                        this.y += this.velocity.y
+                        this.scale -= velocity
+                        this.opacity -= velocity
+                    }
+                    this.draw()
+                }
+
+                Circle.prototype.draw = function() {
+                    const radius = this.scale <= 0 ? 0 : this.radius * this.scale
+                    this.ctx.beginPath()
+                    this.ctx.fillStyle = this.backgroundColor
+                    this.ctx.globalAlpha = this.opacity
+                    this.ctx.arc(this.x, this.y, radius, 0, 2 * Math.PI)
+                    this.ctx.fill()
+                }
+
+                function getRandomColor() {
+                    return '#' + ('00000' + ((Math.random() * 0x1000000) << 0).toString(16)).substr(-6)
+                }
+
+                function getLimitedRandom(min, max, roundToInteger) {
+                    let number = Math.random() * (max - min) + min
+                    if (roundToInteger) {
+                        number = Math.round(number)
+                    }
+                    return number
+                }
+                const gt = new Gt(canvas)
+            })()
+        </script>
+    </body>
+</html>

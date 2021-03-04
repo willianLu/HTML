@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <title>es6 proxy 代理</title>
+  </head>
+
+  <body>
+    <script>
+      // let a = Symbol("another symbol");
+      // let obj = {
+      //   [a]: "123",
+      //   b: "456",
+      //   c() {
+      //     console.log(this.b, '-------c说');
+      //   }
+      // };
+      // console.log(Object.keys(obj));
+      // let p = new Proxy(obj, {
+      //   get(target, key) {
+      //     console.log(target, key, '------------get')
+      //     return target[key];
+      //   },
+      //   ownKeys(target) {
+      //     console.log("------------------获取");
+      //     return Reflect.ownKeys(target);
+      //   }
+      // });
+      // console.log(p);
+      // console.log(Object.keys(p));
+      // p.c();
+
+      function Person(name) {
+        this.name = name;
+      }
+      Person.prototype.say = function(msg) {
+        console.log(`${this.name}说：“${msg}”。`)
+      }
+      let xm = new Person('小明');
+      xm.say('你好');
+      let p = new Proxy(xm, {
+        get(target, key) {
+          return target[key]
+        }
+      })
+      p.say('hello');
+      let date = new Date();
+      date.test = 123;
+      console.log(date.getDate(), '--------------测试')
+      let pDate = new Proxy(date, {
+        get(target, property, receiver) {
+          if(!!target[property] && !!target[property].bind) {
+            return target[property].bind(target);
+          }
+          return Reflect.get(target, property, receiver);
+        }
+      })
+      console.log(pDate.getDate(), pDate.test, '--------------代理')
+    </script>
+  </body>
+</html>

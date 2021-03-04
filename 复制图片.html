@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>图片复制</title>
+    </head>
+    <body>
+        <div class="copyImg">
+            <img src="./images/00001.png" />
+        </div>
+        <div class="text">文字复制</div>
+        <button class="test">复制图片</button>
+        <script src="./js/jquery-2.1.4.min.js"></script>
+        <script src="./js/clipboard.min.js"></script>
+        <script>
+            var clipboardHandler = function(nodeName, event) {
+                event = event || nodeName; //不传参时
+                var type = Object.prototype.toString.call(nodeName).replace(/\[object\s|\]/g, '');
+                var target = event.target || event.srcElement;
+
+                var result = false;
+                switch (type) {
+                    case 'String':
+                        result = (target.nodeName.toLowerCase() === nodeName);
+                        break;
+                    case 'Array':
+                        result = nodeName.some(function(item) { 
+                            target.nodeName.toLowerCase() === item;
+                        });
+                        break;
+                    case 'Object':
+                        nodeName = null;
+                    default:
+                        result = (target.nodeName === 'IMG');
+                }
+
+                if (result) {
+                    //调用之前封装好的getSelect方法
+                    getSelect(target);
+                    document.execCommand('copy');
+                }
+            }
+            var getSelect = function(targetNode) {
+                if (window.getSelection) {
+                    //chrome等主流浏览器
+                    var selection = window.getSelection();
+                    var range = document.createRange();
+                    range.selectNode(targetNode);
+                    selection.removeAllRanges();
+                    selection.addRange(range);
+                } else if (document.body.createTextRange) {
+                    //ie
+                    var range = document.body.createTextRange();
+                    range.moveToElementText(targetNode);
+                    range.select();
+                }
+            }
+            // document.getElementById('img').addEventListener('mousedown', clipboardHandler); 
+            var copyImg = function(targetNode) {
+                if (window.getSelection) {
+                    //chrome等主流浏览器
+                    var selection = window.getSelection();
+                    var range = document.createRange();
+                    range.selectNode(targetNode);
+                    selection.removeAllRanges();
+                    selection.addRange(range);
+                } else if (document.body.createTextRange) {
+                    //ie
+                    var range = document.body.createTextRange();
+                    range.moveToElementText(targetNode);
+                    range.select();
+                }
+                document.execCommand('copy');
+            }
+            var copy_img = function(div) {
+                console.log("-------------执行复制")
+                div.contentEditable = 'true'; 
+                var controlRange; 
+                if (document.body.createControlRange) { 
+                    console.log("--------------测试");
+                    controlRange = document.body.createControlRange(); 
+                    controlRange.addElement(div); 
+                    controlRange.execCommand('copy'); 
+                } 
+                div.contentEditable = 'false'; 
+            }
+            $(".test").on("click", function(e) {
+                console.log("------开始复制图片------");
+                var node = $('.copyImg img')[0];
+                // console.log(node, "-----------测试")
+                copyImg(node)
+                // var input = document.createElement("input");
+                // input.value = "TEST---555";
+                // document.body.appendChild(input);
+                // input.select();
+                // document.execCommand('copy');
+                // input.remove();
+            })
+            // navigator.clipboard.readText().then(function(res) {
+            //     console.log(res);
+            // })
+            // console.log('----->读取剪贴板数据<-----');
+            // const clipEvent = new ClipboardEvent("copy");
+
+            // document.addEventListener('copy', function(e) {
+            //     console.log("--------------copy事件触发");
+            //     e.clipboardData.setData('text/html', `<img src="./images/00001.png" />`);
+            //     e.preventDefault(); // We want our data, not data from any selection, to be written to the clipboard
+            // });
+            // $(document).on("mouseenter", function() {
+            //     console.log("-----------获取焦点");
+            //     $(window).focus();
+            // })
+            // $(window).on("click",function(){
+            //     console.log("---------------------ddd")
+            // })
+
+            var data = {
+                total: 28,
+                children: [
+                    {
+                      name: "songti",
+                      alias: "宋体",
+                      total: 10,
+                      children: [
+                          {
+                            size: 12,
+                            color: rgba( 0, 0, 0, 1),
+                            use: 10
+                          }
+                      ]
+                   },
+                   {
+                      name: "heiti",
+                      alias: "黑体",
+                      total: 18,
+                      children: [
+                          {
+                            size: 14,
+                            color: rgba( 0, 0, 0, 1),
+                            use: 8
+                          },
+                          {
+                            size: 18,
+                            color: rgba( 0, 0, 0, 1),
+                            use: 10
+                          }
+                      ]
+                   }
+                ]
+            }
+        </script>
+    </body>
+</html>

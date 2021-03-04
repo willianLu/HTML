@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <title>js十大经典算法</title>
+  </head>
+
+  <body>
+    <div class="box"></div>
+    <script>
+      //选择排序
+      function selectionSort(arr) {
+        let len = arr.length;
+        let minIndex;
+        let temp;
+        for (let i = 0; i < len - 1; i++) {
+          minIndex = i;
+          for (let j = i + 1; j < len; j++) {
+            if (arr[j] < arr[minIndex]) {
+              minIndex = j;
+            }
+          }
+          temp = arr[i];
+          arr[i] = arr[minIndex];
+          arr[minIndex] = temp;
+        }
+        return arr;
+      }
+      //冒泡排序
+      function bubbleSort(arr) {
+        let len = arr.length;
+        for (let i = 0; i < len; i++) {
+          for (let j = 0; j < len - 1 - i; j++) {
+            if (arr[j] > arr[j + 1]) {
+              //相邻元素两两对比
+              var temp = arr[j + 1]; //元素交换
+              arr[j + 1] = arr[j];
+              arr[j] = temp;
+            }
+          }
+        }
+        return arr;
+      }
+      //插入排序
+      function insertionSort(arr) {
+        let len = arr.length;
+        let preIndex, current;
+        for (let i = 1; i < len; i++) {
+          preIndex = i - 1;
+          current = arr[i];
+          while (preIndex >= 0 && arr[preIndex] > current) {
+            arr[preIndex + 1] = arr[preIndex];
+            preIndex--;
+          }
+          arr[preIndex + 1] = current;
+        }
+        return arr;
+      }
+      //希尔排序
+      function shellSort(arr) {
+        let len = arr.length,
+          temp,
+          gap = 1;
+        while (gap < len / 3) {
+          //动态定义间隔序列
+          gap = gap * 3 + 1;
+        }
+        for (gap; gap > 0; gap = Math.floor(gap / 3)) {
+          for (let i = gap; i < len; i++) {
+            temp = arr[i];
+            for (let j = i - gap; j >= 0 && arr[j] > temp; j -= gap) {
+              arr[j + gap] = arr[j];
+              arr[j] = temp;
+            }
+          }
+        }
+        return arr;
+      }
+      //归并算法
+    </script>
+  </body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <style type="text/css">
+        body,
+        html,
+        #l-map {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            margin: 0;
+            font-family: "微软雅黑";
+        }
+
+        #result {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+    </style>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=HDPFYuBGXtZggMGbl3Hr4S8gh9sr0Wai"></script>
+    <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+    <title>地图展示</title>
+</head>
+
+<body>
+    <div id="l-map"></div>
+    <button id="result">查询</button>
+</body>
+
+</html>
+<script type="text/javascript">
+    // 百度地图API功能
+    var map = new BMap.Map("l-map");    // 创建Map实例
+    map.centerAndZoom(new BMap.Point(116.404, 39.915), 15);  // 初始化地图,设置中心点坐标和地图级别
+    //添加地图类型控件
+    // map.addControl(new BMap.MapTypeControl({
+    //     mapTypes: [
+    //         BMAP_NORMAL_MAP,
+    //         BMAP_HYBRID_MAP
+    //     ]
+    // }));
+    // map.setCurrentCity("北京");          // 设置地图显示的城市 此项是必须设置的
+    map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+    function _getCurrentPosition(callBack) {
+        var geolocation = new BMap.Geolocation();
+        geolocation.getCurrentPosition(function (r) {
+            if (this.getStatus() == BMAP_STATUS_SUCCESS) {
+                var convertor = new BMap.Convertor();
+                var pointArr = [];
+                pointArr.push(r.point);
+                convertor.translate(pointArr, 1, 5, callBack)
+            }
+        }, {
+                enableHighAccuracy: true
+            });
+    }
+    // //坐标转换完之后的回调函数
+    translateCallback = function (data) {
+        if (data.status === 0) {
+            var myIcon = new BMap.Icon("./images/point.png", new BMap.Size(24, 24), {
+                // 指定定位位置。   
+                // 当标注显示在地图上时，其所指向的地理位置距离图标左上    
+                // 角各偏移10像素和25像素。您可以看到在本例中该位置即是   
+                // 图标中央下端的尖角位置。    
+                // anchor: new BMap.Size(10, 24),
+                // 设置图片偏移。   
+                // 当您需要从一幅较大的图片中截取某部分作为标注图标时，您   
+                // 需要指定大图的偏移位置，此做法与css sprites技术类似。    
+                // imageOffset: new BMap.Size(0, 0)   // 设置图片偏移    
+            });
+            var mk = new BMap.Marker(data.points[0], { icon: myIcon });
+            map.addOverlay(mk);
+            var circle = new BMap.Circle(data.points[0], 50, {
+                strokeColor: '#0260ca',
+                fillColor: '#afd3fc',
+                strokeWeight: 2,
+                strokeOpacity: 0.5
+            })
+            map.addOverlay(circle);
+            map.panTo(data.points[0]);
+        }
+    }
+    _getCurrentPosition(translateCallback);
+    var start = "巨人网络二期";
+    var end = "九亭地铁站"
+    var routePolicy = [BMAP_TRANSIT_POLICY_LEAST_TIME, BMAP_TRANSIT_POLICY_LEAST_TRANSFER, BMAP_TRANSIT_POLICY_LEAST_WALKING, BMAP_TRANSIT_POLICY_AVOID_SUBWAYS];
+    var transit = new BMap.TransitRoute(map, {
+        renderOptions: { map: map },
+        policy: 0
+    });
+    $("#result").click(function () {
+        _getCurrentPosition(function (data) {
+            new BMap.LocalCity().get(function (res) {
+                if (res && res.name) {
+                    new BMap.Geocoder().getPoint(end, function (point) {
+                        if (point) {
+                            search(data.points[0], point, routePolicy[1]);
+                        } else {
+                            alert("您选择地址没有解析到结果!");
+                        }
+                    }, res.name);
+                }
+            });
+        });
+    });
+    function search(start, end, route) {
+        transit.setPolicy(route);
+        transit.search(start, end);
+    }
+</script>

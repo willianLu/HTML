@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <title>烟花帆布</title>
+    
+    <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      height: 100vh;
+      cursor: pointer;
+      background-color: #000;
+    }
+    
+    canvas {
+      width: 100%;
+      height: 100%;
+    }
+    </style>
+    
+    </head>
+    <body>
+    
+    <canvas id="canvas" style="width: 100%; height: 100%;"></canvas>
+    
+    <script>
+    const myCanvas = document.getElementById("canvas");
+    // const ctx = canvas.getContext("2d");
+    class P {
+        constructor(canvas) {
+            this.canvas = canvas;
+            this.ctx = canvas.getContext("2d");
+            this.balls = [];
+            this.normal = {};
+            this.count = 3;
+            this.isEnd = false;
+            this.timeout = null;
+            this.init();
+            this.start();
+            this.loop();
+        }
+        init() {
+            const { canvas, ctx } = this;
+            console.log(this, ctx);
+            const { innerWidth: width, innerHeight: height } = window;
+            canvas.width = width * 2;
+            canvas.height = height * 2;
+            canvas.style.width = width + 'px';
+            canvas.style.height = height + 'px';
+            ctx.scale(2, 2);
+            this.normal = {
+                x: width / 2,
+                y: height / 2
+            };
+        }
+        start() {
+            const { innerWidth: width, innerHeight: height } = window;
+            let bool = this.count > 1;
+            this.add(randBetween(bool ? 40 : 10, bool ? 80 : 20), width/2 , height/2, bool );
+            this.count--;
+            if(this.count === 0) {
+                this.isEnd = true;
+                this.timeout = null;
+            } else {
+                this.timeout = setTimeout(() => {
+                    this.start();
+                }, 300);
+            }
+        }
+        loop() {
+            const { canvas, ctx, balls, isEnd } = this;
+            const { innerWidth: width, innerHeight: height } = window;
+            ctx.fillStyle = "rgba(20, 24, 41, 0.7)";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            let i = 0;
+            while(i < balls.length) {
+                let b = balls[i];
+                if (
+                    b.x + b.r < 0 ||
+                    b.x - b.r > width ||
+                    b.y + b.r < 0 ||
+                    b.y - b.r > height ||
+                    b.r < 0
+                ) {
+                    balls.splice(i, 1);
+                } else {
+                    ctx.fillStyle = b.color;
+                    ctx.beginPath();
+                    ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2, false);
+                    ctx.fill();
+                    b.update(this.normal);
+                    i++;
+                }
+           }
+            console.log('---------------loop');
+            if(balls.length === 0 && isEnd) {
+                return;
+            }
+            setTimeout(() => {
+                this.loop();
+            }, 1000 / 60);
+        }
+        add(count = 1, x, y, isFast = false) {
+            for (let i = 0; i < count; i++) {
+                this.balls.push(new Ball(x, y, isFast));
+            }
+        }
+        
+    }
+
+    class Ball {
+        constructor(x, y, isFast) {
+            this.x = x;
+            this.y = y;
+            this.angle = Math.PI * 2 * Math.random();
+
+            this.multiplier = randBetween(6, 12);
+            
+            this.vx = (this.multiplier + Math.random() * 0.5) * Math.cos(this.angle);
+            this.vy = (this.multiplier + Math.random() * 0.5) * Math.sin(this.angle);
+            this.r = randBetween(6, 10) + Math.random();
+            const colours = ['#C59D53', '#F0CC88', '#996D1D'];
+            this.color = colours[Math.floor(Math.random() * colours.length)];
+            this.direction = randBetween(-1, 1);
+            this.isFast = isFast;
+        }
+    
+        update(normal) {
+            this.x += this.vx - normal.x;
+            this.y += this.vy - normal.y;
+        
+            normal.x = -2 / window.innerWidth * Math.sin(this.angle);
+            normal.y = -2 / window.innerHeight * Math.cos(this.angle);
+            this.r -= (this.isFast ? 0.3 : 0.07);
+            this.vx *= (this.isFast ? 1.02 : 0.93);
+            this.vy *= (this.isFast ? 1.02 : 0.93);
+        }
+    }
+
+    function randBetween(min, max) {
+      return Math.floor(Math.random() * max) + min;
+    }
+
+    new P(myCanvas);
+
+    // --------------------原始--------------------------
+    
+    // const colours = ['#C59D53', '#F0CC88', '#996D1D'];
+    
+    // let balls = [];
+    // let width, height;
+    // let origin;
+    // let normal;
+    // let num = 3;
+    
+    // // Make the canvas high res
+    // function updateSize() {
+    //   canvas.width = window.innerWidth * 2;
+    //   canvas.height = window.innerHeight * 2;
+    //   canvas.style.width = window.innerWidth + 'px';
+    //   canvas.style.height = window.innerHeight + 'px';
+    //   ctx.scale(2, 2);
+      
+    //   width = (canvas.width = window.innerWidth);
+    //   height = (canvas.height = window.innerHeight);
+    //   origin = {
+    //     x: width / 2,
+    //     y: height / 2
+    //   };
+    //   normal = {
+    //     x: width / 2,
+    //     y: height / 2
+    //   };
+    // }
+    
+    // updateSize();
+    // window.addEventListener('resize', updateSize, false);
+    
+    // class Ball {
+    //   constructor(x = origin.x, y = origin.y, isFast) {
+    //     this.x = x;
+    //     this.y = y;
+    //     this.angle = Math.PI * 2 * Math.random();
+        
+    //     this.multiplier = randBetween(6, 12);
+        
+    //     this.vx = (this.multiplier + Math.random() * 0.5) * Math.cos(this.angle);
+    //     this.vy = (this.multiplier + Math.random() * 0.5) * Math.sin(this.angle);
+    //     this.r = randBetween(6, 10) + Math.random();
+    //     this.color = colours[Math.floor(Math.random() * colours.length)];
+    //     this.direction = randBetween(-1, 1);
+    //     this.isFast = isFast;
+    //   }
+    
+    //   update() {
+    //     this.x += this.vx - normal.x;
+    //     this.y += this.vy - normal.y;
+    
+    //     normal.x = -2 / window.innerWidth * Math.sin(this.angle);
+    //     normal.y = -2 / window.innerHeight * Math.cos(this.angle);
+    //     this.r -= (this.isFast ? 0.3 : 0.07);
+    //     this.vx *= (this.isFast ? 1.02 : 0.93);
+    //     this.vy *= (this.isFast ? 1.02 : 0.93);
+    //   }
+    // }
+    
+    // function pushBalls(count = 1, x = origin.x, y = origin.y, bool) {
+    //   for (let i = 0; i < count; i++) {
+    //     balls.push(new Ball(x, y, bool));
+    //   }
+    // }
+    
+    // function randBetween(min, max) {
+    //   return Math.floor(Math.random() * max) + min;
+    // }
+    // let isEnd = false;
+    // loop();
+    // function loop() {
+    //   // Alpha means "motion blur", yay!
+    //   ctx.fillStyle = "rgba(20, 24, 41, 0.7)";
+    //   ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    //   let i = 0;
+    //   while(i < balls.length) {
+    //     let b = balls[i];
+    //     if (
+    //       b.x + b.r < 0 ||
+    //       b.x - b.r > width ||
+    //       b.y + b.r < 0 ||
+    //       b.y - b.r > height ||
+    //       b.r < 0
+    //     ) {
+    //       balls.splice(i, 1);
+    //     } else {
+    //         ctx.fillStyle = b.color;
+    //         ctx.beginPath();
+    //         ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2, false);
+    //         ctx.fill();
+        
+    //         b.update();
+    //         i++;
+    //     }
+    //   }
+    //   console.log('---------------loop');
+    //   if(balls.length === 0 && isEnd) {
+    //       return;
+    //   }
+    //   setTimeout(loop, 1000 / 60);
+    // }
+    
+    // function removeBall() {
+    //   let i = 0;
+    //   while(i < balls.length) {
+    //     let b = balls[i];
+    //     if (
+    //       b.x + b.r < 0 ||
+    //       b.x - b.r > width ||
+    //       b.y + b.r < 0 ||
+    //       b.y - b.r > height ||
+    //       b.r < 0
+    //     ) {
+    //       balls.splice(i, 1);
+    //     } else {
+    //         i++;
+    //     }
+    //   }
+    // }
+    
+    // let timeout = setInterval(() => {
+    //     let bool = num > 1;
+    //     pushBalls(randBetween(bool ? 40 : 10, bool ? 80 : 20), origin.x + randBetween(-50,50), origin.y + randBetween(-50,50), bool );
+    //     num--;
+    //     if(num === 0) {
+    //         isEnd = true;
+    //         clearInterval(timeout);
+    //     }
+    // }, 200)
+    </script>
+    
+    
+    
+    </body></html>

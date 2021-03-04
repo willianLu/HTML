@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+        <title>js测试</title>
+    </head>
+    <body>
+        <script>
+            function reactive(data, cb) {
+                let timer = null
+                return new Proxy(data, {
+                    get(target, key) {
+                        console.log('---------------------------get')
+                        let res = Reflect.get(target, key)
+                        return typeof res === 'object' ? reactive(res, cb) : res
+                    },
+                    set(target, key, val) {
+                        console.log('---------------------------set')
+                        let res = Reflect.set(target, key, val)
+                        clearTimeout(timer)
+                        timer = setTimeout(() => {
+                            console.log('--------------------timer')
+                            cb && cb()
+                        }, 0)
+                        return res
+                    },
+                })
+            }
+
+            let data = { foo: 'foo', bar: [1, 2] }
+            let p = reactive(data, () => {
+                console.log('trigger')
+            })
+            // p.bar.push(3)
+            function indexOf(str, pattern) {
+                if (typeof str !== 'string') {
+                    throw new Error('参数必须是字符串')
+                }
+                let res = new RegExp(pattern, 'g').exec(str)
+                if (res) {
+                    return res.index
+                }
+                return -1
+            }
+            function includes(str, pattern) {
+                return new RegExp(pattern, 'g').test(str)
+            }
+            function concat(...arr) {
+                let newArr = []
+                arr.forEach(item => {
+                    if (Array.isArray(item)) {
+                        newArr = [...newArr, ...item]
+                    } else {
+                        newArr.push(item)
+                    }
+                })
+                return newArr
+            }
+            function copyWithin(arr, target, start, end) {}
+            function substr(arr, start, len) {
+                if (start > arr.length) return []
+                let _len = start + len > arr.length ? arr.length : start + len
+                let i = start
+                let newArr = []
+                while (i < _len) {
+                    newArr.push(arr[i])
+                    i++
+                }
+                return newArr
+            }
+            function substring(arr, start, end) {
+                
+            }
+            console.log(substr([1, 2, 3], 0, 2))
+        </script>
+    </body>
+</html>

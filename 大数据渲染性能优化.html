@@ -1,0 +1,29 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>html预览</title>
+        <style>
+            body {
+                margin: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="box"></div>
+        <script>
+            // let div = document.createElement('div')
+            // let img = document.createElement('img')
+            // img.src = './images/00001.png'
+            // div.appendChild(img)
+            let html = ''
+            let box = document.getElementById('box')
+            let len = 1000
+            while (len) {
+                --len
+                let src = './images/00001.png?date=' + len
+                html += `<div><img src="${src}"/></div>`
+            }
+            box.innerHTML = html
+        </script>
+    </body>
+</html>

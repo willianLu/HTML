@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+        <title>原型链继承</title>
+    </head>
+    <body>
+        <script>
+            function Parent(name) {
+                this.name = name;
+                this.type = 'parent';
+            }
+
+            Parent.prototype.a = '10';
+
+            function Child() {
+                Parent.call(this, ...arguments)
+                this.type = 'child' 
+            }
+            function F() {}
+            F.prototype = Parent.prototype;
+
+            Child.prototype = new F();
+            Child.prototype.construct = Child;
+            Child.prototype.b = '12';
+
+            let c = new Child('小明');
+            console.log(c);
+            console.log('---------------');
+            console.log(c.name, c.a, c.b, c.type);
+        </script>
+    </body>
+</html>

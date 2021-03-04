@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <title>富文本截取</title>
+  </head>
+
+  <body>
+    <script>
+      let html =
+        "<div><p>好好的的十分士大夫</p><p><img src='../a.jpg'/></p><p>12d01111111111dff2222哈哈的额大师傅大师傅师德师风第三方</p></div>";
+      function truncateIgnoreTags(richText, maxLength) {
+        const textArr = richText.split(/<\/?\w+[^>]*>/g).filter(Boolean);
+
+        let resTextLength = 0;
+
+        const resultRegexp = textArr.reduce((accumulator, cur) => {
+          if (resTextLength + cur.length <= maxLength) {
+            resTextLength += cur.length;
+
+            return accumulator + "[^]*" + cur;
+          } else {
+            if (resTextLength === maxLength) {
+              return accumulator;
+            }
+
+            const curResRegexp =
+              accumulator + "[^]*" + cur.substr(0, maxLength - resTextLength);
+
+            resTextLength = maxLength;
+
+            return curResRegexp;
+          }
+        }, "");
+
+        const resTextStr = richText.match(new RegExp(resultRegexp))[0];
+
+        return resTextStr;
+      }
+      function getSimpleText(html) {
+        var re1 = new RegExp("<.+?>", "g"); //匹配html标签的正则表达式，"g"是搜索匹配多个符合的内容
+        var msg = html.replace(re1, "").substr(0, 50); //执行替换成空字符
+        return msg;
+      }
+      console.log(getSimpleText(html, 30));
+    </script>
+  </body>
+</html>

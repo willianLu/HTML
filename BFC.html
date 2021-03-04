@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>BFC渲染测试</title>
+  <style>
+      * {
+          margin: 0;
+          border: 0;
+      }
+      .list {
+          margin: 20px 0;
+          height: 50px;
+          background-color: red;
+      }
+      .float {
+          float: left;
+          margin: 0 20px;
+          width: 20%;
+          height: 50px;
+          background-color: blue;
+      }
+  </style>
+</head>
+<body>
+    <div class="list">1</div>
+    <div class="list">2</div>
+    <div style="overflow: hidden;">
+        <div class="list">2-1</div>
+    </div>
+    <div style="overflow: hidden;">
+        <div class="float">3</div>
+        <div class="float">4</div>
+    </div>
+    <div class="list">5</div>
+    <script>
+        function test (a, b) {
+        arguments[2] = 3;
+            console.log(arguments.length); // -> 2
+            console.log(arguments[2]); // -> 3
+        }
+
+        test(1, 2);
+        console.log(test.length); // -> 2
+    </script>
+</body>
+</html>

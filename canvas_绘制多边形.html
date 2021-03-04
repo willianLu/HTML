@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+<head>
+ <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+ <title>canvas 画多边形</title>
+</head>
+<body>
+ <canvas id="canvas" width="500" height="500"></canvas>
+</body>
+<script>
+//  var canvas = document.getElementById("canvas");
+//  var ctx = canvas.getContext('2d');
+//  function draw(x,y,n,r){
+//   var i,ang;
+//   ang= Math.PI*2/n;
+//   ctx.save();
+//   ctx.fillStyle = 'rgba(255,0,0,.3)';
+// //   ctx.strokeStyle = 'hsl(120,50%,50%)';
+// //   ctx.lineWidth = 1;
+//   ctx.translate(x,y);
+//   ctx.moveTo(0,-r);
+//   ctx.beginPath();
+//   for(i=0;i<n;i++){
+//    ctx.rotate(ang);
+//    ctx.lineTo(0,-r);
+//   }
+//   ctx.closePath();
+//   ctx.fill();
+// //   ctx.stroke();
+//   ctx.restore();
+//  }
+//  draw(100,100,3,40); 
+//  draw(200,100,4,40);
+//  draw(300,100,5,40);
+//  draw(100,200,6,40);
+//  draw(200,200,7,40);
+//  draw(300,200,8,40);
+var canvas = document.getElementById("canvas");   
+    var context = canvas.getContext("2d");   
+    context.beginPath();   
+    //设置是个顶点的坐标，根据顶点制定路径   
+    for (var i = 0; i < 5; i++) {   
+        context.lineTo(Math.cos((18+i*72)/180*Math.PI)*200+200,   
+                        -Math.sin((18+i*72)/180*Math.PI)*200+200);   
+        context.lineTo(Math.cos((54+i*72)/180*Math.PI)*80+200,   
+                        -Math.sin((54+i*72)/180*Math.PI)*80+200);   
+    }   
+    context.closePath();   
+    //设置边框样式以及填充颜色   
+    context.lineWidth="3";   
+    context.fillStyle = "#F6F152";   
+    context.strokeStyle = "#F5270B";   
+    context.fill();   
+    context.stroke();   
+</script>
+</html>

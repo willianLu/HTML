@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>乘法表</title>
+    </head>
+    <body>
+        <script>
+            function build() {
+                const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+                return arr.reduce((t,v) => {
+                    let str = '';
+                    let i = 1;
+                    while(i <= v){
+                        let res = v * i;
+                        res = res < 10 ? res+' ' : res;
+                        str += i + ' x ' + v + ' = ' + res + '   ';
+                        i ++;
+                    }
+                    t += str + '\n';
+                    return t;
+                }, '')
+            }
+            const res = build();
+            console.log(res);
+            var minSubArrayLen = function(s, nums) {
+                let minLen = 0;
+                let i = 0;
+                let j = 0;
+                let total = 0;
+                while(i < nums.length) {
+                    total += nums[i];
+                    while(total >= s) {
+                        minLen = minLen === 0 ? i - j + 1 : Math.min(minLen, i - j + 1);
+                        total -= nums[j];
+                        j++;
+                    }
+                    i++;
+                }
+                return minLen;
+            };
+            var twoSum = function(nums, target) {
+                var obj={};
+                var i = 0;
+                var other = 0;
+                while(i < nums.length) {
+                    var current = nums[i];
+                    other = target - current;
+                    if(other in obj) {
+                        return [obj[other], i];
+                    }
+                    if(!(current in obj)) {
+                        obj[current] = i;
+                    }
+                    i++;
+                }
+            };
+            var findLength = function(A, B) {
+                let maxArr = A.length >= B.length ? A : B;
+                let minArr = A.length < B.length ? A : B;
+                let max = 0;
+                let i = 0;
+                let b = ',' + minArr.join(',') + ',';
+                while(i < maxArr.length) {
+                    let str = ',';
+                    let len = 0;
+                    let j = i;
+                    while(j < maxArr.length) {
+                        str += maxArr[j] + ',';
+                        if(b.indexOf(str) > -1) {
+                            len += 1;
+                            if(max < len) max = len;
+                            j++;
+                        } else {
+                            break;
+                        }
+                    }
+                    i++;
+                    if(maxArr.length - i <= max) {
+                        break;
+                    }
+                }
+                return max;
+            };
+            let a = [1, 2, 3, 2, 1];
+            let b = [3, 2, 1, 4, 7];
+            console.log(findLength(a, b), "---------结果");
+        </script>
+    </body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+        <title>js正则表达式</title>
+    </head>
+    <body>
+        <script>
+            //正则前瞻 => 匹配llo前面的he
+            let exp = /he(?=llo)/
+            console.log('-----------------正则前瞻')
+            console.log(exp.test('hello')) // true
+            console.log(exp.test('llohe')) // false
+            console.log('hello'.replace(exp, 'aa'))
+            //正则后瞻 => 匹配llo后面的he
+            exp = /(?<=llo)he/
+            console.log('-----------------正则后瞻')
+            console.log(exp.test('hello')) // false
+            console.log(exp.test('llohe')) // true
+            console.log('llohe'.replace(exp, 'bb'))
+            //正则负前瞻 => 匹配后面不是llo的he
+            exp = /he(?!llo)/
+            console.log('-----------------正则负前瞻')
+            console.log(exp.test('hello')) // false
+            console.log(exp.test('heloo')) // true
+            console.log('heloo'.replace(exp, 'cc'))
+            //正则负后瞻 => 匹配前面不是llo的he
+            exp = /(?<!llo)he/
+            console.log('-----------------正则负后瞻')
+            console.log(exp.test('llohe')) // false
+            console.log(exp.test('loohe')) // true
+            console.log('loohe'.replace(exp, 'dd'))
+
+            exp = /(?:^|-)(\w)/g
+            console.log(
+                'hello-w'
+                    .replace(exp, item => {
+                        console.log(item, '-------------test')
+                        return item.toUpperCase()
+                    })
+                    .replace(/[-]/g, '')
+            )
+            console.log('hello-world'.match(exp))
+        </script>
+    </body>
+</html>

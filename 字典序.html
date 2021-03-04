@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+        <title>字典序</title>
+    </head>
+    <body>
+        <script>
+            let n = 1000
+            let k = 2
+            const printThTwo = n => {
+                if (n > Math.pow(10, 9)) {
+                    throw new Error('输入数字不得大于10的9次幂')
+                }
+                let prefix = 1
+                let arr = []
+                const getAllSomePrefix = (cur, total) => {
+                    cur *= 10
+                    for (let i = 0; i < 10 && cur + i <= total; i++) {
+                        arr.push(cur + i)
+                        getAllSomePrefix(cur + i, total)
+                    }
+                }
+                while (prefix <= 9 && prefix <= n) {
+                    arr.push(prefix)
+                    getAllSomePrefix(prefix, n)
+                    prefix++
+                }
+                console.log(arr);
+            }
+            printThTwo(n)
+
+            /**
+             * @param {number} n
+             * @param {number} k
+             * @return {number}
+             */
+            const _findKthNumber = function(n, k) {
+                let getCount = (prefix, n) => {
+                    let count = 0
+                    for (let cur = prefix, next = prefix + 1; cur <= n; cur *= 10, next *= 10) count += Math.min(next, n + 1) - cur
+                    return count
+                }
+                let p = 1
+                let prefix = 1
+                while (p < k) {
+                    let count = getCount(prefix, n)
+                    if (p + count > k) {
+                        prefix *= 10
+                        p++
+                    } else if (p + count <= k) {
+                        prefix++
+                        p += count
+                    }
+                }
+                return prefix
+            }
+            // console.log(_findKthNumber(n, k))
+        </script>
+    </body>
+</html>
