@@ -60,67 +60,17 @@
             </div>
         </div>
         <script>
-            const tree = {
-                name: 'root',
-                children: [
-                    {
-                        name: 'c1',
-                        children: [
-                            {
-                                name: 'c11',
-                                children: []		
-                            },
-                            {
-                                name: 'c12',
-                                children: []		
-                            }
-                        ]
-                    },
-                    {
-                        name: 'c2',
-                        children: [
-                            {
-                                name: 'c21',
-                                children: []		
-                            },
-                            {
-                                name: 'c22',
-                                children: []		
-                            }
-                        ]
+            function findTowIndex(nums, target) {
+                let temp = new Map();
+                for(let i = 0, len = nums.length; i < len; i++) {
+                    let c = nums[i];
+                    if(temp.has(target - c)) {
+                        return [temp.get(target - c), i]
                     }
-                ]
-            }
-
-            // 深度优先的方式遍历 打印 name
-            // ['root', 'c1','c11', 'c12', 'c2', 'c21', 'c22']
-
-            // 深度优先 - 递归
-            function getDfsByRecursion(tree, res = []) {
-                res.push(tree.name);
-                if(tree.children.length) {
-                    tree.children.forEach(item => {
-                        getDfs(item, res);
-                    })
+                    temp.set(c, i)
                 }
-                return res
             }
-            console.log(getDfsByRecursion(tree), '-----------深度优先递归')
-            // 深度优先 - 非递归
-            function getDfsNonRecursion(tree, res = []) {
-                let temp = [tree];
-                while(temp.length) {
-                    const node = temp.pop();
-                    if(!node) continue;
-                    res.push(node.name);
-                    for(let i = node.children.length -1; i >= 0; i--) {
-                        temp.push(node.children[i]);
-                    }
-                }
-                return res;
-            }
-            console.log(getDfsNonRecursion(tree), '-----------深度优先非递归');
+            console.log(findTowIndex([2, 7, 11, 15], 26))
         </script>
     </body>
 </html>
-.

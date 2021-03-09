@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+        <title>二叉树遍历</title>
+    </head>
+    <body>
+        <script>
+            // 二叉树节点
+            const Node = function(val) {
+                this.value = val
+                this.left = null
+                this.right = null
+            }
+            // 二叉树数据
+            const arr = ['A', 'B', 'C', 'D', 'E', null, 'F'];
+            // 生成二叉树递归
+            function generateNodeByRecursion(data, index = 0, val = 0) {
+                let node = new Node(data[index]);
+                let left = index * 2 + 1;
+                let right = left + 1;
+                if(data[left] !== null && data[left] !== undefined) {
+                    node.left = generateNodeByRecursion(data, left, val + 1)
+                }
+                if(data[right] !== null && data[right] !== undefined) {
+                    node.right = generateNodeByRecursion(data, right, val + 1)
+                }
+                return node;
+            }
+            console.log(generateNodeByRecursion(arr), '------------生成二叉树-递归');
+            // 生成二叉树非递归
+            function generateNodeNonRecursion(data) {
+                let res =  new Node(data[0])
+                let temp = [{ node: res, index: 0 }];
+                while(temp.length) {
+                    let { node, index } = temp.shift();
+                    let left = index * 2 + 1;
+                    let right = left + 1;
+                    if(data[left] !== null && data[left] !== undefined) {
+                        node.left = new Node(data[left]);
+                        temp.push({ node: node.left, index: left });
+                    }
+                    if(data[right] !== null && data[right] !== undefined) {
+                        node.right = new Node(data[right]);
+                        temp.push({ node: node.right, index: right});
+                    }
+                }
+                return res;
+            }
+            console.log(generateNodeNonRecursion(arr), '------------生成二叉树-非递归');
+            // 生成二叉树
+            const binaryTree = generateNodeNonRecursion(arr);
+            // 先序遍历-递归
+            function preorderTraversalByRecursion(node, res = []) {
+                if(node) {
+                    let { left, right, value } = node;
+                    res.push(value);
+                    if(left) preorderTraversalByRecursion(left, res);
+                    if(right) preorderTraversalByRecursion(right, res);
+                }
+                return res;
+            }
+            console.log(preorderTraversalByRecursion(binaryTree), '------------先序遍历-递归');
+            // 先序遍历-非递归
+            function preorderTraversalByNonRecursion(node, res = []) {
+                if(node) {
+                    let queue = [node];
+                    while(queue.length) {
+                        let cnode = queue.shift();
+                        let { left, right, value } = cnode;
+                        res.push(value);
+                        if(right) {
+                            queue.unshift(right)
+                        }
+                        if(left) {
+                            queue.unshift(left)
+                        }
+                    }
+                }
+                return res;
+            }
+            console.log(preorderTraversalByNonRecursion(binaryTree), '------------先序遍历-非递归');
+            // 中序遍历-递归
+            function inorderByRecursion(node, res = []) {
+                if(!node) return res;
+                let { left, right, value } = node;
+                if(left) {
+                    inorderByRecursion(left, res);
+                }
+                res.push(value);
+                if(right) {
+                    inorderByRecursion(right, res);
+                }
+                return res;
+            }
+            console.log(inorderByRecursion(binaryTree), '------------中序遍历-递归');
+            // 中序遍历-非递归
+            function inorderByNonRecursion(node, res = []) {
+                if(!node) return res;
+                let queue = [node];
+                while(queue.length) {
+                    let cnode = queue.shift();
+                    let { left, right, value } = cnode;
+                    if(!left && !right) {
+                        res.push(value)
+                        continue
+                    }
+                    if(right) queue.unshift(right);
+                    queue.unshift({ value })
+                    if(left) queue.unshift(left);
+                }
+                return res;
+            }
+            console.log(inorderByNonRecursion(binaryTree), '------------中序遍历-非递归');
+            // 后序遍历-递归
+            function postorderByRecursion(node, res = []) {
+                if(!node) return res;
+                let { left, right, value } = node;
+                if(left) postorderByRecursion(left, res);
+                if(right) postorderByRecursion(right, res);
+                res.push(value);
+                return res;
+            }
+            console.log(postorderByRecursion(binaryTree), '------------后序遍历-递归');
+            // 后序遍历-非递归
+            function postorderByNonRecursion(node, res = []) {
+                if(!node) return res;
+                let queue = [node];
+                while(queue.length) {
+                    let cnode = queue.shift();
+                    let { left, right, value } = cnode;
+                    if(!left && !right) {
+                        res.push(value);
+                        continue
+                    }
+                    queue.unshift({ value });
+                    if(right) queue.unshift(right);
+                    if(left) queue.unshift(left);
+                }
+                return res;
+            }
+            console.log(postorderByNonRecursion(binaryTree), '------------后序遍历-非递归');
+        </script>
+    </body>
+</html>
+.
