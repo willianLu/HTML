@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+        <title>防抖和节流</title>
+    </head>
+    <body>
+        <script>
+            function debounce(fn, duration) {
+                let timer = null;
+                return function(...args) {
+                    if(timer !== null) clearSetTimeout(timer);
+                    timer = setTimeout(() => {
+                        fn.apply(this, args);
+                    }, duration);
+                }
+            }
+            function test(a, b, c) {
+                console.log(a, b, c)
+            }
+            let obj = {
+                a: 5,
+                b: 2,
+                c: 1
+            }
+
+            function testBind() {
+                console.log(this.a, this.b, this.c);
+            }
+            const d = debounce(testBind, 500).bind(obj)
+            d()
+
+            function throttle(fn, delay) {
+                let time = Date.now();
+                return function(...args) {
+                    const cTime = Date.now();
+                    if(cTime - time < delay) return;
+                    fn.apply(this, args);
+                    time = Date.now();
+                }
+            }
+            const t = throttle(test, 500);
+            setTimeout(()=> {
+                t('a', 'b', 'c')
+            }, 500)
+        </script>
+    </body>
+</html>
+.

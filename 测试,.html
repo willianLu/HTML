@@ -60,17 +60,11 @@
             </div>
         </div>
         <script>
-            function findTowIndex(nums, target) {
-                let temp = new Map();
-                for(let i = 0, len = nums.length; i < len; i++) {
-                    let c = nums[i];
-                    if(temp.has(target - c)) {
-                        return [temp.get(target - c), i]
-                    }
-                    temp.set(c, i)
-                }
-            }
-            console.log(findTowIndex([2, 7, 11, 15], 26))
+            /** 
+             * 爬梯子
+             * 力扣题目地址 https://leetcode-cn.com/problems/climbing-stairs/
+             */
+            
         </script>
     </body>
 </html>
