@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <title>排序算法</title>
+  </head>
+
+  <body>
+    <script>
+        const nums = [3, 38, 5, 44, 15, 36, 26, 27, 2, 46, 19, 47, 60, 48, 50];
+        /** 
+         * 冒泡排序，是交换排序中最简单的排序方法，其主要思想是：在待排序序列中选两相邻记录的数字，如果反序则交换，直到没有反序的数列为止。
+         *
+         */
+        const bubbleSort = function(nums) {
+            let len = nums.length;
+            let i = 0;
+            let j = 0;
+            while(i < len - i) {
+                j = 0;
+                while(j < len - i) {
+                    let temp = nums[j]
+                    if(nums[j] > nums[j+1]) {
+                        nums[j] = nums[j+1];
+                        nums[j+1] = temp;
+                    }
+                    j ++;
+                }
+                i ++;
+            }
+            return nums;
+        }
+        console.time();
+        console.log(bubbleSort([...nums]), '--------------冒泡排序');
+        console.timeEnd();
+        /** 
+         * 快速排序
+         * 该方法的基本思想是：
+         * 1．先从数列中取出一个数作为基准数。
+         * 2．分区过程，将比这个数大的数全放到它的右边，小于或等于它的数全放到它的左边。
+         * 3．再对左右区间重复第二步，直到各区间只有一个数。  
+         *
+         */
+        const quickSort = function(nums) {
+            const sort = (data, left = 0, right = nums.length - 1) => {
+                if(left >= right) return;
+                let i = left;
+                let j = right;
+                let baseVal = data[i];
+                while (i < j) {
+                    while(j > i && data[j] >= baseVal) {
+                        j --;
+                    }
+                    data[i] = data[j];
+                    while(i < j && data[i] <= baseVal) {
+                        i ++;
+                    }
+                    data[j] = data[i];
+                }
+                data[i] = baseVal;
+                sort(data, left, i - 1);
+                sort(data, i + 1, right);
+            }
+            sort(nums);
+            return nums;
+        }
+
+        console.time();
+        console.log(quickSort([...nums]), '--------------快速排序');
+        console.timeEnd();
+        /** 
+         * 插入排序是一类借助“插入”进行排序的方法，其主要思想是：每次将一个待排序的数字按其关键码的大小插入到一个已排好的有序序列中，直到全部数字排好序。
+         *
+         */
+        const insertSort = function(nums) {
+            let len = nums.length;
+            for(let i = 1; i < len; i ++) {
+                let temp = nums[i];
+                let j = i - 1;
+                while(j >= 0 && temp < nums[j]) {
+                    nums[j + 1] = nums[j]
+                    nums[j] = temp;
+                    j --;
+                }
+            }
+            return nums;
+        }
+        console.time();
+        console.log(insertSort([...nums]), '--------------插入排序');
+        console.timeEnd();
+        /** 
+         * 归并排序
+         */
+        const mergeSort = function(nums) {
+            let len = nums.length;
+            if(len < 2) return nums;
+            let middle = Math.ceil(len / 2);
+            let left = nums.slice(0, middle);
+            let right = nums.slice(middle);
+            return execMerge(mergeSort(left), mergeSort(right));
+        }
+        const execMerge = function(left, right) {
+            let temp = [];
+            while(left.length && right.length) {
+                if(left[0] > right[0]) {
+                    temp.push(right.shift())
+                } else {
+                    temp.push(left.shift())
+                }
+            }
+            if(left.length) temp = [...temp, ...left];
+            else if(right.length) temp = [...temp, ...right];
+            return temp;
+        }
+        console.time();
+        console.log(mergeSort([...nums]), '--------------归并排序');
+        console.timeEnd();
+    </script>
+  </body>
+</html>
