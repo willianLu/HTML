@@ -8,12 +8,24 @@
             let stateObj = {
                 foo: 'bar',
             }
+            console.log('<-------------------->')
+            // hash 路由原理
+            // --------------------
+            // window.addEventListener('hashchange', (...args) => {
+            //     console.log('----------->', args);
+            // })
+            // window.location.hash = 'xxx';
 
-            console.log(window.location, '---------xx')
-            history.pushState(stateObj, null, '?bar=1')
-            window.onpopstate = function () {
-                console.log('--->', arguments)
-            }
+            // history 路由原理
+            // --------------------
+            window.addEventListener('popstate', (...args) => {
+                console.log('------------>', args);
+                window.history.pushState(stateObj, '测试', '?bar=a')
+            }, false)
+            setTimeout(() => {
+                window.history.pushState(stateObj, '测试', '?bar=a')
+                window.history.back();
+            }, 500)
         </script>
     </body>
 </html>

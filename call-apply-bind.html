@@ -13,6 +13,7 @@
             }
             p('hello')
             let obj = {
+                a: 1,
                 name: 'zhang san',
             }
             let b = p.bind(obj)
@@ -35,6 +36,24 @@
             }
             let c = p.mbind(obj)
             c('哈哈')
+            Function.prototype.myCall = function(context, ...args) {
+                let obj = context || window;
+                obj.__fn__ = this;
+                let res = obj.__fn__(...args);
+                delete obj.__fn__;
+                return res;
+            }
+            Function.prototype.myApply = function(context, args = []) {
+                let obj = context || window;
+                obj.__fn__ = this;
+                let res = obj.__fn__(...args);
+                delete obj.__fn__;
+                return res;
+            }
+            function test(b, c) {
+                console.log(this.a, b, c);
+            }
+            test.apply(obj, [2, 3]);
         </script>
     </body>
 </html>

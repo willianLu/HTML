@@ -8,29 +8,29 @@
     <body>
         <script>
             function Parent(name) {
-                this.name = name;
-                this.type = 'parent';
+                this.name = name
+                this.type = 'parent'
             }
 
-            Parent.prototype.a = '10';
+            Parent.prototype.a = '10'
 
             function Child() {
                 Parent.call(this, ...arguments)
-                this.type = 'child' 
+                this.type = 'child'
             }
 
             function F() {}
-            
-            F.prototype = Parent.prototype;
 
-            Child.prototype = new F();
-            Child.prototype.construct = Child;
-            Child.prototype.b = '12';
+            F.prototype = Parent.prototype
 
-            let c = new Child('小明');
-            console.log(c);
-            console.log('---------------');
-            console.log(c.name, c.a, c.b, c.type);
+            Child.prototype = new F()
+            Child.prototype.construct = Child
+            Child.prototype.b = '12'
+
+            let c = new Child('小明')
+            console.log(c)
+            console.log('---------------')
+            console.log(c.name, c.a, c.b, c.type)
         </script>
     </body>
 </html>
