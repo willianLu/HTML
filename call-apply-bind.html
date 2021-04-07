@@ -36,6 +36,14 @@
             }
             let c = p.mbind(obj)
             c('哈哈')
+            let li = {
+                name: '李四'   
+            }
+            let d = c.mbind(li);
+            d('你好')
+            c.call(li, '好的')
+            li.c = c;
+            li.c('666');
             Function.prototype.myCall = function(context, ...args) {
                 let obj = context || window;
                 obj.__fn__ = this;
