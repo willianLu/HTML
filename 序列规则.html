@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+        <title>序列规则生成</title>
+    </head>
+    <body>
+        <script>
+           const { items, fill, tail } = {"items":[{"item_id":15,"item_type":1,"type":0,"name":"孢子权重相加随机掉落","index":15,"interval":0,"max":0,"min":0},{"item_id":14,"item_type":1,"type":0,"name":"孢子权重相加随机掉落","index":12,"interval":0,"max":0,"min":0},{"item_id":13,"item_type":1,"type":0,"name":"孢子权重相加随机掉落","index":10,"interval":0,"max":0,"min":0},{"item_id":12,"item_type":1,"type":0,"name":"孢子权重相加随机掉落","index":8,"interval":0,"max":0,"min":0}],"fill":{"item_id":5,"item_type":1,"name":"师德师风","type":1},"tail":{},"length":20}
+
+           buildRule(items, fill, tail, 20, 1)
+
+           function buildRule(items = [], fill = {}, tail = {}, length, total = 1) {
+               // 可生成条数
+                let count = 0;
+                // 每个掉落道具偏范围集合的数据矩阵
+                const usableData = [];
+                items.forEach(item => {
+                    let { max, min , index} = item;
+                    count += max + 1 - min; 
+                    usableData.push(getAllPoint(min + index, max + index));
+                })
+                if(count < total) {
+                    console.log('------------error1');
+                    return '可生成规则条数不足';
+                }
+                const result = execBuildRule({ items, fill, tail, length }, usableData, total);
+                if(result.length !== total) {
+                    console.log(result, '------------error2');
+                    return '生成规则失败，请查看填写数据';
+                }
+                console.log(result, '----------------xx')
+           }
+
+           function execBuildRule(dropData, usableData, total = 10) {
+               // 规则结果result数据
+               const result = [];
+               // 第一个掉落的偏移量范围
+               const fData = [...usableData[0]];
+               // 循环偏移量范围，用于生成多条序列
+               while(fData.length) {
+                    // 随机获取一个偏移量的下标值
+                    const index = getRandom(0, fData.length);
+                    // 选取的起始掉落次数
+                    const first = fData[index];
+                    // 获取的所有掉落起始点数据集合
+                    const pData = getStartData(first, usableData);
+                    // 满足生成条数跳出生成
+                    if(result.length === total) break;
+                    // 掉落起始次数集合长度合法，执行生成序列
+                    if(pData.length === usableData.length) {
+                        const rule = buildSingleRule(pData, dropData);
+                        if(rule) result.push(rule);
+                    }
+                    // 当规则生成条数不足，且配置了多个掉落，则进行多条规则生成
+                    if(result.length < total && usableData.length > 1) {
+                        fData.splice(index, 1);
+                        getMoreRule(dropData, pData, usableData, 2, result, total);
+                    }
+               }
+               return result;
+           }
+
+           function getStartData(first, usableData) {
+               // 存储起始点的map对象，用于剔除重复的掉落起始位置
+               const pMap = new Map();
+               // 起始点集合
+               const data = [first];
+               pMap.set(first);
+               for(let i = 1; i < usableData.length; i++) {
+                   const item = usableData[i];
+                   const index = getRandom(0, item.length) 
+                   if(pMap.has(item[index])) {
+                       let j = 0;
+                       while(j < item.length) {
+                           if(pMap.has(item[j])) {
+                               j ++;
+                           } else {
+                               pMap.set(item[j]);
+                               data.push(item[j]);
+                               break;
+                           }
+                       }
+                   } else {
+                       pMap.set(item[index]);
+                       data.push(item[index]);
+                   }
+               }
+               return data;
+           }
+
+           function getMoreRule(dropData, pData, usableData, n, result, total) {
+               // 第n个位置的掉落偏移量范围
+               const nData = usableData[n - 1];
+               // 已生成参照起始集合的第n个值
+               const nItem = pData[n - 1];
+               for(let i = 0; i < nData.length; i++) {
+                    if(result.length === total) break;
+                    const item = nData[i];
+                    const rData = [...pData];
+                    rData[n - 1] = item;
+                    if(item !== nItem && !pData.includes(item)) {
+                        const rule = buildSingleRule(rData, dropData);
+                        if(rule) result.push(rule);
+                    }
+                    if(n < usableData.length) {
+                        getMoreRule(dropData, rData, usableData, n + 1, result, total)
+                    }
+                }
+           }
+
+           function getRandom(min, max) {
+               return Math.floor(Math.random() * (max - min)) + min;
+           }
+
+           function buildSingleRule(pointData, dropData) {
+                const { items, fill, tail, length } = dropData
+                // 规则map存储数据
+                const pMap = new Map();
+                // 以起始点数据与次数间隔生成序列规则
+                // 当出现重复掉落时，退出规则生成
+                const isSuccess = items.every((item, index) => {
+                    let current = pointData[index]
+                    const { interval, item_id } = item
+                    for(let i = current; i <= length; i += interval) {
+                        if(pMap.has(i)) {
+                            return false;
+                        } else {
+                            pMap.set(i, `${i}:${item_id}`)
+                        }
+                        if(interval === 0) break
+                    }
+                    return true
+                })
+                if(isSuccess) {
+                    // 当无重复时，计算填充与尾随掉落规则
+                    // 存储规则数组
+                    let rules = [];
+                    // 默认填充掉落位置
+                    let start = 1;
+                    Array.from(pMap.keys())
+                    .sort((a, b) => a - b)
+                    .forEach(point => {
+                        if(point !== start) {
+                        rules.push(`${start}:${fill.item_id}`)
+                        }
+                        rules.push(pMap.get(point))
+                        start = point + 1
+                    })
+                    if(start <= length) {
+                        rules.push(`${start}:${fill.item_id}`)
+                    }
+                    if(tail && tail.item_id) {
+                        rules.push(`${length + 1}:${tail.item_id}`)
+                    }
+                    return rules.join(',')
+                }
+            }
+
+            function getAllPoint(min, max) {
+                const data = [];
+                for(let i = min; i <= max; i++) {
+                    data.push(i);
+                }
+                return data;
+            }
+        </script>
+    </body>
+</html>
