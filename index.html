@@ -3,86 +3,53 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-        <title>纯函数</title>
+        <title>index页面</title>
+        <style>
+            .box {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 200px;
+                height: 36px;
+                background-color: #ee5353;
+                font-size: 16px;
+                color: #fff;
+            }
+            .a {
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+            }
+            .icon {
+                display: inline-block;
+                padding: 3px 5px;
+                border: 1px solid green;
+            }
+            .b {
+                flex-shrink: 0;
+            }
+        </style>
     </head>
 
     <body>
+        <div class="box">
+            <div class="a">
+                <span>防可控</span>
+                <span>的架构kkkkkk</span>
+                <span class="icon">好</span>
+            </div>
+            <div class="b">
+                <span>硬卧</span>
+                <span>￥123</span>
+            </div>
+        </div>
+        <button onclick="toPage()">跳转链接</button>
+        <!-- <iframe id="app" name="appPage" src="http://10.181.141.87:9999/#/booking1?refId=1033063234&ts1=%E5%B9%BF%E5%B7%9E%E4%B8%9C&ts1=%E5%93%88%E5%B0%94%E6%BB%A8%E8%A5%BF&ts1=20210605&ts1=Z236&ts1=&ts1=19%3A49&ts1=&ts2=%E5%93%88%E5%B0%94%E6%BB%A8&ts2=%E9%B9%A4%E5%B2%97&ts2=20210607&ts2=K7019&ts2=&ts2=21%3A44&ts2=&cities=%E5%B9%BF%E5%B7%9E%E4%B8%9C&cities=%E5%93%88%E5%B0%94%E6%BB%A8%E8%A5%BF&cities=%E5%93%88%E5%B0%94%E6%BB%A8&cities=%E9%B9%A4%E5%B2%97&at=3479&tt=896&planCode=010031&transferType=TT&dataResource=&source=&abres=C&experimentInfo=&pl=%E5%B9%BF%E5%B7%9E&pl=%E5%93%88%E5%B0%94%E6%BB%A8%E8%A5%BF&pl=%E5%93%88%E5%B0%94%E6%BB%A8&pl=%E9%B9%A4%E5%B2%97&ti=19%3A49&ti=06%3A48&ti=21%3A44&ti=05%3A48&eticket="></iframe> -->
         <script>
-            var arr = [1, [3, 4, 5, 5], [6, 7, 8, 9, [11, 12, [12, 13, [14]]]], 10]
-            //由于es6 flat有些浏览器不兼容，使用reduce递归仿写flat
-            function flat(arr) {
-                return arr.reduce(function(a, b, index) {
-                    if (index === 1) {
-                        a = Array.isArray(a) ? flat(a) : [a]
-                    }
-                    return a.concat(Array.isArray(b) ? flat(b) : [b])
-                })
+            function toPage() {
+                // window.location.href = 'http://10.181.141.87:9999/#/orderdetail?sid=STW179F3DA89D6DW48WXJF5458'
+                window.location.href = 'http://10.181.141.87:9999/#/booking1?refId=1033063234&ts1=%E5%8C%97%E4%BA%AC%E5%8D%97&ts1=%E5%8D%97%E4%BA%AC%E5%8D%97&ts1=20210626&ts1=G105&ts1=&ts1=07%3A17&ts1=%E7%A1%AC%E5%BA%A7&ts2=%E5%8D%97%E4%BA%AC&ts2=%E8%8B%8F%E5%B7%9E&ts2=20210627&ts2=G7229&ts2=&ts2=12%3A47&ts2=%E4%BA%8C%E7%AD%89%E5%BA%A7&cities=%E5%8C%97%E4%BA%AC%E5%8D%97&cities=%E5%8D%97%E4%BA%AC%E5%8D%97&cities=%E5%8D%97%E4%BA%AC&cities=%E8%8B%8F%E5%B7%9E&at=1867&tt=1502&planCode=010031&transferType=TT&dataResource=&source=&abres=C&experimentInfo=&pl=%E5%8C%97%E4%BA%AC%E5%8D%97&pl=%E5%8D%97%E4%BA%AC%E5%8D%97&pl=%E5%8D%97%E4%BA%AC&pl=%E8%8B%8F%E5%B7%9E&ti=07%3A17&ti=11%3A45&ti=12%3A47&ti=14%3A24&eticket='
             }
-            arr = flat(arr)
-            console.log(
-                Array.from(new Set(arr)).sort((a, b) => {
-                    return a - b
-                })
-            )
-            //打印得[1,2,3,4,5,6,7,8,9,10,11,12,13,14]
-
-            //组合函数
-            function compose(...fns) {
-                if (fns.length === 0) return fn => fn
-                if (fns.length === 1) return fns[0]
-                return fns.reduce((a, b) => (...params) => a(b(...params)))
-            }
-
-            function a(params) {
-                return '执行了a: ' + params
-            }
-
-            function b(params) {
-                return '执行了b: ' + params
-            }
-
-            function c(params) {
-                return '执行了c: ' + params
-            }
-            function d(params) {
-                return '执行了d: ' + params
-            }
-            let test = compose(
-                a,
-                b,
-                c,
-                d
-            )
-            console.log(test('hello world'))
-            //管道函数
-            function pipe(...fns) {
-                if (fns.length === 0) return fn => fn
-                if (fns.length === 1) return fns[0]
-                return fns.reduce((a, b) => (...params) => b(a(...params)))
-            }
-            let test_pipe = pipe(
-                a,
-                b,
-                c,
-                d
-            )
-            console.log(test_pipe('hello pipe'))
-            function curry(fun, ...args) {
-                return function(..._args) {
-                    let new_args = args.concat(_args)
-                    if (fun.length <= new_args.length) {
-                        return fun.call(this, ...new_args)
-                    }
-                    return curry.call(this, fun, ...new_args)
-                }
-            }
-            const toUpperCase = x => x.toUpperCase()
-            const split = curry((x, arr) => arr.split(x))
-            const _to = compose(
-                split(' '),
-                toUpperCase
-            )
-            console.log(_to('this is my car!'))
         </script>
     </body>
 </html>
