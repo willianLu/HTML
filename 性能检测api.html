@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+        <title>是否使用页面</title>
+    </head>
+    <body>
+        <script>
+            // 加载时间对象
+            console.log(performance.getEntriesByType('navigation')[0])
+
+            // 性能检测 - 由问题，需要查询资料解决
+            const observer = new PerformanceObserver((list) => {
+                for(const entry of list.getEntries()) {
+                    console.log(entry, '-------加载性能')
+                }
+            });
+            observer.observe({ entryTypes: ['longtask'] })
+
+            function t1() {
+                return new Promise(resolve => {
+                    setTimeout(() => {
+                        resolve(12)
+                    }, 2000)
+                })
+            }
+            
+            async function task() {
+                const res = await t1()
+                console.log(res, '----------xxx')
+            }
+
+            task()
+
+            // 监听页面是否可见
+            let evType = 'visibilitychange';
+            if(document.wekitHidden !== undefined) {
+                evType = 'webkitvisibilitychange'
+            }
+            function changed() {
+                if(document.hidden || document.wekitHidden) {
+                    console.log("页面不可见")
+                } else {
+                    console.log("页面可见")
+                }
+            }
+           document.addEventListener(evType, changed)
+
+           // 监听页面网络
+           const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+           const networkType = connection.effectiveType;
+           console.log(networkType, '----------网络类型')
+           function connectionChange() {
+               console.log('网络发生改变，', `由${networkType}变为${connection.effectiveType}`)
+           }
+           connection.addEventListener('change', connectionChange)
+        </script>
+    </body>
+</html>
