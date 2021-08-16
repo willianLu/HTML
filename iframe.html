@@ -21,11 +21,25 @@
 
     <body>
         <button onclick="toPage()">跳转链接</button>
-        <!-- <iframe id="app" name="appPage" src="http://10.181.141.87:9999/#/booking1?refId=1033063234&ts1=%E5%B9%BF%E5%B7%9E%E4%B8%9C&ts1=%E5%93%88%E5%B0%94%E6%BB%A8%E8%A5%BF&ts1=20210605&ts1=Z236&ts1=&ts1=19%3A49&ts1=&ts2=%E5%93%88%E5%B0%94%E6%BB%A8&ts2=%E9%B9%A4%E5%B2%97&ts2=20210607&ts2=K7019&ts2=&ts2=21%3A44&ts2=&cities=%E5%B9%BF%E5%B7%9E%E4%B8%9C&cities=%E5%93%88%E5%B0%94%E6%BB%A8%E8%A5%BF&cities=%E5%93%88%E5%B0%94%E6%BB%A8&cities=%E9%B9%A4%E5%B2%97&at=3479&tt=896&planCode=010031&transferType=TT&dataResource=&source=&abres=C&experimentInfo=&pl=%E5%B9%BF%E5%B7%9E&pl=%E5%93%88%E5%B0%94%E6%BB%A8%E8%A5%BF&pl=%E5%93%88%E5%B0%94%E6%BB%A8&pl=%E9%B9%A4%E5%B2%97&ti=19%3A49&ti=06%3A48&ti=21%3A44&ti=05%3A48&eticket="></iframe> -->
+        <iframe id="app" name="appPage" src="http://127.0.0.1:8080/"></iframe>
         <script>
-            function toPage() {
-                window.open('http://10.181.141.87:9999/#/booking1?refId=1033063234&ts1=%E5%B9%BF%E5%B7%9E%E4%B8%9C&ts1=%E5%93%88%E5%B0%94%E6%BB%A8%E8%A5%BF&ts1=20210605&ts1=Z236&ts1=&ts1=19%3A49&ts1=&ts2=%E5%93%88%E5%B0%94%E6%BB%A8&ts2=%E9%B9%A4%E5%B2%97&ts2=20210607&ts2=K7019&ts2=&ts2=21%3A44&ts2=&cities=%E5%B9%BF%E5%B7%9E%E4%B8%9C&cities=%E5%93%88%E5%B0%94%E6%BB%A8%E8%A5%BF&cities=%E5%93%88%E5%B0%94%E6%BB%A8&cities=%E9%B9%A4%E5%B2%97&at=3479&tt=896&planCode=010031&transferType=TT&dataResource=&source=&abres=C&experimentInfo=&pl=%E5%B9%BF%E5%B7%9E&pl=%E5%93%88%E5%B0%94%E6%BB%A8%E8%A5%BF&pl=%E5%93%88%E5%B0%94%E6%BB%A8&pl=%E9%B9%A4%E5%B2%97&ti=19%3A49&ti=06%3A48&ti=21%3A44&ti=05%3A48&eticket=')
-            }
+            const app = document.getElementById("app");
+            console.log(app, "-------------------------kkkm")
+            // 注意：必须是在框架内容加载完成后才能触发 message 事件哦
+            app.onload =  function(){
+                const data = {
+                    act: 'article',  // 自定义的消息类型、行为，用于switch条件判断等。。
+                    msg: {
+                        subject: '跨域通信消息收到了有木有~', 
+                        author: 'CSDN-神神的蜗牛'
+                    }
+                };
+                // 不限制域名则填写 * 星号, 否则请填写对应域名如 http://www.b.com
+                app.contentWindow.postMessage(data, '*');
+            };
+            window.addEventListener('message', function(e) {
+               console.log(e, "------------------------父窗口--接受到数据")
+            }, false);
         </script>
     </body>
 </html>
