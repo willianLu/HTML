@@ -42,6 +42,17 @@
                     .replace(/[-]/g, '')
             )
             console.log('hello-world'.match(exp))
+            let a = '1233@@购票须知@@http://www.baidu.com@@、@@其他@@http://www.baidu.com@@酷酷酷，@@合@@';
+            let b = a.replace(/@@(.*?)@@(?:(.*?)@@)?/g,(word, $1,$2) => {
+                console.log($1, $2, '----------------------测试')
+                return `<a data-link="${$2}">${$1}</a>`;
+            })
+            let c = '<h1>dd</h1>\n<h2>cc</h2>\nkkkkkk\nddddd<h2>Lll</h2>\n5554545<h2>其他</h2>看看看看';
+            let d = c.replace(/(<\/h1>|<\/h2>)(?:\n)/g, (word, $1) => {
+                console.log($1, '----------------lll')
+                return $1;
+            })
+            console.log(d)
         </script>
     </body>
 </html>

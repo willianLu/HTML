@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+        <title>Promise 函数</title>
+    </head>
+    <body>
+        <script>
+            function delay(duration = 1000, value) {
+                return new Promise((resolve) => {
+                    setTimeout(() => {
+                        resolve(value);
+                    }, duration)
+                })
+            }
+            // promise的reduce方法
+            function pReduce(iterable, reducer, initialValue) {
+                return new Promise((resolve, reject) => {
+                    const iterator = iterable[Symbol.iterator]();
+                    let index = 0;
+                    const next = async (total) => {
+                        const element = iterator.next(); // 获取下一项
+                        if(element.done) {
+                            resolve(total);
+                            return;
+                        }
+                        console.log(iterable, element, "-----------------kkk")
+                        try {
+                            const [resolvedTotal, resolvedValue] = await Promise.all([total, element.value]);
+                            // 迭代下一项
+                            console.log(resolvedTotal, resolvedValue, '----------------------测试')
+                            next(reducer(resolvedTotal, resolvedValue, index++));
+                        } catch (error) {
+                            reject(error);
+                        }
+                    }
+                    next(initialValue);
+                })
+            }
+            async function test() {
+                console.time("test");
+                const res = await pReduce([delay(800, 1), 2, delay(1000, 3)], (a,b) => {
+                    return a + b;
+                }, 0);
+                console.timeEnd("test");
+                console.log(res, "----------------------结果")
+            }
+            test();
+        </script>
+    </body>
+</html>

@@ -28,6 +28,16 @@
             .b {
                 flex-shrink: 0;
             }
+            .test {
+                width: 300px;
+                background-color: #ee5353;
+                color: #fff;
+                white-space: nowrap;
+                overflow: auto;
+            }
+            .test span {
+                display: inline-block;
+            }
         </style>
     </head>
 
@@ -42,6 +52,12 @@
                 <span>硬卧</span>
                 <span>￥123</span>
             </div>
+        </div>
+        <div class="test">
+            <span>12</span>
+            <span>23</span>
+            <span>45</span>
+            <span>跳转链接跳转链接跳转链接跳转链接跳转链接跳转链接</span>
         </div>
         <button onclick="toPage()">跳转链接</button>
         <button onclick="toMessage()">发送信息</button>
@@ -61,6 +77,70 @@
                 // window.location.href = 'http://10.108.84.209:9999/#/booking1?ts1=%E6%98%86%E5%B1%B1%E5%8D%97&ts1=%E5%AE%89%E4%BA%AD%E5%8C%97&ts1=20210804&ts1=G8277&ts1=&ts1=16%3A33&ts1=%E4%BA%8C%E7%AD%89%E5%BA%A7&ts2=%E5%AE%89%E4%BA%AD%E5%8C%97&ts2=%E4%B8%8A%E6%B5%B7&ts2=20210804&ts2=G7767&ts2=&ts2=17%3A36&ts2=%E4%BA%8C%E7%AD%89%E5%BA%A7&cities=%E6%98%86%E5%B1%B1&cities=%E5%AE%89%E4%BA%AD%E5%8C%97&cities=%E4%B8%8A%E6%B5%B7&refId=560635536&at=77&tt=53&sceneCode=010003&planCode=010005&transferType=TT&itemId=2WPrwDUfU7dSbN%20tQdD%2FAQ%3D%3D&dataResource=&source=%7B%22abTest%22%3A%5B%7B%22expNo%22%3A%2220201217_threePlanExposure%22,%22expGroup%22%3A%22Z%22%7D,%7B%22expNo%22%3A%2220201230_refreshTicketCache%22,%22expGroup%22%3A%22Z%22%7D,%7B%22expNo%22%3A%2220210105_addFilterRule%22,%22expGroup%22%3A%22Z%22%7D,%7B%22expNo%22%3A%2220210107_reInvokeRankModel%22,%22expGroup%22%3A%22Z%22%7D,%7B%22expNo%22%3A%2220210112_transferTimeOptimize%22,%22expGroup%22%3A%22Z%22%7D,%7B%22expNo%22%3A%2220210119_dynamicCitySize%22,%22expGroup%22%3A%22Z%22%7D,%7B%22expNo%22%3A%2220210125_doubleCitySize%22,%22expGroup%22%3A%22Z%22%7D,%7B%22expNo%22%3A%2220210128_schemeComplement%22,%22expGroup%22%3A%22Z%22%7D,%7B%22expNo%22%3A%2220210226_filterByCityRatio%22,%22expGroup%22%3A%22Z%22%7D,%7B%22expNo%22%3A%2220210608_tfftMoreTransCity%22,%22expGroup%22%3A%22Z%22%7D,%7B%22expNo%22%3A%2220210611_newTransTimeLogic%22,%22expGroup%22%3A%22Z%22%7D,%7B%22expNo%22%3A%2220210629_filterRemainTicket%22,%22expGroup%22%3A%22Z%22%7D,%7B%22expNo%22%3A%2220210713_tagSortSplit%22,%22expGroup%22%3A%22Z%22%7D%5D,%22requestId%22%3A%227781811613b05709856b06064a17067b%22,%22planId%22%3A%227781811613b05709856b06064a17067b%401626919018650%40TT%401690%22,%22itemId%22%3A%222WPrwDUfU7dSbN%20tQdD%2FAQ%3D%3D%22,%22rankIndex%22%3A14,%22platId%22%3A852,%22plansTotal%22%3A71%7D&experimentInfo=010003_0&pl=%E6%98%86%E5%B1%B1%E5%8D%97&pl=%E5%AE%89%E4%BA%AD%E5%8C%97&pl=%E5%AE%89%E4%BA%AD%E5%8C%97&pl=%E4%B8%8A%E6%B5%B7&ti=16%3A33&ti=16%3A43&ti=17%3A36&ti=17%3A50&eticket=&ts1SaleFlag=0&ts2SaleFlag=0&cityCode=%5B%22510%22,%22321%22,%22%22,%22KNH%22,%22ASH%22,%22ASH%22,%22SHH%22%5D&cdatetime=1626919054516&queryFromStation=%E6%98%86%E5%B1%B1%E5%8D%97&queryFromStation=%E5%AE%89%E4%BA%AD%E5%8C%97&queryToStation=%E5%AE%89%E4%BA%AD%E5%8C%97&queryToStation=%E4%B8%8A%E6%B5%B7&fromscene=1001&fromwallet=1&planId=7781811613b05709856b06064a17067b%401626919018650%40TT%401690&youhuadayangFlag=1&fromMiniSource=2'
                 window.location.href="http://10.108.84.209:8090/#/booking2?ts1=%E4%B8%8A%E6%B5%B7%E8%99%B9%E6%A1%A5&ts1=%E6%98%86%E5%B1%B1%E5%8D%97&ts1=20210812&ts1=D2928&ts1=%E4%BA%8C%E7%AD%89%E5%BA%A7&ts1=20&ts1=21&ts1=19&ts1=06%3A52&ts1=shanghaihongqiao&ts1=kunshannan&ts1=1&ts1=07%3A12&ts1=20&ts1=&ts1=D&ts1=&ts1=0&ts2=%E6%98%86%E5%B1%B1%E5%8D%97&ts2=%E8%8B%8F%E5%B7%9E&ts2=20210812&ts2=D2212&ts2=%E4%BA%8C%E7%AD%89%E5%BA%A7&ts2=12&ts2=19&ts2=13&ts2=08%3A08&ts2=kunshannan&ts2=suzhou&ts2=2&ts2=08%3A20&ts2=12&ts2=&ts2=D&ts2=&ts2=0&ts1ticket=0&ts1ticket=0&ts1ticket=0&ts2ticket=0&ts2ticket=0&ts2ticket=0&refId=379386067&planCode=010002&source=%7B%22abTest%22%3A%5B%7B%22expNo%22%3A%2220201217_threePlanExposure%22,%22expGroup%22%3A%22Z%22%7D,%7B%22expNo%22%3A%2220201230_refreshTicketCache%22,%22expGroup%22%3A%22Z%22%7D,%7B%22expNo%22%3A%2220210105_addFilterRule%22,%22expGroup%22%3A%22Z%22%7D,%7B%22expNo%22%3A%2220210107_reInvokeRankModel%22,%22expGroup%22%3A%22Z%22%7D,%7B%22expNo%22%3A%2220210119_dynamicCitySize%22,%22expGroup%22%3A%22Z%22%7D,%7B%22expNo%22%3A%2220210125_doubleCitySize%22,%22expGroup%22%3A%22Z%22%7D,%7B%22expNo%22%3A%2220210226_filterByCityRatio%22,%22expGroup%22%3A%22Z%22%7D,%7B%22expNo%22%3A%2220210608_tfftMoreTransCity%22,%22expGroup%22%3A%22Z%22%7D,%7B%22expNo%22%3A%2220210611_newTransTimeLogic%22,%22expGroup%22%3A%22Z%22%7D,%7B%22expNo%22%3A%2220210629_filterRemainTicket%22,%22expGroup%22%3A%22Z%22%7D,%7B%22expNo%22%3A%2220210713_tagSortSplit%22,%22expGroup%22%3A%22Z%22%7D%5D,%22requestId%22%3A%2209c926252d92788216618025f689e4b4%22%7D&packageId=&fastticket=0&totalTime=1%E6%97%B628%E5%88%86&idCard=1&idCard=1"
             }
+            /**
+             * @description 处理慧行h5
+             * @param {*}
+             * @returns {void}
+             */
+            function handleHxPostH5Data(res) {
+                const { insuranceInfo } = res
+                // 保险确认页回传的保险信息
+                if(insuranceInfo) {
+                    const { backUrl, key, type, val, random } = insuranceInfo
+                    // 处理透传前端参数
+                    const param = encodeURIComponent(JSON.stringify({key, type, val}))
+                    // 返回前端路径
+                    let src = decodeURIComponent(backUrl);
+                    let urlArr = src.split('/#/');
+                    let path = urlArr[1];
+                    // 解析处理参数
+                    if(path.indexOf('miniInsuranceInfo=') > -1) {
+                        path = path.replace(new RegExp(`(\\?|&)miniInsuranceInfo=([^&]*)(\\s|&|$)`, 'i'), function(word) {
+                            return word[0] + 'miniInsuranceInfo=' + param + (word[word.length -1] === '&'?'&':'');
+                        })
+                    } else {
+                        path += (path.indexOf('?') > -1 ? '&' : '?') + 'miniInsuranceInfo=' + param;
+                    }
+                    // 随机值处理
+                    if(path.indexOf('miniRandom=') > -1) {
+                        path = path.replace(new RegExp(`(\\?|&)miniRandom=([^&]*)(\\s|&|$)`, 'i'), function(word) {
+                            return word[0] + 'miniRandom=' + Date.now() + random + (word[word.length -1] === '&'?'&':'');
+                        })
+                    } else {
+                        path += '&miniRandom=' + Date.now() + random;
+                    }
+                    return urlArr[0] + "/#/" + path;
+                }
+            }
+            let url = handleHxPostH5Data({
+                // insuranceInfo: {
+                //     backUrl: 'http://10.108.84.209:9999/#/booking3?fromPage=oneTrain&trainIndex=0',
+                //     key: '123', 
+                //     type: 2, 
+                //     val: 1, 
+                //     random: 'r123456'
+                // }
+            })
+            console.log(url)
+            console.log(decodeURIComponent(url))
+
+            function encodeTest(unionId = '') {
+                let str = unionId.length < 3 ? unionId : '';
+                let i = 0;
+                while (i <= unionId.length - 3) {
+                    str += unionId[i+ 2] + unionId[i+ 1] + unionId[i];
+                    i += 3;
+                }
+                return str;
+            }
+            console.log('------------------------加密')
+            console.log(encodeTest(''));
+            console.log(encodeTest('1'));
+            console.log(encodeTest('12'));
+            console.log(encodeTest('123'));
+            console.log(encodeTest('1234'));
+            console.log(encodeTest('12345'));
+            console.log(encodeTest('321654987810'));
         </script>
     </body>
 </html>
