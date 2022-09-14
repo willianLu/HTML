@@ -147,5 +147,100 @@
             </div>
             <div class="right">right</div>
         </div>
+        <script>
+            const data = [
+                    {
+                        from: true,
+                        id: "a",
+                        img: "/static/img/kg.7915597a.png",
+                        lineId: "3",
+                        latitude: 33.052180601876586,
+                        longitude: 120.14530420303345,
+                        point: [120.14530420303345, 33.052180601876586],
+                        type: "2",
+                    },
+                    {
+                        from: false,
+                        id: "b",
+                        img: "/static/img/kg.7915597a.png",
+                        lineId: "3",
+                        latitude: 33.04147043431351,
+                        longitude: 120.14204200185901,
+                        point: [120.14204200185901, 33.04147043431351],
+                        type: "2",
+                    },
+                    {
+                        from: false,
+                        id: "c",
+                        img: "/static/img/kg.7915597a.png",
+                        lineId: "3",
+                        latitude: 33.029394119147085,
+                        longitude: 120.14180966084609,
+                        point: [120.14180966084609, 33.029394119147085],
+                        type: "2",
+                    },
+                    {
+                        from: false,
+                        id: "d",
+                        img: "/static/img/kg.7915597a.png",
+                        lineId: "3",
+                        latitude: 33.0217968793541,
+                        longitude: 120.1278692000464,
+                        point: [120.1278692000464, 33.0217968793541],
+                        type: "2",
+                    },
+                    {
+                        from: false,
+                        id: "e",
+                        img: "/static/img/kg.7915597a.png",
+                        lineId: "3",
+                        latitude: 33.016731689045216,
+                        longitude: 120.14808286820585,
+                        point: [120.14808286820585, 33.016731689045216],
+                        type: "2",
+                    },
+                    {
+                        from: false,
+                        id: "f",
+                        img: "/static/img/kg.7915597a.png",
+                        lineId: "3",
+                        latitude: 33.01049720919171,
+                        longitude: 120.13344538436593,
+                        point: [120.13344538436593, 33.01049720919171],
+                        type: "2",
+                    },
+                    {
+                        from: false,
+                        id: "g",
+                        img: "/static/img/kg.7915597a.png",
+                        lineId: "3",
+                        latitude: 33.016731689045216,
+                        longitude: 120.14808286820585,
+                        point: [120.14808286820585, 33.016731689045216],
+                        type: "2",
+                    },
+                ]
+
+            const ref = ["c","d"];
+            const tempIndex = [];
+            ref.forEach(id => {
+                tempIndex.push(data.findIndex(item => item.id === id))
+            })
+            tempIndex.sort((a, b) => {
+                return a - b
+            })
+            let currentIndex = 0;
+            const tempData = []
+            tempIndex.forEach((i, index) => {
+                if(currentIndex < i) {
+                    tempData.push(data.slice(currentIndex, i))
+                }
+                currentIndex = i + 1;
+                if(index === tempIndex.length -1 && currentIndex < data.length) {
+                    tempData.push(data.slice(currentIndex, data.length))
+                }
+            })
+            console.log(tempData)
+        </script>
     </body>
 </html>

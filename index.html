@@ -29,6 +29,25 @@
                 flex-shrink: 0;
             }
         </style>
+        <script src="./js/whitedragon-v0.0.1.canary.js"></script>
+        <script src="https://unpkg.com/vconsole@latest/dist/vconsole.min.js"></script>
+        <script>
+            // VConsole will be exported to `window.VConsole` by default.
+            var vConsole = new window.VConsole();
+            new window.whiteDragon({
+                appName: 'canopy',
+                debug: true,
+                environment: 'test',
+                frame: 'vue',
+                //   app,
+                userInfo: {
+                    userid: '',
+                    platcode: 0,
+                    unionid: '',
+                    openid: ''
+                }
+            })
+        </script>
     </head>
 
     <body>
@@ -43,13 +62,113 @@
                 <span>￥123</span>
             </div>
         </div>
+<<<<<<< Updated upstream
+=======
+        <div class="test">
+            <span>12</span>
+            <span>23</span>
+            <span>45</span>
+            <span>跳转链接跳转链接跳转链接跳转链接跳转链接跳转链接</span>
+        </div>
+        <div><a href="http://10.108.84.209:8080/" target="_blank">测试链接</a></div>
+>>>>>>> Stashed changes
         <button onclick="toPage()">跳转链接</button>
         <!-- <iframe id="app" name="appPage" src="http://10.181.141.87:9999/#/booking1?refId=1033063234&ts1=%E5%B9%BF%E5%B7%9E%E4%B8%9C&ts1=%E5%93%88%E5%B0%94%E6%BB%A8%E8%A5%BF&ts1=20210605&ts1=Z236&ts1=&ts1=19%3A49&ts1=&ts2=%E5%93%88%E5%B0%94%E6%BB%A8&ts2=%E9%B9%A4%E5%B2%97&ts2=20210607&ts2=K7019&ts2=&ts2=21%3A44&ts2=&cities=%E5%B9%BF%E5%B7%9E%E4%B8%9C&cities=%E5%93%88%E5%B0%94%E6%BB%A8%E8%A5%BF&cities=%E5%93%88%E5%B0%94%E6%BB%A8&cities=%E9%B9%A4%E5%B2%97&at=3479&tt=896&planCode=010031&transferType=TT&dataResource=&source=&abres=C&experimentInfo=&pl=%E5%B9%BF%E5%B7%9E&pl=%E5%93%88%E5%B0%94%E6%BB%A8%E8%A5%BF&pl=%E5%93%88%E5%B0%94%E6%BB%A8&pl=%E9%B9%A4%E5%B2%97&ti=19%3A49&ti=06%3A48&ti=21%3A44&ti=05%3A48&eticket="></iframe> -->
         <script>
             function toPage() {
+<<<<<<< Updated upstream
                 // window.location.href = 'http://10.181.141.87:9999/#/orderdetail?sid=STW179F3DA89D6DW48WXJF5458'
                 window.location.href = 'http://10.181.141.87:9999/#/booking1?refId=1033063234&ts1=%E5%8C%97%E4%BA%AC%E5%8D%97&ts1=%E5%8D%97%E4%BA%AC%E5%8D%97&ts1=20210626&ts1=G105&ts1=&ts1=07%3A17&ts1=%E7%A1%AC%E5%BA%A7&ts2=%E5%8D%97%E4%BA%AC&ts2=%E8%8B%8F%E5%B7%9E&ts2=20210627&ts2=G7229&ts2=&ts2=12%3A47&ts2=%E4%BA%8C%E7%AD%89%E5%BA%A7&cities=%E5%8C%97%E4%BA%AC%E5%8D%97&cities=%E5%8D%97%E4%BA%AC%E5%8D%97&cities=%E5%8D%97%E4%BA%AC&cities=%E8%8B%8F%E5%B7%9E&at=1867&tt=1502&planCode=010031&transferType=TT&dataResource=&source=&abres=C&experimentInfo=&pl=%E5%8C%97%E4%BA%AC%E5%8D%97&pl=%E5%8D%97%E4%BA%AC%E5%8D%97&pl=%E5%8D%97%E4%BA%AC&pl=%E8%8B%8F%E5%B7%9E&ti=07%3A17&ti=11%3A45&ti=12%3A47&ti=14%3A24&eticket='
             }
+=======
+                // window.location.href = "http://10.108.84.209:8090/#/booking?at=438&tt=296&ts1=%E5%A4%AA%E5%8E%9F&ts1=%E6%A6%86%E6%AC%A1&ts1=20211111&ts1=K237&ts1=23%3A19&ts1=21&ts1=%E7%A1%AC%E5%BA%A7&ts1=KS&ts1=&ts2=%E6%A6%86%E6%AC%A1&ts2=%E5%BF%BB%E5%B7%9E&ts2=20211112&ts2=1552&ts2=04%3A36&ts2=121&ts2=%E6%97%A0%E5%BA%A7&ts2=PK&ts2=&refId=&planCode=&source=%7B%22abTest%22%3A%5B%7B%22expNo%22%3A%2220201217_threePlanExposure%22,%22expGroup%22%3A%22Z%22%7D,%7B%22expNo%22%3A%2220201230_refreshTicketCache%22,%22expGroup%22%3A%22Z%22%7D,%7B%22expNo%22%3A%2220210105_addFilterRule%22,%22expGroup%22%3A%22Z%22%7D,%7B%22expNo%22%3A%2220210107_reInvokeRankModel%22,%22expGroup%22%3A%22Z%22%7D,%7B%22expNo%22%3A%2220210119_dynamicCitySize%22,%22expGroup%22%3A%22Z%22%7D,%7B%22expNo%22%3A%2220210125_doubleCitySize%22,%22expGroup%22%3A%22Z%22%7D,%7B%22expNo%22%3A%2220210226_filterByCityRatio%22,%22expGroup%22%3A%22Z%22%7D,%7B%22expNo%22%3A%2220210608_tfftMoreTransCity%22,%22expGroup%22%3A%22Z%22%7D,%7B%22expNo%22%3A%2220210611_newTransTimeLogic%22,%22expGroup%22%3A%22Z%22%7D,%7B%22expNo%22%3A%2220210629_filterRemainTicket%22,%22expGroup%22%3A%22Z%22%7D,%7B%22expNo%22%3A%2220210813_appUseModel%22,%22expGroup%22%3A%22Z%22%7D,%7B%22expNo%22%3A%2220210831_grabticketfiltration%22,%22expGroup%22%3A%22Z%22%7D%5D,%22requestId%22%3A%220df5b0e059d020f50dcb0a938a06d146%22%7D"
+                window.location.href = "http://192.168.31.60:9999/#/booking1?ts1=%E5%90%88%E8%82%A5%E5%8D%97&ts1=%E5%B7%A2%E6%B9%96%E4%B8%9C&ts1=20220416&ts1=G1184&ts1=&ts1=15%3A04&ts1=%E4%BA%8C%E7%AD%89%E5%BA%A7&ts2=%E5%B7%A2%E6%B9%96%E4%B8%9C&ts2=%E8%8A%9C%E6%B9%96&ts2=20220416&ts2=G7685&ts2=&ts2=16%3A21&ts2=%E4%BA%8C%E7%AD%89%E5%BA%A7&eticket=&ts1SaleFlag=0&ts2SaleFlag=0&cities=%E5%90%88%E8%82%A5&cities=%E5%B7%A2%E6%B9%96%E5%B8%82&cities=%E8%8A%9C%E6%B9%96&refId=379386082&at=96&tt=45&sceneCode=010002&planCode=010001&transferType=TT&itemId=fiWG4NNpcH7HdA4r2t%2FaDQ%3D%3D&dataResource=&source=%7B%22abTest%22%3A%5B%7B%22expNo%22%3A%2220201217_threePlanExposure%22,%22expGroup%22%3A%22Z%22%7D,%7B%22expNo%22%3A%2220201230_refreshTicketCache%22,%22expGroup%22%3A%22Z%22%7D,%7B%22expNo%22%3A%2220210105_addFilterRule%22,%22expGroup%22%3A%22Z%22%7D,%7B%22expNo%22%3A%2220210107_reInvokeRankModel%22,%22expGroup%22%3A%22Z%22%7D,%7B%22expNo%22%3A%2220210119_dynamicCitySize%22,%22expGroup%22%3A%22Z%22%7D,%7B%22expNo%22%3A%2220210125_doubleCitySize%22,%22expGroup%22%3A%22Z%22%7D,%7B%22expNo%22%3A%2220210226_filterByCityRatio%22,%22expGroup%22%3A%22Z%22%7D,%7B%22expNo%22%3A%2220210608_tfftMoreTransCity%22,%22expGroup%22%3A%22Z%22%7D,%7B%22expNo%22%3A%2220210611_newTransTimeLogic%22,%22expGroup%22%3A%22Z%22%7D,%7B%22expNo%22%3A%2220210629_filterRemainTicket%22,%22expGroup%22%3A%22Z%22%7D,%7B%22expNo%22%3A%2220210813_appUseModel%22,%22expGroup%22%3A%22Z%22%7D,%7B%22expNo%22%3A%2220210831_grabticketfiltration%22,%22expGroup%22%3A%22Z%22%7D,%7B%22expNo%22%3A%2220220126_12306transfer%22,%22expGroup%22%3A%22A%22%7D%5D,%22requestId%22%3A%2291dd8bb8eda213141ceddeb8bb431b91%22,%22planId%22%3A%2291dd8bb8eda213141ceddeb8bb431b91%401649991511159%40TT%4020%22,%22itemId%22%3A%22fiWG4NNpcH7HdA4r2t%2FaDQ%3D%3D%22,%22rankIndex%22%3A1,%22platId%22%3A852,%22plansTotal%22%3A31%7D&experimentInfo=010002_0&pl=%E5%90%88%E8%82%A5%E5%8D%97&pl=%E5%B7%A2%E6%B9%96%E4%B8%9C&pl=%E5%B7%A2%E6%B9%96%E4%B8%9C&pl=%E8%8A%9C%E6%B9%96&ti=15%3A04&ti=15%3A36&ti=16%3A21&ti=16%3A40&cityCode=%5B%2242%22,%2250%22,%22418%22,%22ENH%22,%22GUH%22,%22GUH%22,%22WHH%22%5D&cdatetime=1649991639836&queryFromStation=%E5%90%88%E8%82%A5%E5%8D%97&queryFromStation=%E5%B7%A2%E6%B9%96%E4%B8%9C&queryToStation=%E5%B7%A2%E6%B9%96%E4%B8%9C&queryToStation=%E8%8A%9C%E6%B9%96&fromscene=1001&fromwallet=1&crossrequestid=91dd8bb8eda213141ceddeb8bb431b91%40fiWG4NNpcH7HdA4r2t%2FaDQ%3D%3D&planId=91dd8bb8eda213141ceddeb8bb431b91%401649991511159%40TT%4020&youhuadayangFlag=1&fromMiniSource=1"
+            }
+            /**
+             * @description 处理慧行h5
+             * @param {*}
+             * @returns {void}
+             */
+            function handleHxPostH5Data(res) {
+                const { insuranceInfo } = res
+                // 保险确认页回传的保险信息
+                if(insuranceInfo) {
+                    const { backUrl, key, type, val, random } = insuranceInfo
+                    // 处理透传前端参数
+                    const param = encodeURIComponent(JSON.stringify({key, type, val}))
+                    // 返回前端路径
+                    let src = decodeURIComponent(backUrl);
+                    let urlArr = src.split('/#/');
+                    let path = urlArr[1];
+                    // 解析处理参数
+                    if(path.indexOf('miniInsuranceInfo=') > -1) {
+                        path = path.replace(new RegExp(`(\\?|&)miniInsuranceInfo=([^&]*)(\\s|&|$)`, 'i'), function(word) {
+                            return word[0] + 'miniInsuranceInfo=' + param + (word[word.length -1] === '&'?'&':'');
+                        })
+                    } else {
+                        path += (path.indexOf('?') > -1 ? '&' : '?') + 'miniInsuranceInfo=' + param;
+                    }
+                    // 随机值处理
+                    if(path.indexOf('miniRandom=') > -1) {
+                        path = path.replace(new RegExp(`(\\?|&)miniRandom=([^&]*)(\\s|&|$)`, 'i'), function(word) {
+                            return word[0] + 'miniRandom=' + Date.now() + random + (word[word.length -1] === '&'?'&':'');
+                        })
+                    } else {
+                        path += '&miniRandom=' + Date.now() + random;
+                    }
+                    return urlArr[0] + "/#/" + path;
+                }
+            }
+            let url = handleHxPostH5Data({
+                // insuranceInfo: {
+                //     backUrl: 'http://10.108.84.209:9999/#/booking3?fromPage=oneTrain&trainIndex=0',
+                //     key: '123', 
+                //     type: 2, 
+                //     val: 1, 
+                //     random: 'r123456'
+                // }
+            })
+            console.log(url)
+            console.log(decodeURIComponent(url))
+
+            function encodeTest(unionId = '') {
+                let str = unionId.length < 3 ? unionId : '';
+                let i = 0;
+                while (i <= unionId.length - 3) {
+                    str += unionId[i+ 2] + unionId[i+ 1] + unionId[i];
+                    i += 3;
+                }
+                return str;
+            }
+            console.log('------------------------加密')
+            console.log(encodeTest(''));
+            console.log(encodeTest('1'));
+            console.log(encodeTest('12'));
+            console.log(encodeTest('123'));
+            console.log(encodeTest('1234'));
+            console.log(encodeTest('12345'));
+            console.log(encodeTest('321654987810'));
+
+            function isValid(s) {
+                let len = s.length;
+                if(len % 2 !== 0) return false;
+                let index = Math.floor(len/2);
+                index = index <= 1 ? 0 : index;
+                let map = {
+                    "(": ")",
+                    "[": "]",
+                    "{": "}"
+                }
+                for(i = index; i >= 0; i --) {
+                    index ++;
+                    console.log(i, index);
+                    console.log(s[i], s[index])
+                    if(map[s[i]] !== s[index]) return false;
+                }
+                return true;
+            };
+            isValid("()")
+>>>>>>> Stashed changes
         </script>
     </body>
 </html>

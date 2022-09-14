@@ -82,61 +82,75 @@
             }
             console.log(preorderTraversalByNonRecursion(binaryTree), '------------先序遍历-非递归');
             // 中序遍历-递归
-            function inorderByRecursion(node, res = []) {
+            function inorderByRecursion(node) {
+                let res = [];
                 if(!node) return res;
-                let { left, right, value } = node;
+                const { left, right, value } = node;
                 if(left) {
-                    inorderByRecursion(left, res);
+                    res = res.concat(inorderByRecursion(left));
                 }
-                res.push(value);
+                res.push(value)
                 if(right) {
-                    inorderByRecursion(right, res);
+                    res = res.concat(inorderByRecursion(right));
                 }
                 return res;
             }
             console.log(inorderByRecursion(binaryTree), '------------中序遍历-递归');
             // 中序遍历-非递归
-            function inorderByNonRecursion(node, res = []) {
+            function inorderByNonRecursion(node) {
+                const res = [];
                 if(!node) return res;
-                let queue = [node];
-                while(queue.length) {
-                    let cnode = queue.shift();
-                    let { left, right, value } = cnode;
+                const temp = [node];
+                while(temp.length) {
+                    const { left, right, value } = temp.pop();
                     if(!left && !right) {
-                        res.push(value)
-                        continue
+                        res.push(value);
+                        continue;
                     }
-                    if(right) queue.unshift(right);
-                    queue.unshift({ value })
-                    if(left) queue.unshift(left);
+                    if(right) {
+                        temp.push(right);
+                    }
+                    temp.push({ value });
+                    if(left) {
+                        temp.push(left);
+                    }
                 }
                 return res;
             }
             console.log(inorderByNonRecursion(binaryTree), '------------中序遍历-非递归');
             // 后序遍历-递归
-            function postorderByRecursion(node, res = []) {
+            function postorderByRecursion(node) {
+                let res = [];
                 if(!node) return res;
-                let { left, right, value } = node;
-                if(left) postorderByRecursion(left, res);
-                if(right) postorderByRecursion(right, res);
+                const { left, right, value } = node;
+                if(left) {
+                    res = res.concat(postorderByRecursion(left));
+                }
+                if(right) {
+                    res = res.concat(postorderByRecursion(right));
+                }
                 res.push(value);
                 return res;
             }
             console.log(postorderByRecursion(binaryTree), '------------后序遍历-递归');
             // 后序遍历-非递归
-            function postorderByNonRecursion(node, res = []) {
+            function postorderByNonRecursion(node) {
+                const res = [];
                 if(!node) return res;
-                let queue = [node];
-                while(queue.length) {
-                    let cnode = queue.shift();
-                    let { left, right, value } = cnode;
+                const temp = [node];
+                while(temp.length) {
+                    const { left, right, value } = temp.pop();
                     if(!left && !right) {
                         res.push(value);
-                        continue
+                        continue;
                     }
-                    queue.unshift({ value });
-                    if(right) queue.unshift(right);
-                    if(left) queue.unshift(left);
+                    temp.push({ value });
+                    if(right) {
+                        temp.push(right);
+                    }
+                    if(left) {
+                        temp.push(left);
+                    }
                 }
                 return res;
             }

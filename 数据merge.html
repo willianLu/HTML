@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+        <title>JS数据合并</title>
+    </head>
+    <body>
+        <script>
+            function curry(fun, ...args) {
+                return function(..._args) {
+                    let new_args = args.concat(_args)
+                    if (fun.length <= new_args.length) {
+                        return fun.call(this, ...new_args)
+                    }
+                    return curry.call(this, fun, ...new_args)
+                }
+            }
+
+            const isType = curry((type, data) => {
+                return Object.prototype.toString.call(data).toLowerCase() === `[object ${type}]`.toLowerCase()
+            })
+
+            const isObject = data => isType('object', data)
+            const isSet = data => isType('set', data)
+            const isMap = data => isType('map', data)
+            const isArray = data => isType('array', data)
+            const isArguments = data => isType('arguments', data)
+            // 深度合并
+            function deepMerge(data, obj, map) {
+                if(!isObject(obj) || map.has(obj)) return
+                map.set(obj, true)
+                Object.keys(obj).forEach(key => {
+                    const val = obj[key]
+                    if(!isObject(val) || map.has(val)) {
+                        data[key] = val
+                    } else {
+                        if(!(key in data)) data[key] = {}
+                        deepMerge(data[key], val, map)
+                    }
+                })
+            }
+            // 合并函数
+            function merge(...args) {
+                // 缓存对象map，用于过滤自引用循环
+                const map = new WeakMap()
+                const data = {}
+                args.forEach(obj => {
+                    console.log(obj, "==============测试")
+                    deepMerge(data, obj, map)
+                })
+                return data
+            }
+            const obj = {
+                name: "lu",
+                desc: "xxx",
+                data: {
+                    a: 1,
+                    arr: [1, 2],
+                    data: {
+                        b: 2
+                    }
+                }
+            }
+            const obj2 = {
+                desc: "xxx222",
+                data: {
+                    c: 2,
+                    arr: [5, 6, 7],
+                    data: {
+                        b: 3,
+                        g: [1, 2]
+                    }
+                },
+                arr: [3, 4],
+            }
+            const obj3 = {
+                name: "我是3"
+            }
+            obj2.self = obj2
+            // console.log(obj2)
+            console.log(merge(obj, obj2, obj3))
+        </script>
+    </body>
+</html>
