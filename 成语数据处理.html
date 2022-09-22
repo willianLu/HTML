@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>成语数据处理</title>
+    </head>
+    <body>
+        <script>
+            const aMap = {
+                ā: 'a',
+                á: 'a',
+                ǎ: 'a',
+                à: 'a',
+                ō: 'o',
+                ó: 'o',
+                ǒ: 'o',
+                ò: 'o',
+                ē: 'e',
+                é: 'e',
+                ě: 'e',
+                è: 'e',
+                ī: 'i',
+                í: 'i',
+                ǐ: 'i',
+                ì: 'i',
+                ū: 'u', 
+                ú: 'u',
+                ǔ: 'u',
+                ù: 'u',
+                ǖ: 'ü',
+                ǘ: 'ü',
+                ǚ: 'ü',
+                ǜ: 'ü'
+            }
+
+            function handleKeyword(spell) {
+                if(!spell) return
+                const arr = spell.split(" ")
+                // 全拼
+                let keyword = ""
+                // 缩写
+                let abbr = ""
+                arr.forEach(word => {
+                    for(let i = 0; i < word.length; i ++) {
+                        const letter = word[i]
+                        // 过滤空格
+                        if(!letter) continue
+                        if(i === 0) {
+                            // 首字母带声调的需要转化
+                            abbr += (aMap[letter] || letter)
+                        }
+                        // 关键字拼接，找到带声调的字母，则跳过后续遍历
+                        if(aMap[letter]) {
+                            keyword += aMap[letter] + word.substr(i+1)
+                            break
+                        }
+                        keyword += letter
+                    }
+                })
+                return {
+                    spell,
+                    keyword,
+                    abbr
+                }
+            }
+            console.log(handleKeyword("yè  gōng  hào  lóng"))
+            console.log(handleKeyword("xíng shī zǒu ròu"))
+            console.log(handleKeyword("jīn chán tuō qiào"))
+            console.log(handleKeyword("áng shǒu tǐng xiōng"))
+        </script>
+    </body>
+</html>

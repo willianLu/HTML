@@ -125,6 +125,131 @@
             //     })
             // })
             // myObserver.observe(document.querySelector(".test"));
+            // 组合数据
+            function handleCombineData(list) {
+                if(list.length < 3) return [list]
+                let data = []
+                let first = -1, last = -1;
+                for(let i = 0, j = list.length - 1; i < j;) {
+                    if(first === -1) {
+                        if(list[i].type !== "dl") {
+                            i ++
+                            continue
+                        }
+                        first = i
+                    }
+                    if(last === -1) {
+                        if(list[j].type !== "dl") {
+                            j --
+                            continue
+                        }
+                        last = j
+                    }
+                    if(first > -1 && last > -1) {
+                        // 相邻相同的不变
+                        if(first === last - 1) {
+                            data.push(list)
+                        } else {
+                            // 其他不相同的，分别切割
+                            data.push(list.slice(0, first + 1))
+                            data.push(list.slice(first, last + 1))
+                            data.push(list.slice(last))
+                        }
+                        break
+                    }
+                }
+                return data.length ? data.filter(item => item.length) : [list]
+            }
+            console.log(handleCombineData([
+                {
+                    type: "dl",
+                    id: 1
+                },
+                {
+                    type: "xx",
+                    id: 1
+                },
+                {
+                    type: "xx",
+                    id: 1
+                }
+            ]))
+            console.log("==================")
+            console.log(handleCombineData([
+                {
+                    type: "xx",
+                    id: 1
+                },
+                {
+                    type: "xx",
+                    id: 1
+                }
+            ]))
+            console.log("==================same")
+            console.log(handleCombineData([
+                {
+                    type: "xxx",
+                    id: 1
+                },
+                {
+                    type: "dl",
+                    id: 1
+                },
+                {
+                    type: "dl",
+                    id: 1
+                },
+            ]))
+            console.log("==================")
+            console.log(handleCombineData([
+                {
+                    type: "xxx",
+                    id: 1
+                },
+                {
+                    type: "dl",
+                    id: 1
+                },
+                {
+                    type: "xx",
+                    id: 1
+                },
+                {
+                    type: "dl",
+                    id: 2
+                },
+                {
+                    type: "xx",
+                    id: 1
+                }
+            ]))
+            console.log("==================")
+            console.log(handleCombineData([
+                {
+                    type: "xxx",
+                    id: 1
+                },
+                {
+                    type: "dl",
+                    id: 1
+                },
+                {
+                    type: "dl",
+                    id: 2
+                },
+                {
+                    type: "xx",
+                    id: 1
+                },
+                {
+                    type: "dl",
+                    id: 4
+                },
+                {
+                    type: "xx",
+                    id: 1
+                }
+            ]))
         </script>
     </body>
 </html>
