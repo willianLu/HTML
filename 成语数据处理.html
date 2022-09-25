@@ -33,12 +33,14 @@
             }
 
             function handleKeyword(spell) {
+                spell = spell.replace(/　/g, " ")
                 if(!spell) return
                 const arr = spell.split(" ")
                 // 全拼
                 let keyword = ""
                 // 缩写
                 let abbr = ""
+                console.log(arr, "=================测试")
                 arr.forEach(word => {
                     for(let i = 0; i < word.length; i ++) {
                         const letter = word[i]
@@ -62,10 +64,28 @@
                     abbr
                 }
             }
-            console.log(handleKeyword("yè  gōng  hào  lóng"))
-            console.log(handleKeyword("xíng shī zǒu ròu"))
+            console.log(handleKeyword("bèi　ér　bù　yòng"))
+            console.log(handleKeyword("bǐ　chàng　bù jīng"))
             console.log(handleKeyword("jīn chán tuō qiào"))
             console.log(handleKeyword("áng shǒu tǐng xiōng"))
+
+            function buildRandom() {
+                const temp = [];
+                const ids = [];
+                for (let i = 0; i < 60;) {
+                    const random = Math.round(Math.random() * 30377 + 1);
+                    console.log(random)
+                    if(temp.every(item =>( item + 4 < random || random + 4 < item))) {
+                        i++
+                        temp.push(random);
+                        ([0, 1, 2, 3, 4]).forEach(item => {
+                            ids.push(item + random)
+                        })
+                    }
+                }
+                console.log(ids)
+            }
+            buildRandom()
         </script>
     </body>
 </html>
