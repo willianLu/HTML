@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>算法集合</title>
+    </head>
+    <body>
+        <script>
+        var atMostNGivenDigitSet = function(digits, n) {
+            if(digits.length === 0) return 0
+            const digit = `${n}`
+            const count = digit.length;
+            const len = digits.length;
+            let total = 0;
+            for(let i = 1; i < count; i ++) {
+                if(count > 1) total += Math.pow(len, i)
+            }
+            let i = 0;
+            while(i < count) {
+                for(let j = 0; j < len; j ++) {
+                    if(digits[j] < digit[i]) {
+                        total += Math.pow(len, count - i - 1)
+                        if(j === len -1) return total
+                    } else if(digits[j] > digit[i]) {
+                        return total
+                    } else {
+                        if(i === count -1) {
+                            total += 1
+                        }
+                        i ++
+                        break;
+                    }
+                }
+            }
+            return total
+        };
+            console.log(atMostNGivenDigitSet(["7"], 8))
+            console.log(atMostNGivenDigitSet(["1","2","3","4","6","7","8","9"], 67688637))
+            console.log(atMostNGivenDigitSet(["1"], 834))
+            console.log(atMostNGivenDigitSet(["2", "3", "6"], 71066))
+            console.log(atMostNGivenDigitSet(["3", "4", "8"], 4))
+            console.log(atMostNGivenDigitSet(["5", "7", "8"], 59))
+            console.log(atMostNGivenDigitSet(["2", "4", "5", "6", "7"], 58187467))
+        </script>
+    </body>
+</html>

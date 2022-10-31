@@ -23,24 +23,23 @@
                 background-color: #ee5353;
                 overflow-y: auto;
                 box-sizing: content-box;
-            } 
+            }
             .test-box::-webkit-scrollbar {
-                width: 4px;  
-                height: 8px;  
+                width: 4px;
+                height: 8px;
                 background-color: transparent;
             }
-            /*定义滚动条轨道 内阴影+圆角*/  
+            /*定义滚动条轨道 内阴影+圆角*/
             /* .test-box::-webkit-scrollbar-track  
             {  
                 border-radius: 4px;  
                 background-color: transparent;  
             }   */
-            
-            /*定义滑块 内阴影+圆角*/  
-            .test-box::-webkit-scrollbar-thumb  
-            {  
+
+            /*定义滑块 内阴影+圆角*/
+            .test-box::-webkit-scrollbar-thumb {
                 display: none;
-                border-radius: 4px;  
+                border-radius: 4px;
                 /* box-shadow: inset 0 0 6px #414141;   */
                 background-color: #757575;
             }
@@ -53,7 +52,8 @@
                 width: 100%;
             }
 
-            ul,li {
+            ul,
+            li {
                 list-style: none;
             }
             .title {
@@ -79,9 +79,9 @@
         </div>
         <script src="./js/jquery-2.1.4.min.js"></script>
         <script>
-            setTimeout(function() {
-                $(".box").show();
-                var html = "";
+            setTimeout(function () {
+                $('.box').show()
+                var html = ''
                 var str = `<li>
                         <div class="title">测试1</div>
                         <div class="content"> 
@@ -98,23 +98,23 @@
                             异域百世
                            一滴血，居然造成这种要灭世般的景象，怎能令人不畏？
                         </div>
-                    </li>`;
-                for(let i = 0; i < 8; i++) {
-                    html += str;
+                    </li>`
+                for (let i = 0; i < 8; i++) {
+                    html += str
                 }
-                $(".test").html(html);
+                $('.test').html(html)
             }, 0)
-            $(document).on("click", ".title", function() {
-                var li = $(this).parent();
-                if(!li.hasClass("active")) {
-                    $(".active").removeClass("active");
-                    li.addClass("active");
+            $(document).on('click', '.title', function () {
+                var li = $(this).parent()
+                if (!li.hasClass('active')) {
+                    $('.active').removeClass('active')
+                    li.addClass('active')
                 } else {
-                    li.removeClass("active");
+                    li.removeClass('active')
                 }
-            });
-            $(".content").on("click", function() {
-                $(this).attr("data-type", "内容");
+            })
+            $('.content').on('click', function () {
+                $(this).attr('data-type', '内容')
             })
             // const myObserver = new ResizeObserver(entries => {
             //     console.log("-------------->resize");
@@ -127,129 +127,300 @@
             // myObserver.observe(document.querySelector(".test"));
             // 组合数据
             function handleCombineData(list) {
-                if(list.length < 3) return [list]
-                let data = []
-                let first = -1, last = -1;
-                for(let i = 0, j = list.length - 1; i < j;) {
-                    if(first === -1) {
-                        if(list[i].type !== "dl") {
-                            i ++
-                            continue
+                if (list.length < 2) return [list]
+                const pairMap = {}
+                const data = []
+                let first = 0
+                for (let i = 1; i < list.length; i++) {
+                    const item = list[i]
+                    if (item.type === 'dl' || i === list.length - 1) {
+                        const temp = list.slice(first, i + 1).map((el) => {
+                            return { ...el }
+                        })
+                        if (item.type === 'dl' && list[first].type === 'dl' && !pairMap[first]) {
+                            pairMap[first] = pairMap[i] = true
+                            temp[0].isPair = true
+                            temp[temp.length - 1].isPair = true
                         }
+                        data.push(temp)
                         first = i
                     }
-                    if(last === -1) {
-                        if(list[j].type !== "dl") {
-                            j --
-                            continue
-                        }
-                        last = j
-                    }
-                    if(first > -1 && last > -1) {
-                        // 相邻相同的不变
-                        if(first === last - 1) {
-                            data.push(list)
-                        } else {
-                            // 其他不相同的，分别切割
-                            data.push(list.slice(0, first + 1))
-                            data.push(list.slice(first, last + 1))
-                            data.push(list.slice(last))
-                        }
-                        break
-                    }
                 }
-                return data.length ? data.filter(item => item.length) : [list]
+                return data
             }
-            console.log(handleCombineData([
-                {
-                    type: "dl",
-                    id: 1
-                },
-                {
-                    type: "xx",
-                    id: 1
-                },
-                {
-                    type: "xx",
-                    id: 1
-                }
-            ]))
-            console.log("==================")
-            console.log(handleCombineData([
-                {
-                    type: "xx",
-                    id: 1
-                },
-                {
-                    type: "xx",
-                    id: 1
-                }
-            ]))
-            console.log("==================same")
-            console.log(handleCombineData([
-                {
-                    type: "xxx",
-                    id: 1
-                },
-                {
-                    type: "dl",
-                    id: 1
-                },
-                {
-                    type: "dl",
-                    id: 1
-                },
-            ]))
-            console.log("==================")
-            console.log(handleCombineData([
-                {
-                    type: "xxx",
-                    id: 1
-                },
-                {
-                    type: "dl",
-                    id: 1
-                },
-                {
-                    type: "xx",
-                    id: 1
-                },
-                {
-                    type: "dl",
-                    id: 2
-                },
-                {
-                    type: "xx",
-                    id: 1
-                }
-            ]))
-            console.log("==================")
-            console.log(handleCombineData([
-                {
-                    type: "xxx",
-                    id: 1
-                },
-                {
-                    type: "dl",
-                    id: 1
-                },
-                {
-                    type: "dl",
-                    id: 2
-                },
-                {
-                    type: "xx",
-                    id: 1
-                },
-                {
-                    type: "dl",
-                    id: 4
-                },
-                {
-                    type: "xx",
-                    id: 1
-                }
-            ]))
+            console.log(
+                handleCombineData([
+                    {
+                        type: 'dl',
+                        id: 1,
+                    },
+                    {
+                        type: 'dl',
+                        id: 1,
+                    },
+                ])
+            )
+            console.log('==================')
+            console.log(
+                handleCombineData([
+                    {
+                        type: 'xx',
+                        id: 1,
+                    },
+                    {
+                        type: 'xx',
+                        id: 1,
+                    },
+                ])
+            )
+            console.log('==================same')
+            console.log(
+                handleCombineData([
+                    {
+                        type: 'xxx',
+                        id: 1,
+                    },
+                    {
+                        type: 'dl',
+                        id: 1,
+                    },
+                    {
+                        type: 'dl',
+                        id: 1,
+                    },
+                ])
+            )
+            console.log('==================')
+            console.log(
+                handleCombineData([
+                    {
+                        type: 'xxx',
+                        id: 1,
+                    },
+                    {
+                        type: 'dl',
+                        id: 1,
+                    },
+                    {
+                        type: 'xx',
+                        id: 1,
+                    },
+                    {
+                        type: 'dl',
+                        id: 2,
+                    },
+                    {
+                        type: 'xx',
+                        id: 1,
+                    },
+                ])
+            )
+            console.log('==================')
+            console.log(
+                handleCombineData([
+                    {
+                        type: 'xxx',
+                        id: 1,
+                    },
+                    {
+                        type: 'dl',
+                        id: 1,
+                    },
+                    {
+                        type: 'dl',
+                        id: 2,
+                    },
+                    {
+                        type: 'xx',
+                        id: 1,
+                    },
+                    {
+                        type: 'dl',
+                        id: 4,
+                    },
+                    {
+                        type: 'xx',
+                        id: 1,
+                    },
+                ])
+            )
+            ;(function () {
+                const tempMap = new Map()
+                // const { lineData, lineListData } = this
+                const lineData = [
+                    [
+                        {
+                            astId: '',
+                            id: '40500008087',
+                            kid: '',
+                            kname: '',
+                            lat: '33.08183800429105',
+                            lineId: '',
+                            lng: '119.976557999849',
+                            name: '钓鱼变',
+                            orgId: '500001055',
+                            type: 'bdz',
+                            u: '32',
+                        },
+                        {
+                            astId: '',
+                            id: '1351600996380',
+                            kid: '80100053484',
+                            kname: 'K1',
+                            lat: '33.082139116873975',
+                            lineId: '1350000013516',
+                            lng: '119.977334570339320',
+                            name: '',
+                            orgId: '500001055',
+                            type: 'gtnz',
+                            u: '',
+                        },
+                    ],
+                    [
+                        {
+                            astId: '',
+                            id: '1351600957425',
+                            kid: '80100049764',
+                            kname: 'K1',
+                            lat: '33.089975095120980',
+                            lineId: '1350000013241',
+                            lng: '120.083820847786770',
+                            name: '',
+                            orgId: '500001055',
+                            type: 'gtzx',
+                            u: '',
+                        },
+                        {
+                            astId: '',
+                            id: '1351600957425',
+                            kid: '80100049764',
+                            kname: 'K1',
+                            lat: '33.089975095120980',
+                            lineId: '1350000013241',
+                            lng: '120.083820847786770',
+                            name: '',
+                            orgId: '500001055',
+                            type: 'gtzx',
+                            u: '',
+                        },
+                        {
+                            astId: '',
+                            id: '1350200150378',
+                            kid: '80100049765',
+                            kname: 'K2-19',
+                            lat: '33.089975095120980',
+                            lineId: '1350000013241',
+                            lng: '120.083820847786770',
+                            name: '总线003',
+                            orgId: '500001055',
+                            type: 'kg',
+                            u: '',
+                        },
+                    ],
+                    [
+                        {
+                            astId: '',
+                            id: '1351700112158',
+                            kid: '80100051371',
+                            kname: 'K1',
+                            lat: '33.115011920696500',
+                            lineId: '1350000013301',
+                            lng: '120.084698370865270',
+                            name: '站外-电缆终端头1851670',
+                            orgId: '500001055',
+                            type: 'dl',
+                            u: '',
+                        },
+                        {
+                            astId: '',
+                            id: '1351600961720',
+                            kid: '80100051371',
+                            kname: 'K1',
+                            lat: '33.114968229105315',
+                            lineId: '1350000013301',
+                            lng: '120.084198025702720',
+                            name: '',
+                            orgId: '500001055',
+                            type: 'gtnz',
+                            u: '',
+                        },
+                        {
+                            astId: '',
+                            id: '1351700112159',
+                            kid: '80100051371',
+                            kname: 'K1',
+                            lat: '33.114672373096816',
+                            lineId: '1350000013301',
+                            lng: '120.084164516190370',
+                            name: '站外-电缆终端头1851671',
+                            orgId: '500001055',
+                            type: 'dl',
+                            u: '',
+                        },
+                    ],
+                ]
+                const lineListData = [
+                    {
+                        gddybh: 'JS-TZ-XH-AF-001-J2/D2',
+                        id: '1350000013241',
+                        nodeKey: 3,
+                        title: '10kV科达232线',
+                        wgId: '337123705492606976',
+                        xlColor: '#FA8072',
+                        xlId: '1350000013241',
+                        xlpsrId: '10DKX-195761',
+                    },
+                    {
+                        gddybh: 'JS-TZ-XH-AF-001-J2/D2',
+                        id: '1350000013295',
+                        nodeKey: 4,
+                        title: '10kV圣家1C6线',
+                        wgId: '337123705492606976',
+                        xlColor: '#FFA07A',
+                        xlId: '1350000013295',
+                        xlpsrId: '10DKX-201009',
+                    },
+                    {
+                        gddybh: 'JS-TZ-XH-AF-001-J2/D2',
+                        id: '1350000013301',
+                        nodeKey: 5,
+                        title: '10kV兴阳1C5线',
+                        wgId: '337123705492606976',
+                        xlColor: '#8B4513',
+                        xlId: '1350000013301',
+                        xlpsrId: '10DKX-201265',
+                    },
+                    {
+                        gddybh: 'JS-TZ-XH-AF-001-J2/D2',
+                        id: '1350000013297',
+                        nodeKey: 6,
+                        title: '10kV安开1D4线',
+                        wgId: '337123705492606976',
+                        xlColor: '#FFC0CB',
+                        xlId: '1350000013297',
+                        xlpsrId: '10DKX-201569',
+                    },
+                ]
+                console.time()
+                lineListData.forEach((item) => {
+                    if (!tempMap.has(item.xlId)) {
+                        tempMap.set(item.xlId, item)
+                    }
+                })
+                lineData.flat().forEach((el) => {
+                    if (el.lineId && tempMap.has(el.lineId)) {
+                        const list = tempMap.get(el.lineId)
+                        el.xlpsrId = list.xlpsrId
+                        el.xlName = el.lineName = list.title
+                        el.xlColor = list.xlColor
+                    }
+                    if (el.type === 'gtzx' || el.type === 'gtnz') {
+                        el.type = 'gt'
+                    }
+                })
+                console.log(lineData, '===========结果')
+                console.timeEnd()
+            })()
         </script>
     </body>
 </html>

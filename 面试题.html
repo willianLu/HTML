@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <title>面试题</title>
+  </head>
+
+  <body>
+    <div class="box"></div>
+    <script>
+        // 节点的数据结构
+        class Node {
+            id = null;
+            label = null
+            rank = null
+            parentId = null
+            children = [];
+            constructor(node) {
+                const { id, parentId, label, rank } = node
+                this.id = id
+                this.parentId = parentId
+                this.label = label
+                this.rank = rank
+            }
+            addChild(node) {
+                node = Array.isArray(node) ? node : [node]
+                this.children = this.children.concat(node)
+            }
+            toJson() {
+                const { id, label, rank, children } = this
+                const jsonNode = {
+                    id,
+                    label,
+                    rank
+                }
+                if(children.length) {
+                    jsonNode.children = children.map(item => {
+                        return item.toString()
+                    })
+                }
+                return jsonNode
+            }
+        }
+        const nodes1 = [
+            { id: 1, parentId: null, label: "4", rank: 1 },
+            { id: 2, parentId: 1, label: "4", rank: 3 },
+            { id: 3, parentId: 2, label: "22", rank: 2 },
+            { id: 4, parentId: 3, label: "3q", rank: 7 },
+            { id: 7, parentId: 2, label: "83", rank: 8 },
+            { id: 8, parentId: 6, label: "d6", rank: 5 },
+            { id: 9, parentId: 6, label: "b2", rank: 4 },
+            { id: 10, parentId: 3, label: "1k", rank: 3 },
+            { id: 11, parentId: 3, label: "133", rank: 9 },
+            { id: 12, parentId: 3, label: "kg", rank: 9 },
+            { id: 13, parentId: 1, label: "160", rank: 0 },
+            { id: 14, parentId: 12, label: "1mf", rank: 2 },
+            { id: 15, parentId: 7, label: "h8", rank: 0 },
+            { id: 16, parentId: 13, label: "oh", rank: 0 },
+            { id: 17, parentId: 3, label: "1a1", rank: 8 },
+            { id: 5, parentId: 3, label: "e", rank: 2 },
+            { id: 6, parentId: 4, label: "3r", rank: 9 },
+        ];
+        const nodes2 = [
+            { id: 18, parentId: 6, label: "13f", rank: 0 },
+            { id: 20, parentId: 3, label: "189", rank: 8 },
+            { id: 19, parentId: 17, label: "1i2", rank: 5 },
+        ];
+        class Tree {
+            // 由题目得知，所有节点都是完整的链表
+            // 这里不考虑断裂的情况，所以可以只考虑头部指针
+            // 缓存节点信息
+            nodeMap = new Map()
+            // 头部指针
+            header = null
+            add(...nodes) {
+                const { nodeMap } = this
+                const tempChildren = {}
+                nodes.forEach(item => {
+                    // 这里就不考虑重复情况了，只处理题目示例
+                    const node = new Node(item)
+                    nodeMap.set(node.id, node)
+                    // 存在未处理的children，则放入父节点
+                    if(tempChildren[node.id]) {
+                        node.addChild(tempChildren[node.id])
+                        delete tempChildren[node.id]
+                    }
+                    // 简化头部逻辑，只做题目案例情况
+                    if(node.parentId === null) {
+                       return this.header = node
+                    }
+                    // 存在父节点，则将子节点放入父节点
+                    if(nodeMap.has(node.parentId)) {
+                        const parentNode = nodeMap.get(node.parentId)
+                        parentNode.addChild(node)
+                    } else {
+                        // 不存在父节点，则将节点临时保管
+                        if(!tempChildren[node.parentId]) {
+                            tempChildren[node.parentId] = []
+                        }
+                        tempChildren[node.parentId].push(node)
+                    }
+                })
+            }
+            json() {
+                return this.header.toJson()
+            }
+            getNodeTotalRank(id) {
+                const node = this.nodeMap.get(id)
+                if(!node) return 0;
+                let rankTotal = 0;
+                let queue = [node]
+                while(queue.length) {
+                    const currentNode = queue.shift()
+                    rankTotal += currentNode.rank
+                    if(currentNode.children.length) {
+                        queue = queue.concat(currentNode.children)
+                    }
+                }
+                return rankTotal
+            }
+            getNodeAncestorIds(id) {
+                const { nodeMap } = this
+                const node = nodeMap.get(id)
+                // 父节点结果
+                const res = []
+                if(!node || !node.parentId) return res;
+                let parent = nodeMap.get(node.parentId)
+                while(parent) {
+                    res.push(parent.id)
+                    parent = parent.parentId && nodeMap.get(parent.parentId)
+                }
+                return res.reverse()
+            }
+        }
+        const tree = new Tree()
+        tree.add(...nodes1);
+        console.log(tree.getNodeTotalRank(4));
+        tree.add(...nodes2);
+        console.log(tree.json());
+        console.log(tree.getNodeTotalRank(3));
+        console.log(tree.getNodeAncestorIds(4));
+    </script>
+  </body>
+</html>
