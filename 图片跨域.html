@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+        <title>图片跨域</title>
+        <style></style>
+    </head>
+
+    <body>
+        <script>
+            const url = 'https://yjimage-dev.oss-cn-qingdao.aliyuncs.com/342022002/d23a44d8-8015-411a-92a1-13ee6ee00100.jpg?x-oss-process=image/auto-orient,0/crop,x_1231,y_-16,w_1276,h_1740&OSSAccessKeyId=LTAI36URVnKkomqd&Expires=1669147200&Signature=a/Rkz2GlQ56Jcm8zNTCm2hz3Q3M%3d'
+            function createImgTag(options) {
+                const { url, onLoad, onError } = options
+                const img = document.createElement('img')
+                img.setAttribute('src', url)
+                img.setAttribute('crossOrigin', 'Anonymous')
+                document.body.appendChild(img)
+                console.log('========图片')
+                onLoad &&
+                    (img.onload = (...args) => {
+                        onLoad(...args)
+                    })
+                onError &&
+                    (img.onerror = (...args) => {
+                        onError(...args)
+                    })
+            }
+            function createImg(url) {
+                const img = new Image()
+                img.crossOrigin = ''
+                img.src = url
+                img.onload = function () {
+                    console.log('=========加载成功=========')
+                }
+                img.onerror = function () {
+                    console.log('=========加载失败=========')
+                }
+            }
+            // createImgTag({
+            //     url,
+            // })
+            createImg(url)
+        </script>
+    </body>
+</html>
