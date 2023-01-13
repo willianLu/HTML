@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+        <title>js测试</title>
+        <style>
+            html,
+            body {
+                padding: 0;
+                margin: 0;
+                width: 100%;
+                height: 100%;
+                background-color: #f1f1f1;
+            }
+            .app {
+                position: relative;
+                width: 100%;
+                height: 100%;
+            }
+            .aslid {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 180px;
+                height: 100%;
+                background-color: #fff;
+                overflow-y: auto;
+            }
+            section {
+                margin: 0 auto;
+                width: 680px;
+                min-height: 100%;
+                background-color: #fff;
+            }
+            .error {
+                color: #ee5353;
+            }
+        </style>
+    </head>
+    <body>
+        <main class="app">
+            <aslid class="aslid">
+                <div style="height: 2000px">是这个内容</div>
+                <div style="height: 100px">是这个内容</div>
+            </aslid>
+            <section>
+                <input placeholder="请输入邮箱地址" oninput="handleInput(event)" />
+                <div class="error" style="display: none">邮箱错误</div>
+                <div style="height: 2000px">主要内容</div>
+                <div style="height: 200px">底部内容</div>
+            </section>
+        </main>
+        <script>
+            function handleInput(e) {
+                const email = e.target.value
+                const emailReg = /^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))$/i
+                console.log(email, '=======邮箱地址')
+                console.log(emailReg.test(email), '======验证邮箱')
+            }
+            const nums1 = [1, 2, 3]
+            const nums2 = [2, 5, 6]
+            // 将两个有序的数组，合并成一个有序的数组
+            function concatNums(nums1, nums2) {
+                let i = nums1.length - 1
+                let j = nums2.length - 1
+                let k = i + j + 1
+                while (i >= 0 && j >= 0) {
+                    if (nums1[i] > nums2[j]) {
+                        nums1[k] = nums1[i]
+                        i--
+                    } else {
+                        nums1[k] = nums2[j]
+                        j--
+                    }
+                    k--
+                }
+
+                while (j >= 0) {
+                    nums1[j] = nums2[j]
+                    j--
+                }
+                console.log(nums1, '=======最新顺序')
+            }
+            concatNums([2, 3, 4], [1, 2, 6, 7, 8])
+            concatNums([3, 4, 5, 9], [1, 2, 5, 6, 7, 8, 10])
+
+            // 三数求和等于0，求和元祖不得重复
+            function threeNumberSum(nums) {
+                nums = nums.sort((a, b) => a - b)
+                const res = []
+                let i = 0
+                while (i <= nums.length - 3) {
+                    if (i === 0 || nums[i] !== nums[i - 1]) {
+                        let j = i + 1
+                        let k = nums.length - 1
+                        while (j < k) {
+                            const sum = nums[i] + nums[j] + nums[k]
+                            let isLess = sum < 0
+                            let isMore = sum > 0
+                            if (sum === 0) {
+                                res.push([nums[i], nums[j], nums[k]])
+                                isLess = true
+                                isMore = true
+                            }
+                            if (isLess) {
+                                j++
+                                while (j < k && nums[j] === nums[j - 1]) {
+                                    j++
+                                }
+                            }
+                            if (isMore) {
+                                k--
+                                while (j < k && nums[k] === nums[k + 1]) {
+                                    k--
+                                }
+                            }
+                        }
+                    }
+                    i++
+                }
+                console.log(res, '========三数求和')
+            }
+            threeNumberSum([-1, 1, 0, -2, 4, 2, -3, 5, -4])
+
+            // 判断删除其中一个字符是否是回文字符串
+            // 回文字符串，删除一个字符，必定是回文
+            function checkPalindrome(str) {
+                let len = str.length
+                let i = 0
+                let j = len - 1
+                while (i < j && str[i] === str[j]) {
+                    i++
+                    j--
+                }
+                if (isPalindrome(str, i, j - 1)) {
+                    return true
+                }
+                if (isPalindrome(str, i + 1, j)) {
+                    return true
+                }
+                return false
+            }
+            // 判断是否是回文字符串
+            function isPalindrome(str, i, j) {
+                while (i < j) {
+                    if (str[i] !== str[j]) {
+                        return false
+                    }
+                    i++
+                    j--
+                }
+                return true
+            }
+            console.log('abca', checkPalindrome('abca'))
+            console.log('abdca', checkPalindrome('abdca'))
+            console.log('abbca', checkPalindrome('abbca'))
+            console.log('abba', checkPalindrome('abba'))
+            console.log('aba', checkPalindrome('aba'))
+            const temperatures = [35, 31, 36, 33, 37, 38, 30]
+            function dailyTemperatures(data) {
+                const len = data.length
+                const stack = []
+                const res = new Array(len).fill(0)
+                for (let i = 0; i < len; i++) {
+                    while (stack.length && data[i] > data[stack[stack.length - 1]]) {
+                        const preIndex = stack.pop()
+                        res[preIndex] = i - preIndex
+                    }
+                    stack.push(i)
+                }
+                return res
+            }
+            console.log(dailyTemperatures(temperatures), '======温度计算')
+            // 滑动窗口问题，双端队列解法
+            function mixSlidingWindow(nums, k) {
+                const len = nums.length
+                const res = []
+                const queue = []
+                for (let i = 0; i < len; i++) {
+                    while (queue.length && nums[i] > nums[queue[queue.length - 1]]) {
+                        queue.pop()
+                    }
+                    queue.push(i)
+                    while (queue.length && queue[0] < i - k) {
+                        queue.shift()
+                    }
+                    if (i >= k - 1) {
+                        res.push(nums[queue[0]])
+                    }
+                }
+                return res
+            }
+            console.log(mixSlidingWindow([1, -2, 2, 3, -2, 5, -3, 3, 6, 7], 3))
+
+            function permute(arr) {
+                const res = []
+                function def(data, cur) {
+                    for (let i = 0; i < data.length; i++) {
+                        cur.push(data[i])
+                        if (data.length > 1) {
+                            const _data = [...data]
+                            _data.splice(i, 1)
+                            def(_data, cur)
+                        } else {
+                            res.push(cur.slice())
+                        }
+                        cur.pop()
+                    }
+                }
+                def(arr, [])
+                return res
+            }
+            console.log(permute([1, 2, 3, 4]))
+            function subsets(arr) {
+                if (!arr || arr.length === 0) return []
+                const res = []
+                function def(data, cur) {
+                    const item = data.pop()
+                    const emptyCur = [].concat(cur)
+                    const hasCur = [item].concat(cur)
+                    if (data.length) {
+                        def([...data], emptyCur)
+                        def([...data], hasCur)
+                    } else {
+                        res.push(emptyCur)
+                        res.push(hasCur)
+                    }
+                }
+                def([...arr], [])
+                return res
+            }
+            console.log(subsets([1, 2, 3, 4]))
+            function subsets2(nums) {
+                // 初始化结果数组
+                const res = []
+                // 缓存数组长度
+                const len = nums.length
+                // 初始化组合数组
+                const subset = []
+                // 进入 dfs
+                dfs(0)
+
+                // 定义 dfs 函数，入参是 nums 中的数字索引
+                function dfs(index) {
+                    // 每次进入，都意味着组合内容更新了一次，故直接推入结果数组
+                    res.push(subset.slice())
+                    // 从当前数字的索引开始，遍历 nums
+                    for (let i = index; i < len; i++) {
+                        // 这是当前数字存在于组合中的情况
+                        subset.push(nums[i])
+                        // 基于当前数字存在于组合中的情况，进一步 dfs
+                        dfs(i + 1)
+                        // 这是当前数字不存在与组合中的情况
+                        subset.pop()
+                    }
+                }
+                // 返回结果数组
+                return res
+            }
+            console.log(subsets2([1, 2, 3, 4]))
+            function subsets3(n, k) {
+                if (n < 1 || k < 1) return []
+                const res = []
+                const cur = []
+                function def(num) {
+                    for (let i = num; i <= n; i++) {
+                        cur.push(i)
+                        if (cur.length < k && i < n) {
+                            def(i + 1)
+                        }
+                        if (cur.length === k) {
+                            res.push(cur.slice())
+                        }
+                        cur.pop()
+                    }
+                }
+                def(1)
+                return res
+            }
+            console.log(subsets3(6, 3), '======xxx')
+            const root = {
+                val: 'A',
+                left: {
+                    val: 'B',
+                    left: {
+                        val: 'D',
+                    },
+                    right: {
+                        val: 'E',
+                    },
+                },
+                right: {
+                    val: 'C',
+                    right: {
+                        val: 'F',
+                    },
+                },
+            }
+            function xs(root) {
+                const res = []
+                const queue = [root]
+                while (queue.length) {
+                    const cur = queue.pop()
+                    res.push(cur.val)
+                    if (cur.right) {
+                        queue.push(cur.right)
+                    }
+                    if (cur.left) {
+                        queue.push(cur.left)
+                    }
+                }
+                return res
+            }
+            console.log(xs(root), '=======先序遍历')
+            function zx(root) {
+                const res = []
+                const queue = []
+                let cur = root
+                while (cur || queue.length) {
+                    while (cur) {
+                        queue.push(cur)
+                        cur = cur.left
+                    }
+                    cur = queue.pop()
+                    res.push(cur.val)
+                    cur = cur.right
+                }
+                return res
+            }
+            console.log(zx(root), '=======中序遍历')
+            function hx(root) {
+                const res = []
+                const queue = [root]
+                while (queue.length) {
+                    const cur = queue.pop()
+                    res.unshift(cur.val)
+                    if (cur.left) {
+                        queue.push(cur.left)
+                    }
+                    if (cur.right) {
+                        queue.push(cur.right)
+                    }
+                }
+                return res
+            }
+            console.log(hx(root), '=======中序遍历')
+            function fz(root) {
+                const res = { ...root }
+                const queue = [res]
+                while (queue.length) {
+                    const cur = queue.pop()
+                    const left = cur.left ? { ...cur.left } : null
+                    const right = cur.right ? { ...cur.right } : null
+                    cur.left = right
+                    cur.right = left
+                    if (left) {
+                        queue.push(left)
+                    } else {
+                        delete cur.right
+                    }
+                    if (right) {
+                        queue.push(right)
+                    } else {
+                        delete cur.left
+                    }
+                }
+                return res
+            }
+            console.log(fz(root), '=======反转链表')
+            function levelOrder(root) {
+                const res = []
+                const queue = [root]
+                while (queue.length) {
+                    const len = queue.length
+                    const stack = []
+                    for (let i = 0; i < len; i++) {
+                        const cur = queue.shift()
+                        stack.push(cur.val)
+                        if (cur.left) {
+                            queue.push(cur.left)
+                        }
+                        if (cur.right) {
+                            queue.push(cur.right)
+                        }
+                    }
+                    res.push(stack)
+                }
+                return res
+            }
+            console.log(levelOrder(root), '=======按层取出数据')
+        </script>
+    </body>
+</html>
