@@ -292,7 +292,7 @@
                 },
                 right: {
                     val: 'C',
-                    right: {
+                    left: {
                         val: 'F',
                     },
                 },
@@ -344,7 +344,7 @@
                 }
                 return res
             }
-            console.log(hx(root), '=======中序遍历')
+            console.log(hx(root), '=======后序遍历')
             function fz(root) {
                 const res = { ...root }
                 const queue = [res]
