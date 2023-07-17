@@ -188,95 +188,95 @@
             c.say()
             c.play()
             // Z 字形变换
-            let convert = function(s, numRows) {
-                if(numRows === 1) return s;
-                let str = '';
-                for(let i = 0; i < numRows; i++) {
-                    let j = i;
-                    let k = 1;
-                    while(j < s.length) {
-                        str += s[j];
-                        if(i === 0 || i === numRows - 1) {
-                            j += (numRows - 1) * 2;
+            let convert = function (s, numRows) {
+                if (numRows === 1) return s
+                let str = ''
+                for (let i = 0; i < numRows; i++) {
+                    let j = i
+                    let k = 1
+                    while (j < s.length) {
+                        str += s[j]
+                        if (i === 0 || i === numRows - 1) {
+                            j += (numRows - 1) * 2
                         } else {
-                            j += (k % 2 === 0 ? i : (numRows - i -1)) * 2;
+                            j += (k % 2 === 0 ? i : numRows - i - 1) * 2
                         }
-                        k ++;
+                        k++
                     }
                 }
-                return str;
-            };
-            console.log(convert("PAYPALISHIRING", 4))
+                return str
+            }
+            console.log(convert('PAYPALISHIRING', 4))
             function myAtoi(str) {
-                str = str.trim();
-                let reg = /^(\+|-){0,1}\d+/;
-                let res = str.match(reg);
-                let num = 0;
-                let max = Math.pow(2, 31) - 1;
-                let min = - max - 1;
-                if(res) num = Number(res[0]);
-                if(num > max) return max;
-                if(num < min) return min;
-                return num;
+                str = str.trim()
+                let reg = /^(\+|-){0,1}\d+/
+                let res = str.match(reg)
+                let num = 0
+                let max = Math.pow(2, 31) - 1
+                let min = -max - 1
+                if (res) num = Number(res[0])
+                if (num > max) return max
+                if (num < min) return min
+                return num
             }
-            console.log(myAtoi('+-12'));
-            var reverse = function(x) {
-                let max = Math.pow(2, 31) - 1;
-                let min = - max - 1;
-                let num = 0;
-                while(x !== 0) {
-                    num = num * 10 + x % 10;
-                    if(num > max || num < min) return 0;
-                    x = (x / 10) | 0;
+            console.log(myAtoi('+-12'))
+            var reverse = function (x) {
+                let max = Math.pow(2, 31) - 1
+                let min = -max - 1
+                let num = 0
+                while (x !== 0) {
+                    num = num * 10 + (x % 10)
+                    if (num > max || num < min) return 0
+                    x = (x / 10) | 0
                 }
-                return num;
-            };
-            console.log(reverse('98700'));
+                return num
+            }
+            console.log(reverse('98700'))
             // 是否是回文数字
-            var isPalindrome = function(x) {
-                if(x < 0) return false;
-                if(x < 10) return true;
-                let s = `${x}`;
-                let i = 0;
-                let j = s.length - 1;
-                while(i < j) {
-                    if(s[i] !== s[j]) return false;
-                    i ++;
-                    j --;
+            var isPalindrome = function (x) {
+                if (x < 0) return false
+                if (x < 10) return true
+                let s = `${x}`
+                let i = 0
+                let j = s.length - 1
+                while (i < j) {
+                    if (s[i] !== s[j]) return false
+                    i++
+                    j--
                 }
-                return true;
-            };
-            const isMatch = function(s, p) {
-                p = '^' + p + '$';
-                let reg = new RegExp(p);
-                return reg.test(s);
+                return true
             }
-            console.log(isMatch('ab', '.*..'));
+            const isMatch = function (s, p) {
+                p = '^' + p + '$'
+                let reg = new RegExp(p)
+                return reg.test(s)
+            }
+            console.log(isMatch('ab', '.*..'))
             // 盛最多水的容器
             function maxArea(height) {
-                let len = height.length;
-                let i = 0;
-                let j = len - 1;
-                let max = 0;
-                while(i < j) {
-                    let s = height[i];
-                    let e = height[j];
-                    let area = (j - i);
-                    if(s > e) {
-                        area *= e;
-                        j --;
+                let len = height.length
+                let i = 0
+                let j = len - 1
+                let max = 0
+                while (i < j) {
+                    let s = height[i]
+                    let e = height[j]
+                    let area = j - i
+                    if (s > e) {
+                        area *= e
+                        j--
                     } else {
-                        area *= s;
-                        i ++;
+                        area *= s
+                        i++
                     }
-                    if(area > max) max = area;
+                    if (area > max) max = area
                 }
-                return max;
+                return max
             }
-            console.log(maxArea([1,2,1]), '-------------');
+            console.log(maxArea([1, 2, 1]), '-------------')
             // 整数转罗马数字
             function intToRoman(num) {
-                let map = { 
+                let map = {
                     1: 'I',
                     4: 'IV',
                     5: 'V',
@@ -289,108 +289,108 @@
                     400: 'CD',
                     500: 'D',
                     900: 'CM',
-                    1000: 'M'
+                    1000: 'M',
                 }
-                if(map[num]) return map[num];
-                let res = '';
-                let i = 1;
-                while(num !== 0) {
-                    let c = num % 10;
-                    if(map[c * i]) {
-                        res = map[c * i] + res;
+                if (map[num]) return map[num]
+                let res = ''
+                let i = 1
+                while (num !== 0) {
+                    let c = num % 10
+                    if (map[c * i]) {
+                        res = map[c * i] + res
                     } else {
-                        res = (c >= 5 ? (map[ 5 * i] + map[i].repeat(c - 5)) :  map[i].repeat(c)) + res;
+                        res = (c >= 5 ? map[5 * i] + map[i].repeat(c - 5) : map[i].repeat(c)) + res
                     }
-                    num = num / 10 | 0;
-                    i *= 10;
+                    num = (num / 10) | 0
+                    i *= 10
                 }
-                return res;
+                return res
             }
-            console.log(intToRoman(1994));
+            console.log(intToRoman(1994))
             // 罗马数字转整数
             function romanToInt(s) {
-                let map = { 
-                    'I': 1,
-                    'V': 5,
-                    'X': 10,
-                    'L': 50,
-                    'C': 100,
-                    'D': 500,
-                    'M': 1000
+                let map = {
+                    I: 1,
+                    V: 5,
+                    X: 10,
+                    L: 50,
+                    C: 100,
+                    D: 500,
+                    M: 1000,
                 }
-                if(map[s]) return map[s];
-                let num = 0;
-                for(let i = 0, len = s.length; i < len;) {
-                    if(i < len - 1 && map[s[i]] < map[s[i + 1]]) {
-                        num += map[s[i + 1]] - map[s[i]];
-                        i += 2;
+                if (map[s]) return map[s]
+                let num = 0
+                for (let i = 0, len = s.length; i < len; ) {
+                    if (i < len - 1 && map[s[i]] < map[s[i + 1]]) {
+                        num += map[s[i + 1]] - map[s[i]]
+                        i += 2
                     } else {
-                        num += map[s[i]];
-                        i ++;
+                        num += map[s[i]]
+                        i++
                     }
                 }
-                return num;
+                return num
             }
             console.log(romanToInt('MCMXCIV'))
             // 查找最长公共前缀
             function longestCommonPrefix(strs) {
-                if(strs.length === 1) return strs[0];
-                let len = strs.length;
-                let pre = strs[0] || '';
-                let i = 1;
-                while(i < len) {
-                    if(pre && strs[i].indexOf(pre) === 0) {
-                        i ++;
-                        continue;
+                if (strs.length === 1) return strs[0]
+                let len = strs.length
+                let pre = strs[0] || ''
+                let i = 1
+                while (i < len) {
+                    if (pre && strs[i].indexOf(pre) === 0) {
+                        i++
+                        continue
                     }
-                    let j = 1;
-                    while(j <= pre.length) {
-                        if(strs[i].indexOf(pre.slice(0, j)) === 0) {
-                            j ++;
+                    let j = 1
+                    while (j <= pre.length) {
+                        if (strs[i].indexOf(pre.slice(0, j)) === 0) {
+                            j++
                         } else {
-                            pre = pre.slice(0, j - 1);
-                            break;
+                            pre = pre.slice(0, j - 1)
+                            break
                         }
                     }
-                    if(pre === '') break;
-                    i ++;
+                    if (pre === '') break
+                    i++
                 }
-                return pre;
+                return pre
             }
-            console.log(longestCommonPrefix(['dog', 'doc', 'dd']));
+            console.log(longestCommonPrefix(['dog', 'doc', 'dd']))
             function threeSumClosest(nums, target) {
-                nums.sort((a, b) => a - b);
-                if(target >= 0 && target <= nums[0]) {
-                    return nums[0] + nums[1] + nums[2];
+                nums.sort((a, b) => a - b)
+                if (target >= 0 && target <= nums[0]) {
+                    return nums[0] + nums[1] + nums[2]
                 }
-                let i = 0;
-                let len = nums.length;
-                let res;
-                while(i < len - 2) {
-                    let p = i + 1;
-                    let n = len - 1;
-                    while(p < n) {
-                        let sum = nums[i] + nums[p] + nums[n];
-                        if(sum > target) {
-                            n --;
-                        } else if(sum === target) {
-                            return sum;
+                let i = 0
+                let len = nums.length
+                let res
+                while (i < len - 2) {
+                    let p = i + 1
+                    let n = len - 1
+                    while (p < n) {
+                        let sum = nums[i] + nums[p] + nums[n]
+                        if (sum > target) {
+                            n--
+                        } else if (sum === target) {
+                            return sum
                         } else {
-                            p ++;
+                            p++
                         }
-                        if(res === undefined || Math.abs(target - sum) < Math.abs(target - res)) {
-                            res = sum;
+                        if (res === undefined || Math.abs(target - sum) < Math.abs(target - res)) {
+                            res = sum
                         }
                     }
-                    i ++;
-                    if(res > target && (nums[i] >= 0 || nums[i] + nums[i + 1] >= 0)) break;
+                    i++
+                    if (res > target && (nums[i] >= 0 || nums[i] + nums[i + 1] >= 0)) break
                 }
-                return res;
+                return res
             }
-            console.log(threeSumClosest([2,3,4,5,6,7,8,9], 1));
+            console.log(threeSumClosest([2, 3, 4, 5, 6, 7, 8, 9], 1))
             // 电话号码的字母组合
             function letterCombinations(digits) {
-                if(!digits) return [];
+                if (!digits) return []
                 let map = {
                     2: 'abc',
                     3: 'def',
@@ -399,208 +399,261 @@
                     6: 'mno',
                     7: 'pqrs',
                     8: 'tuv',
-                    9: 'wxyz'
-                };
-                let queue = [{
-                    pre: '',
-                    str: digits
-                }];
+                    9: 'wxyz',
+                }
+                let queue = [
+                    {
+                        pre: '',
+                        str: digits,
+                    },
+                ]
                 let res = []
-                while(queue.length) {
-                    let c = queue.shift();
-                    let l = map[c.str[0]];
-                    for(let i = 0, len = l.length; i < len; i ++) {
-                        if(c.str.length === 1) {
-                            res.push(c.pre + l[i]);
+                while (queue.length) {
+                    let c = queue.shift()
+                    let l = map[c.str[0]]
+                    for (let i = 0, len = l.length; i < len; i++) {
+                        if (c.str.length === 1) {
+                            res.push(c.pre + l[i])
                         } else {
                             queue.push({
                                 pre: c.pre + l[i],
-                                str: c.str.slice(1)
+                                str: c.str.slice(1),
                             })
                         }
                     }
                 }
-                return res;
+                return res
             }
-            console.log(letterCombinations('23'));
+            console.log(letterCombinations('23'))
             // 四数之和
             function fourSum(nums, target) {
-                if(nums.length < 4) return [];
-                nums.sort((a, b) => a - b);
-                let len = nums.length;
-                let i = 0;
-                let map = {};
-                let sums = [];
-                while(i < len - 3) {
-                    if(nums[i] + nums[i + 1] + nums[i + 2] + nums[i + 3] > target) break;
-                    if(nums[i] + nums[len - 3] + nums[len - 2] + nums[len - 1] < target) {
-                        i ++;
-                        continue;
-                    };
-                    let j = i + 1;
-                    while(j < len - 2) {
-                        if(nums[i] + nums[j] + nums[j + 1] + nums[j + 2] > target) break;
-                        if(nums[i] + nums[j] + nums[len - 2] + nums[len - 1] < target) {
-                            j ++;
+                if (nums.length < 4) return []
+                nums.sort((a, b) => a - b)
+                let len = nums.length
+                let i = 0
+                let map = {}
+                let sums = []
+                while (i < len - 3) {
+                    if (nums[i] + nums[i + 1] + nums[i + 2] + nums[i + 3] > target) break
+                    if (nums[i] + nums[len - 3] + nums[len - 2] + nums[len - 1] < target) {
+                        i++
+                        continue
+                    }
+                    let j = i + 1
+                    while (j < len - 2) {
+                        if (nums[i] + nums[j] + nums[j + 1] + nums[j + 2] > target) break
+                        if (nums[i] + nums[j] + nums[len - 2] + nums[len - 1] < target) {
+                            j++
                             continue
-                        };
-                        let k = j + 1;
-                        let l = len - 1;
-                        while(k < l) {
-                            let s = nums[i] + nums[j] + nums[k] + nums[l];
-                            if(s > target) {
-                                l --;
+                        }
+                        let k = j + 1
+                        let l = len - 1
+                        while (k < l) {
+                            let s = nums[i] + nums[j] + nums[k] + nums[l]
+                            if (s > target) {
+                                l--
                             } else {
-                                let key = `${nums[i]}_${nums[j]}_${nums[k]}`;
-                                if(s === target && !map[key]) {
-                                    map[key] = true;
-                                    sums.push([nums[i], nums[j], nums[k], nums[l]]);
+                                let key = `${nums[i]}_${nums[j]}_${nums[k]}`
+                                if (s === target && !map[key]) {
+                                    map[key] = true
+                                    sums.push([nums[i], nums[j], nums[k], nums[l]])
                                 }
-                                k ++;
+                                k++
                             }
                         }
-                        j ++;
+                        j++
                     }
-                    i ++;
+                    i++
                 }
-                return sums;
+                return sums
             }
-            console.log(fourSum([0,4,-5,2,-2,4,2,-1,4], 12));
+            console.log(fourSum([0, 4, -5, 2, -2, 4, 2, -1, 4], 12))
             // 有效的括号
             function isValid(s) {
-                let left = '([{';
-                let right = ')]}';
-                let res = '';
-                for(let i = 0, len = s.length; i < len; i ++) {
-                    let index = left.indexOf(s[i]);
-                    if(index > -1) {
-                        res += index;
+                let left = '([{'
+                let right = ')]}'
+                let res = ''
+                for (let i = 0, len = s.length; i < len; i++) {
+                    let index = left.indexOf(s[i])
+                    if (index > -1) {
+                        res += index
                     } else {
-                        index = right.indexOf(s[i]);
-                        if(index > -1 && res[res.length - 1] == index) {
-                            res = res.slice(0, res.length - 1);  
+                        index = right.indexOf(s[i])
+                        if (index > -1 && res[res.length - 1] == index) {
+                            res = res.slice(0, res.length - 1)
                         } else {
-                            return false;
+                            return false
                         }
                     }
                 }
-                return res === '';
+                return res === ''
             }
             console.log(isValid('([)]'))
             // 函数柯里化
             function curry(fn) {
                 let args = Array.prototype.slice.call(arguments, 1)
                 return function curry_fn() {
-                    let newArgs = args.concat(Array.prototype.slice.call(arguments));
-                    return newArgs.length >= fn.length ? fn.apply(this, newArgs) : curry_fn;
+                    let newArgs = args.concat(Array.prototype.slice.call(arguments))
+                    return newArgs.length >= fn.length ? fn.apply(this, newArgs) : curry_fn
                 }
             }
-            const checkDataType = curry(function(type, data) {
-                return Object.prototype.toString.call(data) === `[object ${type}]`;
+            const checkDataType = curry(function (type, data) {
+                return Object.prototype.toString.call(data) === `[object ${type}]`
             })
-            const isNumber = checkDataType('Number');
-            const isString = checkDataType('String');
-            console.log(checkDataType('Number', 3)); //  true
+            const isNumber = checkDataType('Number')
+            const isString = checkDataType('String')
+            console.log(checkDataType('Number', 3)) //  true
             // 括号生成
             function generateParenthesis(n) {
-                let res = [];
+                let res = []
                 const build = (str, l, r) => {
-                    if(str.length === 2 * n) {
-                        res.push(str);
+                    if (str.length === 2 * n) {
+                        res.push(str)
                     } else {
-                        if(l < n) build(str + '(', l + 1, r);
-                        if(r < l) build(str + ')', l, r + 1);
+                        if (l < n) build(str + '(', l + 1, r)
+                        if (r < l) build(str + ')', l, r + 1)
                     }
                 }
-                build('(', 1, 0);
-                return res;
+                build('(', 1, 0)
+                return res
             }
-            console.log(generateParenthesis(4));
+            console.log(generateParenthesis(4))
             // 合并K个升序链表
             function mergeKLists(lists) {
-                if(lists.length === 0) return null;
-                let temp = [];
-                while(lists.length) {
-                    let i = 0;
-                    while(i < lists.length) {
-                        let c = lists[i];
-                        if(c) {
-                            let j = temp.length - 1;
-                            let index = undefined;
-                            while(j >= 0) {
-                                if(temp[j].val <= c.val) {
-                                    index = j;
-                                    break;
+                if (lists.length === 0) return null
+                let temp = []
+                while (lists.length) {
+                    let i = 0
+                    while (i < lists.length) {
+                        let c = lists[i]
+                        if (c) {
+                            let j = temp.length - 1
+                            let index = undefined
+                            while (j >= 0) {
+                                if (temp[j].val <= c.val) {
+                                    index = j
+                                    break
                                 }
-                                j --;
+                                j--
                             }
-                            lists[i] = c.next;
-                            if(index === undefined) {
-                                c.next = temp.length ? temp[0] : null;
-                                temp.unshift(c);
+                            lists[i] = c.next
+                            if (index === undefined) {
+                                c.next = temp.length ? temp[0] : null
+                                temp.unshift(c)
                             } else {
-                                temp[index].next = c;
-                                c.next = temp[index + 1] || null;
-                                temp.splice(index + 1, 0, c);
+                                temp[index].next = c
+                                c.next = temp[index + 1] || null
+                                temp.splice(index + 1, 0, c)
                             }
-                            i ++;
+                            i++
                         } else {
-                            lists.splice(i, 1);
+                            lists.splice(i, 1)
                         }
                     }
                 }
-                return temp[0] || null;
+                return temp[0] || null
             }
             // 两两交换链表中的节点
             function swapPairs(head) {
-                let res = new ListNode();
-                let list = res;
-                while(head) {
-                    if(head.next) {
-                        let next = head.next;
-                        let temp = next.next;
-                        head.next = null;
-                        next.next = head;
-                        list.next = next;
-                        list = head;
-                        head = temp;
+                let res = new ListNode()
+                let list = res
+                while (head) {
+                    if (head.next) {
+                        let next = head.next
+                        let temp = next.next
+                        head.next = null
+                        next.next = head
+                        list.next = next
+                        list = head
+                        head = temp
                     } else {
-                        list.next = head;
-                        head = head.next;
+                        list.next = head
+                        head = head.next
                     }
                 }
-                return res.next;
+                return res.next
             }
             // K个一组翻转链表
             function reverseKGroup(head, k) {
-                let res = new ListNode();
-                let temp = res;
-                let arr = [];
-                while(head) {
-                    arr.push(head);
-                    head = head.next;
-                    if(arr.length === k) {
-                        while(arr.length) {
-                            let node = arr.pop();
-                            node.next = null;
-                            temp.next = node;
-                            temp = node;
+                let res = new ListNode()
+                let temp = res
+                let arr = []
+                while (head) {
+                    arr.push(head)
+                    head = head.next
+                    if (arr.length === k) {
+                        while (arr.length) {
+                            let node = arr.pop()
+                            node.next = null
+                            temp.next = node
+                            temp = node
                         }
                     }
                 }
-                if(arr.length) temp.next = arr[0];
-                return res.next;
+                if (arr.length) temp.next = arr[0]
+                return res.next
             }
             // 删除有序数组中的重复项
             function removeDuplicates(nums) {
-                for(let i = 1; i < nums.length; i ++) {
-                    if(nums[i] === nums[i - 1]) {
-                        nums.splice(i, 1);
-                        i --;
+                for (let i = 1; i < nums.length; i++) {
+                    if (nums[i] === nums[i - 1]) {
+                        nums.splice(i, 1)
+                        i--
                     }
                 }
-                return nums.length;
+                return nums.length
             }
+            // 寻找子系列
+            function findSubstring(s, words) {
+                const res = []
+                if (s.length === 0 || words.length === 0) return res
+                const fLen = words[0].length
+                const len = s.length
+                const total = fLen * words.length
+                if (len < total) return res
+                const need = new Map()
+                for (let c of words) {
+                    need.set(c, need.has(c) ? need.get(c) + 1 : 1)
+                }
+                console.log(need, '=====大卫爱登堡')
+                function compareStr(str, list) {
+                    if (list.length) {
+                        const current = str.substr(0, fLen)
+                        const index = list.findIndex((item) => item === current)
+                        if (index > -1) {
+                            list.splice(index, 1)
+                            return compareStr(str.substring(fLen), list)
+                        }
+                        return false
+                    }
+                    return true
+                }
+                function matchStr(sIdx, item, index) {
+                    if (sIdx > -1 && sIdx + total - fLen < s.length) {
+                        const list = [...words]
+                        list.splice(index, 1)
+                        if (compareStr(s.substring(sIdx + fLen), list)) {
+                            res.push(sIdx)
+                        }
+                        const nIdx = sIdx + 1 + s.substring(sIdx + 1).indexOf(item)
+                        if (nIdx <= sIdx) return
+                        matchStr(nIdx, item, index)
+                    }
+                }
+                const map = {}
+                words.forEach((item, index) => {
+                    if (map[item]) return
+                    map[item] = true
+                    matchStr(s.indexOf(item), item, index)
+                })
+                console.log(res, '=========结果')
+                return res
+            }
+            findSubstring('barfoothefoobarman', ['foo', 'bar'])
+            findSubstring('wordgoodgoodgoodbestword', ['word', 'good', 'best', 'word'])
+            findSubstring('barfoofoobarthefoobarman', ['bar', 'foo', 'the'])
+            findSubstring('wordgoodgoodgoodbestword', ['word', 'good', 'best', 'good'])
+            findSubstring('aaaaaaaaaaaaaa', ['aa', 'aa'])
         </script>
     </body>
 </html>
