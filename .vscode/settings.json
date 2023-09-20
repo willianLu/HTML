@@ -13,6 +13,9 @@
     "[typescript]": { // ts文件格式化
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
+    "[css]": {
+        "editor.defaultFormatter": "vscode.css-language-features"
+    },
     "[less]": {
         "editor.defaultFormatter": "vscode.css-language-features"
     },
