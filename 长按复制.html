@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Custom Text Selection</title>
+        <script>
+            document.addEventListener('contextmenu', function (e) {
+                e.preventDefault() // 阻止默认的上下文菜单
+            })
+
+            document.body.addEventListener('selectstart', function (e) {
+                // 自定义复制逻辑
+                document.execCommand('copy')
+
+                // 自定义全选逻辑
+                if (window.getSelection) {
+                    var selection = window.getSelection()
+                    var range = document.createRange()
+                    range.selectNodeContents(document.body)
+                    selection.removeAllRanges()
+                    selection.addRange(range)
+                }
+            })
+        </script>
+    </head>
+    <body>
+        <p>长按文本尝试复制和全选。</p>
+    </body>
+</html>

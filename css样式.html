@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+        <title>css样式</title>
+        <style>
+            html,
+            body {
+                padding: 0;
+                margin: 0;
+                width: 100%;
+                height: 100%;
+            }
+            * {
+                margin: 0;
+                padding: 0;
+            }
+
+            main {
+                margin: 0 auto;
+                width: 680px;
+            }
+            /* 文章第一行样式 */
+            .article:first-line {
+                font-weight: bold;
+                color: #ee5353;
+            }
+            .jing-ye-si h1 {
+                margin-top: 10px;
+                font-size: 18px;
+                font-weight: bold;
+            }
+            .jing-ye-si h1 ~ p {
+                margin-top: 6px;
+                text-decoration: underline;
+            }
+            .link:visited {
+                color: forestgreen;
+                text-decoration-color: hotpink;
+            }
+            /* 父元素 */
+            .grid {
+                padding: 10px;
+                display: grid;
+                grid-gap: 10px;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            }
+
+            /* 子元素 */
+            .item {
+                height: 200px;
+                background-color: rgb(141, 141, 255);
+                border-radius: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <main>
+            <div class="article">天有不测风云，人有旦夕祸福。蜈蚣百足，行不及蛇；雄鸡两翼，飞不过鸦。马有千里之程，无骑不能自往；人有冲天之志，非运不能自通。</div>
+            <div class="jing-ye-si">
+                <h1>静夜思</h1>
+                <p>窗前明月光，</p>
+                <p>疑是地上霜。</p>
+                <p>举头望明月，</p>
+                <p>低头思故乡。</p>
+            </div>
+            <div>
+                <a class="link" href="http://www.baidu.com">百度</a>
+            </div>
+        </main>
+        <div class="grid">
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+        </div>
+    </body>
+</html>

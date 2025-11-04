@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <title>七天学堂</title>
+        <link rel="stylesheet" href="https://static.7net.cc/cdn/katexszone/katex.min.css" />
+        <style>
+            html {
+                margin-top: 20px;
+                margin-bottom: 20px;
+            }
+            .flex-center {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .flex-center-space-between {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+            .flex-center-space-around {
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
+            }
+            .flex-center-right {
+                display: flex;
+                align-items: center;
+                justify-content: right;
+            }
+            .flex-v-center {
+                display: flex;
+                align-items: center;
+            }
+            .flex-space-between {
+                display: flex;
+                justify-content: space-between;
+            }
+            .flex-wrap {
+                flex-wrap: wrap;
+            }
+            .pdf-wrap {
+                margin: 8px 0;
+                padding: 8px 12px;
+                background-color: #fff;
+            }
+            .pdf-flag {
+                font-size: 14px;
+                font-weight: bold;
+                color: #ed5b68;
+            }
+            .pdf-flag img {
+                margin-right: 4px;
+                width: 20px;
+                height: 20px;
+            }
+            .test-paper-title {
+                margin: 12px 0;
+                font-size: 16px;
+                font-weight: bold;
+            }
+            .question-wrap {
+                padding: 0;
+                margin: 0;
+                list-style: none;
+            }
+            .question-wrap img {
+                display: block;
+                margin-bottom: 3px;
+                width: 100%;
+            }
+            .question-title {
+                margin: 12px 0 6px;
+                font-size: 16px;
+                font-weight: 500;
+            }
+            .question-title span:first-child {
+                margin-right: 8px;
+                width: 4px;
+                height: 16px;
+                background-color: #fe6706;
+                border-radius: 4px;
+            }
+            .disabled-img {
+                height: 56px;
+                background-color: #f3f4f8;
+                font-size: 14px;
+                color: #999;
+            }
+            .disabled-img img {
+                margin-right: 8px;
+                width: 28px;
+                height: 28px;
+            }
+            .answer-area {
+                height: 72px;
+            }
+            .question-info {
+                flex: 1;
+                overflow: hidden;
+            }
+            .question-info-title {
+                margin-bottom: 6px;
+                padding-right: 6px;
+                height: 24px;
+                border: 1px dashed #999;
+                font-size: 12px;
+                color: #666;
+            }
+            .question-number {
+                flex-shrink: 0;
+            }
+            .question-number span:first-child {
+                font-size: 14px;
+                font-weight: 500;
+                color: #222;
+            }
+            .question-from {
+                margin-left: 16px;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+            }
+            .error-cause {
+                flex-shrink: 0;
+                width: 168px;
+                min-height: 120px;
+                border: 1px solid #eee;
+            }
+            .error-cause-title {
+                padding: 0 8px;
+                line-height: 24px;
+                background-color: #ccc;
+                font-size: 14px;
+            }
+            .error-cause-list {
+                padding: 0 8px;
+                flex-wrap: wrap;
+            }
+            .error-cause-item {
+                width: 50%;
+                height: 32px;
+                font-size: 12px;
+            }
+            .error-cause-item span:first-child {
+                margin-right: 6px;
+                display: block;
+                width: 10px;
+                height: 10px;
+                border: 1px solid #ccc;
+            }
+        </style>
+    </head>
+    <body>
+        <!--bindings={
+  "ng-reflect-ng-template-outlet": "[object Object]"
+}-->
+        <div _ngcontent-sfq-c49="" class="flex-v-center pdf-flag"><img _ngcontent-sfq-c49="" src="https://static.7net.cc/szoneapplet/static/images/logo-szone.png" /><span _ngcontent-sfq-c49="">七天学堂</span></div>
+        <div _ngcontent-sfq-c49="" class="flex-center test-paper-title">高一数学错题卷2025.07.29.2</div>
+        <!--bindings={
+  "ng-reflect-ng-template-outlet-context": "[object Object]",
+  "ng-reflect-ng-template-outlet": "[object Object]"
+}--><!--bindings={
+  "ng-reflect-ng-for-of": "[object Object],[object Object"
+}-->
+        <ul _ngcontent-sfq-c49="" class="question-wrap">
+            <li _ngcontent-sfq-c49="" class="flex-space-between">
+                <div _ngcontent-sfq-c49="" class="question-info">
+                    <!--bindings={
+  "ng-reflect-ng-if": "false"
+}--><!--bindings={
+  "ng-reflect-ng-if": "true"
+}-->
+                    <div _ngcontent-sfq-c49="" class="question-info-title flex-center-space-between">
+                        <div _ngcontent-sfq-c49="" class="question-number flex-v-center"><span _ngcontent-sfq-c49="">【第1题】</span></div>
+                        <!--bindings={
+  "ng-reflect-ng-if": "学堂联考九科"
+}-->
+                        <div _ngcontent-sfq-c49="" class="question-from">试题来源：学堂联考九科</div>
+                    </div>
+                    <!--bindings={
+  "ng-reflect-ng-if": "false",
+  "ng-reflect-ng-if-else": "[object Object]"
+}-->
+                    <div _ngcontent-sfq-c49="" ng-reflect-imgviewer="https://itembank-dev.oss-cn-qi">
+                        <!--bindings={
+  "ng-reflect-ng-for-of": "https://itembank-dev.oss-cn-qi"
+}--><image _ngcontent-sfq-c49="" ng-reflect-src="https://itembank-dev.oss-cn-qi" ng-reflect-auto-size="true" class="loaded"
+                            ><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><img src="https://itembank-dev.oss-cn-qingdao.aliyuncs.com/stonecutresults/665d0b4e-8af1-4051-81fc-d8aabab8e65a/665d0b4e-8af1-4051-81fc-d8aabab8e65a_pageimg_content_0.jpg?Expires=1755586800&amp;OSSAccessKeyId=LTAI36URVnKkomqd&amp;Signature=Td3MCRnOeAEJOmBSRl2o7SpMLKA%3D" class="auto-size loaded" /><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--></image
+                        >
+                    </div>
+                    <!--bindings={
+  "ng-reflect-ng-if": "false"
+}--><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><!----><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--><!--bindings={
+  "ng-reflect-ng-if": "1"
+}-->
+                    <div _ngcontent-sfq-c49="" ng-reflect-imgviewer="https://itembank-dev.oss-cn-qi">
+                        <!--bindings={
+  "ng-reflect-ng-for-of": "https://itembank-dev.oss-cn-qi"
+}--><image _ngcontent-sfq-c49="" ng-reflect-src="https://itembank-dev.oss-cn-qi" ng-reflect-auto-size="true" class="loaded"
+                            ><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><img src="https://itembank-dev.oss-cn-qingdao.aliyuncs.com/stonecutresults/665d0b4e-8af1-4051-81fc-d8aabab8e65a/665d0b4e-8af1-4051-81fc-d8aabab8e65a_pageimg_answer_0.jpg?Expires=1755586800&amp;OSSAccessKeyId=LTAI36URVnKkomqd&amp;Signature=BxL2iiK0fbRnLfUW4LTmUXInyqs%3D" class="auto-size loaded" /><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--></image
+                        >
+                    </div>
+                    <!----><!----><!---->
+                </div>
+                <!--bindings={
+  "ng-reflect-ng-if": "true"
+}-->
+                <div _ngcontent-sfq-c49="" class="error-cause">
+                    <div _ngcontent-sfq-c49="" class="error-cause-title">错题原因</div>
+                    <div _ngcontent-sfq-c49="" class="flex-center-space-around error-cause-list">
+                        <div _ngcontent-sfq-c49="" class="flex-v-center error-cause-item"><span _ngcontent-sfq-c49=""></span><span _ngcontent-sfq-c49="">思路错误</span></div>
+                        <div _ngcontent-sfq-c49="" class="flex-v-center error-cause-item"><span _ngcontent-sfq-c49=""></span><span _ngcontent-sfq-c49="">概念模糊</span></div>
+                        <div _ngcontent-sfq-c49="" class="flex-v-center error-cause-item"><span _ngcontent-sfq-c49=""></span><span _ngcontent-sfq-c49="">粗心大意</span></div>
+                        <div _ngcontent-sfq-c49="" class="flex-v-center error-cause-item"><span _ngcontent-sfq-c49=""></span><span _ngcontent-sfq-c49="">其他原因</span></div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <ul _ngcontent-sfq-c49="" class="question-wrap">
+            <li _ngcontent-sfq-c49="" class="flex-space-between">
+                <div _ngcontent-sfq-c49="" class="question-info">
+                    <!--bindings={
+  "ng-reflect-ng-if": "false"
+}--><!--bindings={
+  "ng-reflect-ng-if": "true"
+}-->
+                    <div _ngcontent-sfq-c49="" class="question-info-title flex-center-space-between">
+                        <div _ngcontent-sfq-c49="" class="question-number flex-v-center"><span _ngcontent-sfq-c49="">【第2题】</span></div>
+                        <!--bindings={
+  "ng-reflect-ng-if": "学堂联考九科"
+}-->
+                        <div _ngcontent-sfq-c49="" class="question-from">试题来源：学堂联考九科</div>
+                    </div>
+                    <!--bindings={
+  "ng-reflect-ng-if": "false",
+  "ng-reflect-ng-if-else": "[object Object]"
+}-->
+                    <div _ngcontent-sfq-c49="" ng-reflect-imgviewer="https://itembank-dev.oss-cn-qi">
+                        <!--bindings={
+  "ng-reflect-ng-for-of": "https://itembank-dev.oss-cn-qi"
+}--><image _ngcontent-sfq-c49="" ng-reflect-src="https://itembank-dev.oss-cn-qi" ng-reflect-auto-size="true" class="loaded"
+                            ><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><img src="https://itembank-dev.oss-cn-qingdao.aliyuncs.com/stonecutresults/c5a30fd6-4022-4ee3-8cd9-14fb329fc4dc/c5a30fd6-4022-4ee3-8cd9-14fb329fc4dc_pageimg_content_0.jpg?Expires=1755586800&amp;OSSAccessKeyId=LTAI36URVnKkomqd&amp;Signature=8Pitk%2FbTRJRG7l8n7bpD69RkKgM%3D" class="auto-size loaded" /><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--></image
+                        >
+                    </div>
+                    <!--bindings={
+  "ng-reflect-ng-if": "false"
+}--><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><!----><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--><!--bindings={
+  "ng-reflect-ng-if": "1"
+}-->
+                    <div _ngcontent-sfq-c49="" ng-reflect-imgviewer="https://itembank-dev.oss-cn-qi">
+                        <!--bindings={
+  "ng-reflect-ng-for-of": "https://itembank-dev.oss-cn-qi"
+}--><image _ngcontent-sfq-c49="" ng-reflect-src="https://itembank-dev.oss-cn-qi" ng-reflect-auto-size="true" class="loaded"
+                            ><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><img src="https://itembank-dev.oss-cn-qingdao.aliyuncs.com/stonecutresults/c5a30fd6-4022-4ee3-8cd9-14fb329fc4dc/c5a30fd6-4022-4ee3-8cd9-14fb329fc4dc_pageimg_answer_0.jpg?Expires=1755586800&amp;OSSAccessKeyId=LTAI36URVnKkomqd&amp;Signature=JxzllElOVv52MKU1c4HQJKUArKU%3D" class="auto-size loaded" /><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--></image
+                        >
+                    </div>
+                    <!----><!----><!---->
+                </div>
+                <!--bindings={
+  "ng-reflect-ng-if": "true"
+}-->
+                <div _ngcontent-sfq-c49="" class="error-cause">
+                    <div _ngcontent-sfq-c49="" class="error-cause-title">错题原因</div>
+                    <div _ngcontent-sfq-c49="" class="flex-center-space-around error-cause-list">
+                        <div _ngcontent-sfq-c49="" class="flex-v-center error-cause-item"><span _ngcontent-sfq-c49=""></span><span _ngcontent-sfq-c49="">思路错误</span></div>
+                        <div _ngcontent-sfq-c49="" class="flex-v-center error-cause-item"><span _ngcontent-sfq-c49=""></span><span _ngcontent-sfq-c49="">概念模糊</span></div>
+                        <div _ngcontent-sfq-c49="" class="flex-v-center error-cause-item"><span _ngcontent-sfq-c49=""></span><span _ngcontent-sfq-c49="">粗心大意</span></div>
+                        <div _ngcontent-sfq-c49="" class="flex-v-center error-cause-item"><span _ngcontent-sfq-c49=""></span><span _ngcontent-sfq-c49="">其他原因</span></div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <ul _ngcontent-sfq-c49="" class="question-wrap">
+            <li _ngcontent-sfq-c49="" class="flex-space-between">
+                <div _ngcontent-sfq-c49="" class="question-info">
+                    <!--bindings={
+  "ng-reflect-ng-if": "false"
+}--><!--bindings={
+  "ng-reflect-ng-if": "true"
+}-->
+                    <div _ngcontent-sfq-c49="" class="question-info-title flex-center-space-between">
+                        <div _ngcontent-sfq-c49="" class="question-number flex-v-center"><span _ngcontent-sfq-c49="">【第3题】</span></div>
+                        <!--bindings={
+  "ng-reflect-ng-if": "拍照上传"
+}-->
+                        <div _ngcontent-sfq-c49="" class="question-from">试题来源：拍照上传</div>
+                    </div>
+                    <!--bindings={
+  "ng-reflect-ng-if": "false",
+  "ng-reflect-ng-if-else": "[object Object]"
+}-->
+                    <div _ngcontent-sfq-c49="" ng-reflect-imgviewer="https://7net-szone-dev.oss-cn-">
+                        <!--bindings={
+  "ng-reflect-ng-for-of": "https://7net-szone-dev.oss-cn-"
+}--><image _ngcontent-sfq-c49="" ng-reflect-src="https://7net-szone-dev.oss-cn-" ng-reflect-auto-size="true" class="loaded"
+                            ><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><img src="https://7net-szone-dev.oss-cn-qingdao.aliyuncs.com/szone/userErrorquestion/57e1bd1e-d152-460a-b3ed-525fedbf3cab/560c942b-86d6-4f89-90e7-87a12b8fb2b3.jpg?Expires=1755586800&amp;OSSAccessKeyId=LTAI36URVnKkomqd&amp;Signature=%2FD%2FCtfdt12yXUPPWF0%2BheIMLZ9c%3D" class="auto-size loaded" /><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--></image
+                        >
+                    </div>
+                    <!--bindings={
+  "ng-reflect-ng-if": "false"
+}--><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><!----><!--bindings={
+  "ng-reflect-ng-if": ""
+}--><!--bindings={
+  "ng-reflect-ng-if": "0"
+}--><!----><!----><!---->
+                </div>
+                <!--bindings={
+  "ng-reflect-ng-if": "true"
+}-->
+                <div _ngcontent-sfq-c49="" class="error-cause">
+                    <div _ngcontent-sfq-c49="" class="error-cause-title">错题原因</div>
+                    <div _ngcontent-sfq-c49="" class="flex-center-space-around error-cause-list">
+                        <div _ngcontent-sfq-c49="" class="flex-v-center error-cause-item"><span _ngcontent-sfq-c49=""></span><span _ngcontent-sfq-c49="">思路错误</span></div>
+                        <div _ngcontent-sfq-c49="" class="flex-v-center error-cause-item"><span _ngcontent-sfq-c49=""></span><span _ngcontent-sfq-c49="">概念模糊</span></div>
+                        <div _ngcontent-sfq-c49="" class="flex-v-center error-cause-item"><span _ngcontent-sfq-c49=""></span><span _ngcontent-sfq-c49="">粗心大意</span></div>
+                        <div _ngcontent-sfq-c49="" class="flex-v-center error-cause-item"><span _ngcontent-sfq-c49=""></span><span _ngcontent-sfq-c49="">其他原因</span></div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <ul _ngcontent-sfq-c49="" class="question-wrap">
+            <li _ngcontent-sfq-c49="" class="flex-space-between">
+                <div _ngcontent-sfq-c49="" class="question-info">
+                    <!--bindings={
+  "ng-reflect-ng-if": "false"
+}--><!--bindings={
+  "ng-reflect-ng-if": "true"
+}-->
+                    <div _ngcontent-sfq-c49="" class="question-info-title flex-center-space-between">
+                        <div _ngcontent-sfq-c49="" class="question-number flex-v-center"><span _ngcontent-sfq-c49="">【第4题】</span></div>
+                        <!--bindings={
+  "ng-reflect-ng-if": "学堂联考九科"
+}-->
+                        <div _ngcontent-sfq-c49="" class="question-from">试题来源：学堂联考九科</div>
+                    </div>
+                    <!--bindings={
+  "ng-reflect-ng-if": "false",
+  "ng-reflect-ng-if-else": "[object Object]"
+}-->
+                    <div _ngcontent-sfq-c49="" ng-reflect-imgviewer="https://itembank-dev.oss-cn-qi">
+                        <!--bindings={
+  "ng-reflect-ng-for-of": "https://itembank-dev.oss-cn-qi"
+}--><image _ngcontent-sfq-c49="" ng-reflect-src="https://itembank-dev.oss-cn-qi" ng-reflect-auto-size="true" class="loaded"
+                            ><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><img src="https://itembank-dev.oss-cn-qingdao.aliyuncs.com/stonecutresults/98e28dc3-cdae-4445-9df3-93abdd399439/98e28dc3-cdae-4445-9df3-93abdd399439_pageimg_content_0.jpg?Expires=1755586800&amp;OSSAccessKeyId=LTAI36URVnKkomqd&amp;Signature=dhnYuuXID%2B4Ewo8B77esRvbJ1AA%3D" class="auto-size loaded" /><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--></image
+                        >
+                    </div>
+                    <!--bindings={
+  "ng-reflect-ng-if": "false"
+}--><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><!----><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--><!--bindings={
+  "ng-reflect-ng-if": "1"
+}-->
+                    <div _ngcontent-sfq-c49="" ng-reflect-imgviewer="https://itembank-dev.oss-cn-qi">
+                        <!--bindings={
+  "ng-reflect-ng-for-of": "https://itembank-dev.oss-cn-qi"
+}--><image _ngcontent-sfq-c49="" ng-reflect-src="https://itembank-dev.oss-cn-qi" ng-reflect-auto-size="true" class="loaded"
+                            ><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><img src="https://itembank-dev.oss-cn-qingdao.aliyuncs.com/stonecutresults/98e28dc3-cdae-4445-9df3-93abdd399439/98e28dc3-cdae-4445-9df3-93abdd399439_pageimg_answer_0.jpg?Expires=1755586800&amp;OSSAccessKeyId=LTAI36URVnKkomqd&amp;Signature=Z64OB5USAWXAacPWmEfwDf4o6h8%3D" class="auto-size loaded" /><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--></image
+                        >
+                    </div>
+                    <!----><!----><!---->
+                </div>
+                <!--bindings={
+  "ng-reflect-ng-if": "true"
+}-->
+                <div _ngcontent-sfq-c49="" class="error-cause">
+                    <div _ngcontent-sfq-c49="" class="error-cause-title">错题原因</div>
+                    <div _ngcontent-sfq-c49="" class="flex-center-space-around error-cause-list">
+                        <div _ngcontent-sfq-c49="" class="flex-v-center error-cause-item"><span _ngcontent-sfq-c49=""></span><span _ngcontent-sfq-c49="">思路错误</span></div>
+                        <div _ngcontent-sfq-c49="" class="flex-v-center error-cause-item"><span _ngcontent-sfq-c49=""></span><span _ngcontent-sfq-c49="">概念模糊</span></div>
+                        <div _ngcontent-sfq-c49="" class="flex-v-center error-cause-item"><span _ngcontent-sfq-c49=""></span><span _ngcontent-sfq-c49="">粗心大意</span></div>
+                        <div _ngcontent-sfq-c49="" class="flex-v-center error-cause-item"><span _ngcontent-sfq-c49=""></span><span _ngcontent-sfq-c49="">其他原因</span></div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <ul _ngcontent-sfq-c49="" class="question-wrap">
+            <li _ngcontent-sfq-c49="" class="flex-space-between">
+                <div _ngcontent-sfq-c49="" class="question-info">
+                    <!--bindings={
+  "ng-reflect-ng-if": "false"
+}--><!--bindings={
+  "ng-reflect-ng-if": "true"
+}-->
+                    <div _ngcontent-sfq-c49="" class="question-info-title flex-center-space-between">
+                        <div _ngcontent-sfq-c49="" class="question-number flex-v-center"><span _ngcontent-sfq-c49="">【第5题】</span></div>
+                        <!--bindings={
+  "ng-reflect-ng-if": "学堂联考九科"
+}-->
+                        <div _ngcontent-sfq-c49="" class="question-from">试题来源：学堂联考九科</div>
+                    </div>
+                    <!--bindings={
+  "ng-reflect-ng-if": "false",
+  "ng-reflect-ng-if-else": "[object Object]"
+}-->
+                    <div _ngcontent-sfq-c49="" ng-reflect-imgviewer="https://itembank-dev.oss-cn-qi">
+                        <!--bindings={
+  "ng-reflect-ng-for-of": "https://itembank-dev.oss-cn-qi"
+}--><image _ngcontent-sfq-c49="" ng-reflect-src="https://itembank-dev.oss-cn-qi" ng-reflect-auto-size="true" class="loaded"
+                            ><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><img src="https://itembank-dev.oss-cn-qingdao.aliyuncs.com/stonecutresults/20800f36-ba41-4477-87a7-0874f4b3af98/20800f36-ba41-4477-87a7-0874f4b3af98_pageimg_content_0.jpg?Expires=1755586800&amp;OSSAccessKeyId=LTAI36URVnKkomqd&amp;Signature=mtgSK2SAiirniAamIqVzQII%2FuKw%3D" class="auto-size loaded" /><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--></image
+                        >
+                    </div>
+                    <!--bindings={
+  "ng-reflect-ng-if": "false"
+}--><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><!----><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--><!--bindings={
+  "ng-reflect-ng-if": "1"
+}-->
+                    <div _ngcontent-sfq-c49="" ng-reflect-imgviewer="https://itembank-dev.oss-cn-qi">
+                        <!--bindings={
+  "ng-reflect-ng-for-of": "https://itembank-dev.oss-cn-qi"
+}--><image _ngcontent-sfq-c49="" ng-reflect-src="https://itembank-dev.oss-cn-qi" ng-reflect-auto-size="true" class="loaded"
+                            ><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><img src="https://itembank-dev.oss-cn-qingdao.aliyuncs.com/stonecutresults/20800f36-ba41-4477-87a7-0874f4b3af98/20800f36-ba41-4477-87a7-0874f4b3af98_pageimg_answer_0.jpg?Expires=1755586800&amp;OSSAccessKeyId=LTAI36URVnKkomqd&amp;Signature=Zv1qkvf5neoCoNZlSZ1cGTFwSYo%3D" class="auto-size loaded" /><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--></image
+                        >
+                    </div>
+                    <!----><!----><!---->
+                </div>
+                <!--bindings={
+  "ng-reflect-ng-if": "true"
+}-->
+                <div _ngcontent-sfq-c49="" class="error-cause">
+                    <div _ngcontent-sfq-c49="" class="error-cause-title">错题原因</div>
+                    <div _ngcontent-sfq-c49="" class="flex-center-space-around error-cause-list">
+                        <div _ngcontent-sfq-c49="" class="flex-v-center error-cause-item"><span _ngcontent-sfq-c49=""></span><span _ngcontent-sfq-c49="">思路错误</span></div>
+                        <div _ngcontent-sfq-c49="" class="flex-v-center error-cause-item"><span _ngcontent-sfq-c49=""></span><span _ngcontent-sfq-c49="">概念模糊</span></div>
+                        <div _ngcontent-sfq-c49="" class="flex-v-center error-cause-item"><span _ngcontent-sfq-c49=""></span><span _ngcontent-sfq-c49="">粗心大意</span></div>
+                        <div _ngcontent-sfq-c49="" class="flex-v-center error-cause-item"><span _ngcontent-sfq-c49=""></span><span _ngcontent-sfq-c49="">其他原因</span></div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <ul _ngcontent-sfq-c49="" class="question-wrap">
+            <li _ngcontent-sfq-c49="" class="flex-space-between">
+                <div _ngcontent-sfq-c49="" class="question-info">
+                    <!--bindings={
+  "ng-reflect-ng-if": "false"
+}--><!--bindings={
+  "ng-reflect-ng-if": "true"
+}-->
+                    <div _ngcontent-sfq-c49="" class="question-info-title flex-center-space-between">
+                        <div _ngcontent-sfq-c49="" class="question-number flex-v-center"><span _ngcontent-sfq-c49="">【第6题】</span></div>
+                        <!--bindings={
+  "ng-reflect-ng-if": "学堂联考九科"
+}-->
+                        <div _ngcontent-sfq-c49="" class="question-from">试题来源：学堂联考九科</div>
+                    </div>
+                    <!--bindings={
+  "ng-reflect-ng-if": "false",
+  "ng-reflect-ng-if-else": "[object Object]"
+}-->
+                    <div _ngcontent-sfq-c49="" ng-reflect-imgviewer="https://itembank-dev.oss-cn-qi">
+                        <!--bindings={
+  "ng-reflect-ng-for-of": "https://itembank-dev.oss-cn-qi"
+}--><image _ngcontent-sfq-c49="" ng-reflect-src="https://itembank-dev.oss-cn-qi" ng-reflect-auto-size="true" class="loaded"
+                            ><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><img src="https://itembank-dev.oss-cn-qingdao.aliyuncs.com/stonecutresults/0e598dbe-9e55-4df1-a623-e86077d21b1a/0e598dbe-9e55-4df1-a623-e86077d21b1a_pageimg_content_0.jpg?Expires=1755586800&amp;OSSAccessKeyId=LTAI36URVnKkomqd&amp;Signature=tuqACRZYtkEPIK0VXAW%2BYOsfJM4%3D" class="auto-size loaded" /><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--></image
+                        >
+                    </div>
+                    <!--bindings={
+  "ng-reflect-ng-if": "false"
+}--><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><!----><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--><!--bindings={
+  "ng-reflect-ng-if": "1"
+}-->
+                    <div _ngcontent-sfq-c49="" ng-reflect-imgviewer="https://itembank-dev.oss-cn-qi">
+                        <!--bindings={
+  "ng-reflect-ng-for-of": "https://itembank-dev.oss-cn-qi"
+}--><image _ngcontent-sfq-c49="" ng-reflect-src="https://itembank-dev.oss-cn-qi" ng-reflect-auto-size="true" class="loaded"
+                            ><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><img src="https://itembank-dev.oss-cn-qingdao.aliyuncs.com/stonecutresults/0e598dbe-9e55-4df1-a623-e86077d21b1a/0e598dbe-9e55-4df1-a623-e86077d21b1a_pageimg_answer_0.jpg?Expires=1755586800&amp;OSSAccessKeyId=LTAI36URVnKkomqd&amp;Signature=CmQAesuJK0AzA8%2BAqOdKTsfnC6g%3D" class="auto-size loaded" /><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--></image
+                        >
+                    </div>
+                    <!----><!----><!---->
+                </div>
+                <!--bindings={
+  "ng-reflect-ng-if": "true"
+}-->
+                <div _ngcontent-sfq-c49="" class="error-cause">
+                    <div _ngcontent-sfq-c49="" class="error-cause-title">错题原因</div>
+                    <div _ngcontent-sfq-c49="" class="flex-center-space-around error-cause-list">
+                        <div _ngcontent-sfq-c49="" class="flex-v-center error-cause-item"><span _ngcontent-sfq-c49=""></span><span _ngcontent-sfq-c49="">思路错误</span></div>
+                        <div _ngcontent-sfq-c49="" class="flex-v-center error-cause-item"><span _ngcontent-sfq-c49=""></span><span _ngcontent-sfq-c49="">概念模糊</span></div>
+                        <div _ngcontent-sfq-c49="" class="flex-v-center error-cause-item"><span _ngcontent-sfq-c49=""></span><span _ngcontent-sfq-c49="">粗心大意</span></div>
+                        <div _ngcontent-sfq-c49="" class="flex-v-center error-cause-item"><span _ngcontent-sfq-c49=""></span><span _ngcontent-sfq-c49="">其他原因</span></div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <ul _ngcontent-sfq-c49="" class="question-wrap">
+            <li _ngcontent-sfq-c49="" class="flex-space-between">
+                <div _ngcontent-sfq-c49="" class="question-info">
+                    <!--bindings={
+  "ng-reflect-ng-if": "false"
+}--><!--bindings={
+  "ng-reflect-ng-if": "true"
+}-->
+                    <div _ngcontent-sfq-c49="" class="question-info-title flex-center-space-between">
+                        <div _ngcontent-sfq-c49="" class="question-number flex-v-center"><span _ngcontent-sfq-c49="">【第7题】</span></div>
+                        <!--bindings={
+  "ng-reflect-ng-if": "学堂联考九科"
+}-->
+                        <div _ngcontent-sfq-c49="" class="question-from">试题来源：学堂联考九科</div>
+                    </div>
+                    <!--bindings={
+  "ng-reflect-ng-if": "false",
+  "ng-reflect-ng-if-else": "[object Object]"
+}-->
+                    <div _ngcontent-sfq-c49="" ng-reflect-imgviewer="https://itembank-dev.oss-cn-qi">
+                        <!--bindings={
+  "ng-reflect-ng-for-of": "https://itembank-dev.oss-cn-qi"
+}--><image _ngcontent-sfq-c49="" ng-reflect-src="https://itembank-dev.oss-cn-qi" ng-reflect-auto-size="true" class="loaded"
+                            ><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><img src="https://itembank-dev.oss-cn-qingdao.aliyuncs.com/stonecutresults/a6e30fa5-753b-4469-babd-9fbe618d9e8c/a6e30fa5-753b-4469-babd-9fbe618d9e8c_pageimg_content_0.jpg?Expires=1755586800&amp;OSSAccessKeyId=LTAI36URVnKkomqd&amp;Signature=5UFV1pskPAZNt92yRcORvaaiAiY%3D" class="auto-size loaded" /><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--></image
+                        >
+                    </div>
+                    <!--bindings={
+  "ng-reflect-ng-if": "false"
+}--><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><!----><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--><!--bindings={
+  "ng-reflect-ng-if": "1"
+}-->
+                    <div _ngcontent-sfq-c49="" ng-reflect-imgviewer="https://itembank-dev.oss-cn-qi">
+                        <!--bindings={
+  "ng-reflect-ng-for-of": "https://itembank-dev.oss-cn-qi"
+}--><image _ngcontent-sfq-c49="" ng-reflect-src="https://itembank-dev.oss-cn-qi" ng-reflect-auto-size="true" class="loaded"
+                            ><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><img src="https://itembank-dev.oss-cn-qingdao.aliyuncs.com/stonecutresults/a6e30fa5-753b-4469-babd-9fbe618d9e8c/a6e30fa5-753b-4469-babd-9fbe618d9e8c_pageimg_answer_0.jpg?Expires=1755586800&amp;OSSAccessKeyId=LTAI36URVnKkomqd&amp;Signature=fdm0bGkPzlPmTzdnJNBPVAoSGyg%3D" class="auto-size loaded" /><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--></image
+                        >
+                    </div>
+                    <!----><!----><!---->
+                </div>
+                <!--bindings={
+  "ng-reflect-ng-if": "true"
+}-->
+                <div _ngcontent-sfq-c49="" class="error-cause">
+                    <div _ngcontent-sfq-c49="" class="error-cause-title">错题原因</div>
+                    <div _ngcontent-sfq-c49="" class="flex-center-space-around error-cause-list">
+                        <div _ngcontent-sfq-c49="" class="flex-v-center error-cause-item"><span _ngcontent-sfq-c49=""></span><span _ngcontent-sfq-c49="">思路错误</span></div>
+                        <div _ngcontent-sfq-c49="" class="flex-v-center error-cause-item"><span _ngcontent-sfq-c49=""></span><span _ngcontent-sfq-c49="">概念模糊</span></div>
+                        <div _ngcontent-sfq-c49="" class="flex-v-center error-cause-item"><span _ngcontent-sfq-c49=""></span><span _ngcontent-sfq-c49="">粗心大意</span></div>
+                        <div _ngcontent-sfq-c49="" class="flex-v-center error-cause-item"><span _ngcontent-sfq-c49=""></span><span _ngcontent-sfq-c49="">其他原因</span></div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <ul _ngcontent-sfq-c49="" class="question-wrap">
+            <li _ngcontent-sfq-c49="" class="flex-space-between">
+                <div _ngcontent-sfq-c49="" class="question-info">
+                    <!--bindings={
+  "ng-reflect-ng-if": "false"
+}--><!--bindings={
+  "ng-reflect-ng-if": "true"
+}-->
+                    <div _ngcontent-sfq-c49="" class="question-info-title flex-center-space-between">
+                        <div _ngcontent-sfq-c49="" class="question-number flex-v-center"><span _ngcontent-sfq-c49="">【第8题】</span></div>
+                        <!--bindings={
+  "ng-reflect-ng-if": "学堂联考九科"
+}-->
+                        <div _ngcontent-sfq-c49="" class="question-from">试题来源：学堂联考九科</div>
+                    </div>
+                    <!--bindings={
+  "ng-reflect-ng-if": "false",
+  "ng-reflect-ng-if-else": "[object Object]"
+}-->
+                    <div _ngcontent-sfq-c49="" ng-reflect-imgviewer="https://itembank-dev.oss-cn-qi">
+                        <!--bindings={
+  "ng-reflect-ng-for-of": "https://itembank-dev.oss-cn-qi"
+}--><image _ngcontent-sfq-c49="" ng-reflect-src="https://itembank-dev.oss-cn-qi" ng-reflect-auto-size="true" class="loaded"
+                            ><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><img src="https://itembank-dev.oss-cn-qingdao.aliyuncs.com/stonecutresults/6b6b1ba0-ed8f-43f4-b8aa-b098ab6b5782/6b6b1ba0-ed8f-43f4-b8aa-b098ab6b5782_pageimg_content_0.jpg?Expires=1755586800&amp;OSSAccessKeyId=LTAI36URVnKkomqd&amp;Signature=6lnytJ7unIBwl9H%2FD3I%2Fa7VqMfA%3D" class="auto-size loaded" /><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--></image
+                        >
+                    </div>
+                    <!--bindings={
+  "ng-reflect-ng-if": "false"
+}--><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><!----><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--><!--bindings={
+  "ng-reflect-ng-if": "1"
+}-->
+                    <div _ngcontent-sfq-c49="" ng-reflect-imgviewer="https://itembank-dev.oss-cn-qi">
+                        <!--bindings={
+  "ng-reflect-ng-for-of": "https://itembank-dev.oss-cn-qi"
+}--><image _ngcontent-sfq-c49="" ng-reflect-src="https://itembank-dev.oss-cn-qi" ng-reflect-auto-size="true" class="loaded"
+                            ><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><img src="https://itembank-dev.oss-cn-qingdao.aliyuncs.com/stonecutresults/6b6b1ba0-ed8f-43f4-b8aa-b098ab6b5782/6b6b1ba0-ed8f-43f4-b8aa-b098ab6b5782_pageimg_answer_0.jpg?Expires=1755586800&amp;OSSAccessKeyId=LTAI36URVnKkomqd&amp;Signature=LuUFuGz2ve6mUlhn7CX6vd6ZwyY%3D" class="auto-size loaded" /><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--></image
+                        >
+                    </div>
+                    <!----><!----><!---->
+                </div>
+                <!--bindings={
+  "ng-reflect-ng-if": "true"
+}-->
+                <div _ngcontent-sfq-c49="" class="error-cause">
+                    <div _ngcontent-sfq-c49="" class="error-cause-title">错题原因</div>
+                    <div _ngcontent-sfq-c49="" class="flex-center-space-around error-cause-list">
+                        <div _ngcontent-sfq-c49="" class="flex-v-center error-cause-item"><span _ngcontent-sfq-c49=""></span><span _ngcontent-sfq-c49="">思路错误</span></div>
+                        <div _ngcontent-sfq-c49="" class="flex-v-center error-cause-item"><span _ngcontent-sfq-c49=""></span><span _ngcontent-sfq-c49="">概念模糊</span></div>
+                        <div _ngcontent-sfq-c49="" class="flex-v-center error-cause-item"><span _ngcontent-sfq-c49=""></span><span _ngcontent-sfq-c49="">粗心大意</span></div>
+                        <div _ngcontent-sfq-c49="" class="flex-v-center error-cause-item"><span _ngcontent-sfq-c49=""></span><span _ngcontent-sfq-c49="">其他原因</span></div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <ul _ngcontent-sfq-c49="" class="question-wrap">
+            <li _ngcontent-sfq-c49="" class="flex-space-between">
+                <div _ngcontent-sfq-c49="" class="question-info">
+                    <!--bindings={
+  "ng-reflect-ng-if": "false"
+}--><!--bindings={
+  "ng-reflect-ng-if": "true"
+}-->
+                    <div _ngcontent-sfq-c49="" class="question-info-title flex-center-space-between">
+                        <div _ngcontent-sfq-c49="" class="question-number flex-v-center"><span _ngcontent-sfq-c49="">【第9题】</span></div>
+                        <!--bindings={
+  "ng-reflect-ng-if": "拍照上传"
+}-->
+                        <div _ngcontent-sfq-c49="" class="question-from">试题来源：拍照上传</div>
+                    </div>
+                    <!--bindings={
+  "ng-reflect-ng-if": "false",
+  "ng-reflect-ng-if-else": "[object Object]"
+}-->
+                    <div _ngcontent-sfq-c49="" ng-reflect-imgviewer="https://7net-szone-dev.oss-cn-">
+                        <!--bindings={
+  "ng-reflect-ng-for-of": "https://7net-szone-dev.oss-cn-"
+}--><image _ngcontent-sfq-c49="" ng-reflect-src="https://7net-szone-dev.oss-cn-" ng-reflect-auto-size="true" class="loaded"
+                            ><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><img src="https://7net-szone-dev.oss-cn-qingdao.aliyuncs.com/szone/userErrorquestion/57e1bd1e-d152-460a-b3ed-525fedbf3cab/12c2f21c-e63d-4498-8ed6-d23771f5eba9.jpg?Expires=1755586800&amp;OSSAccessKeyId=LTAI36URVnKkomqd&amp;Signature=ePU%2Fyr9dNVLaxSayVVN%2FiHlnA6k%3D" class="auto-size loaded" /><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--></image
+                        >
+                    </div>
+                    <!--bindings={
+  "ng-reflect-ng-if": "false"
+}--><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><!----><!--bindings={
+  "ng-reflect-ng-if": ""
+}--><!--bindings={
+  "ng-reflect-ng-if": "0"
+}--><!----><!----><!---->
+                </div>
+                <!--bindings={
+  "ng-reflect-ng-if": "true"
+}-->
+                <div _ngcontent-sfq-c49="" class="error-cause">
+                    <div _ngcontent-sfq-c49="" class="error-cause-title">错题原因</div>
+                    <div _ngcontent-sfq-c49="" class="flex-center-space-around error-cause-list">
+                        <div _ngcontent-sfq-c49="" class="flex-v-center error-cause-item"><span _ngcontent-sfq-c49=""></span><span _ngcontent-sfq-c49="">思路错误</span></div>
+                        <div _ngcontent-sfq-c49="" class="flex-v-center error-cause-item"><span _ngcontent-sfq-c49=""></span><span _ngcontent-sfq-c49="">概念模糊</span></div>
+                        <div _ngcontent-sfq-c49="" class="flex-v-center error-cause-item"><span _ngcontent-sfq-c49=""></span><span _ngcontent-sfq-c49="">粗心大意</span></div>
+                        <div _ngcontent-sfq-c49="" class="flex-v-center error-cause-item"><span _ngcontent-sfq-c49=""></span><span _ngcontent-sfq-c49="">其他原因</span></div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <ul _ngcontent-sfq-c49="" class="question-wrap">
+            <li _ngcontent-sfq-c49="" class="flex-space-between">
+                <div _ngcontent-sfq-c49="" class="question-info">
+                    <!--bindings={
+  "ng-reflect-ng-if": "false"
+}--><!--bindings={
+  "ng-reflect-ng-if": "true"
+}-->
+                    <div _ngcontent-sfq-c49="" class="question-info-title flex-center-space-between">
+                        <div _ngcontent-sfq-c49="" class="question-number flex-v-center"><span _ngcontent-sfq-c49="">【第10题】</span></div>
+                        <!--bindings={
+  "ng-reflect-ng-if": "学堂联考九科"
+}-->
+                        <div _ngcontent-sfq-c49="" class="question-from">试题来源：学堂联考九科</div>
+                    </div>
+                    <!--bindings={
+  "ng-reflect-ng-if": "false",
+  "ng-reflect-ng-if-else": "[object Object]"
+}-->
+                    <div _ngcontent-sfq-c49="" ng-reflect-imgviewer="https://itembank-dev.oss-cn-qi">
+                        <!--bindings={
+  "ng-reflect-ng-for-of": "https://itembank-dev.oss-cn-qi"
+}--><image _ngcontent-sfq-c49="" ng-reflect-src="https://itembank-dev.oss-cn-qi" ng-reflect-auto-size="true" class="loaded"
+                            ><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><img src="https://itembank-dev.oss-cn-qingdao.aliyuncs.com/stonecutresults/362aa46d-ae74-41f1-bd1c-1c02f7ea90b4/362aa46d-ae74-41f1-bd1c-1c02f7ea90b4_pageimg_content_0.jpg?Expires=1755586800&amp;OSSAccessKeyId=LTAI36URVnKkomqd&amp;Signature=gocz9JLNvUWgULYWdD%2Bsaqj9U%2FM%3D" class="auto-size loaded" /><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--></image
+                        >
+                    </div>
+                    <!--bindings={
+  "ng-reflect-ng-if": "false"
+}--><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><!----><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--><!--bindings={
+  "ng-reflect-ng-if": "1"
+}-->
+                    <div _ngcontent-sfq-c49="" ng-reflect-imgviewer="https://itembank-dev.oss-cn-qi">
+                        <!--bindings={
+  "ng-reflect-ng-for-of": "https://itembank-dev.oss-cn-qi"
+}--><image _ngcontent-sfq-c49="" ng-reflect-src="https://itembank-dev.oss-cn-qi" ng-reflect-auto-size="true" class="loaded"
+                            ><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><img src="https://itembank-dev.oss-cn-qingdao.aliyuncs.com/stonecutresults/362aa46d-ae74-41f1-bd1c-1c02f7ea90b4/362aa46d-ae74-41f1-bd1c-1c02f7ea90b4_pageimg_answer_0.jpg?Expires=1755586800&amp;OSSAccessKeyId=LTAI36URVnKkomqd&amp;Signature=k%2B%2Fx8JzFJSExVcv4jPZ8F4WVgAM%3D" class="auto-size loaded" /><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--></image
+                        >
+                    </div>
+                    <!----><!----><!---->
+                </div>
+                <!--bindings={
+  "ng-reflect-ng-if": "true"
+}-->
+                <div _ngcontent-sfq-c49="" class="error-cause">
+                    <div _ngcontent-sfq-c49="" class="error-cause-title">错题原因</div>
+                    <div _ngcontent-sfq-c49="" class="flex-center-space-around error-cause-list">
+                        <div _ngcontent-sfq-c49="" class="flex-v-center error-cause-item"><span _ngcontent-sfq-c49=""></span><span _ngcontent-sfq-c49="">思路错误</span></div>
+                        <div _ngcontent-sfq-c49="" class="flex-v-center error-cause-item"><span _ngcontent-sfq-c49=""></span><span _ngcontent-sfq-c49="">概念模糊</span></div>
+                        <div _ngcontent-sfq-c49="" class="flex-v-center error-cause-item"><span _ngcontent-sfq-c49=""></span><span _ngcontent-sfq-c49="">粗心大意</span></div>
+                        <div _ngcontent-sfq-c49="" class="flex-v-center error-cause-item"><span _ngcontent-sfq-c49=""></span><span _ngcontent-sfq-c49="">其他原因</span></div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <ul _ngcontent-sfq-c49="" class="question-wrap">
+            <li _ngcontent-sfq-c49="" class="flex-space-between">
+                <div _ngcontent-sfq-c49="" class="question-info">
+                    <!--bindings={
+  "ng-reflect-ng-if": "false"
+}--><!--bindings={
+  "ng-reflect-ng-if": "true"
+}-->
+                    <div _ngcontent-sfq-c49="" class="question-info-title flex-center-space-between">
+                        <div _ngcontent-sfq-c49="" class="question-number flex-v-center"><span _ngcontent-sfq-c49="">【第11题】</span></div>
+                        <!--bindings={
+  "ng-reflect-ng-if": "学堂联考九科"
+}-->
+                        <div _ngcontent-sfq-c49="" class="question-from">试题来源：学堂联考九科</div>
+                    </div>
+                    <!--bindings={
+  "ng-reflect-ng-if": "false",
+  "ng-reflect-ng-if-else": "[object Object]"
+}-->
+                    <div _ngcontent-sfq-c49="" ng-reflect-imgviewer="https://itembank-dev.oss-cn-qi">
+                        <!--bindings={
+  "ng-reflect-ng-for-of": "https://itembank-dev.oss-cn-qi"
+}--><image _ngcontent-sfq-c49="" ng-reflect-src="https://itembank-dev.oss-cn-qi" ng-reflect-auto-size="true" class="loaded"
+                            ><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><img src="https://itembank-dev.oss-cn-qingdao.aliyuncs.com/stonecutresults/185323d7-478b-402a-8653-243def281b8c/185323d7-478b-402a-8653-243def281b8c_pageimg_content_0.jpg?Expires=1755586800&amp;OSSAccessKeyId=LTAI36URVnKkomqd&amp;Signature=MTS7OvUgprxYTKNiKBXGoSXOTTo%3D" class="auto-size loaded" /><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--></image
+                        >
+                    </div>
+                    <!--bindings={
+  "ng-reflect-ng-if": "false"
+}--><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><!----><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--><!--bindings={
+  "ng-reflect-ng-if": "1"
+}-->
+                    <div _ngcontent-sfq-c49="" ng-reflect-imgviewer="https://itembank-dev.oss-cn-qi">
+                        <!--bindings={
+  "ng-reflect-ng-for-of": "https://itembank-dev.oss-cn-qi"
+}--><image _ngcontent-sfq-c49="" ng-reflect-src="https://itembank-dev.oss-cn-qi" ng-reflect-auto-size="true" class="loaded"
+                            ><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><img src="https://itembank-dev.oss-cn-qingdao.aliyuncs.com/stonecutresults/185323d7-478b-402a-8653-243def281b8c/185323d7-478b-402a-8653-243def281b8c_pageimg_answer_0.jpg?Expires=1755586800&amp;OSSAccessKeyId=LTAI36URVnKkomqd&amp;Signature=km3UWgUlJobX8nPSeKZEqmFTXBI%3D" class="auto-size loaded" /><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--></image
+                        >
+                    </div>
+                    <!----><!----><!---->
+                </div>
+                <!--bindings={
+  "ng-reflect-ng-if": "true"
+}-->
+                <div _ngcontent-sfq-c49="" class="error-cause">
+                    <div _ngcontent-sfq-c49="" class="error-cause-title">错题原因</div>
+                    <div _ngcontent-sfq-c49="" class="flex-center-space-around error-cause-list">
+                        <div _ngcontent-sfq-c49="" class="flex-v-center error-cause-item"><span _ngcontent-sfq-c49=""></span><span _ngcontent-sfq-c49="">思路错误</span></div>
+                        <div _ngcontent-sfq-c49="" class="flex-v-center error-cause-item"><span _ngcontent-sfq-c49=""></span><span _ngcontent-sfq-c49="">概念模糊</span></div>
+                        <div _ngcontent-sfq-c49="" class="flex-v-center error-cause-item"><span _ngcontent-sfq-c49=""></span><span _ngcontent-sfq-c49="">粗心大意</span></div>
+                        <div _ngcontent-sfq-c49="" class="flex-v-center error-cause-item"><span _ngcontent-sfq-c49=""></span><span _ngcontent-sfq-c49="">其他原因</span></div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <!---->
+    </body>
+</html>

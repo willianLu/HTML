@@ -28,6 +28,13 @@
             .b {
                 flex-shrink: 0;
             }
+            .test-box {
+                width: 300px;
+                height: 200px;
+                background-color: green;
+                clip-path: circle(0);
+                transition: all 0.5s;
+            }
         </style>
         <!-- <script src="./js/whitedragon-v0.0.1.canary.js"></script> -->
         <!-- <script src="https://unpkg.com/vconsole@latest/dist/vconsole.min.js"></script> -->
@@ -66,8 +73,12 @@
             <a href="http://localhost:5173/#/">跳转h5链接</a>
         </div>
         <button onclick="toPage()">跳转链接</button>
+        <div class="test-box"></div>
         <!-- <iframe id="app" name="appPage" src="http://10.181.141.87:9999/#/booking1?refId=1033063234&ts1=%E5%B9%BF%E5%B7%9E%E4%B8%9C&ts1=%E5%93%88%E5%B0%94%E6%BB%A8%E8%A5%BF&ts1=20210605&ts1=Z236&ts1=&ts1=19%3A49&ts1=&ts2=%E5%93%88%E5%B0%94%E6%BB%A8&ts2=%E9%B9%A4%E5%B2%97&ts2=20210607&ts2=K7019&ts2=&ts2=21%3A44&ts2=&cities=%E5%B9%BF%E5%B7%9E%E4%B8%9C&cities=%E5%93%88%E5%B0%94%E6%BB%A8%E8%A5%BF&cities=%E5%93%88%E5%B0%94%E6%BB%A8&cities=%E9%B9%A4%E5%B2%97&at=3479&tt=896&planCode=010031&transferType=TT&dataResource=&source=&abres=C&experimentInfo=&pl=%E5%B9%BF%E5%B7%9E&pl=%E5%93%88%E5%B0%94%E6%BB%A8%E8%A5%BF&pl=%E5%93%88%E5%B0%94%E6%BB%A8&pl=%E9%B9%A4%E5%B2%97&ti=19%3A49&ti=06%3A48&ti=21%3A44&ti=05%3A48&eticket="></iframe> -->
         <script>
+            setTimeout(() => {
+                document.querySelector('.test-box').style.clipPath = 'circle(100%)'
+            }, 1000)
             function toPage() {
                 // window.location.href = "http://10.108.84.209:8090/#/booking?at=438&tt=296&ts1=%E5%A4%AA%E5%8E%9F&ts1=%E6%A6%86%E6%AC%A1&ts1=20211111&ts1=K237&ts1=23%3A19&ts1=21&ts1=%E7%A1%AC%E5%BA%A7&ts1=KS&ts1=&ts2=%E6%A6%86%E6%AC%A1&ts2=%E5%BF%BB%E5%B7%9E&ts2=20211112&ts2=1552&ts2=04%3A36&ts2=121&ts2=%E6%97%A0%E5%BA%A7&ts2=PK&ts2=&refId=&planCode=&source=%7B%22abTest%22%3A%5B%7B%22expNo%22%3A%2220201217_threePlanExposure%22,%22expGroup%22%3A%22Z%22%7D,%7B%22expNo%22%3A%2220201230_refreshTicketCache%22,%22expGroup%22%3A%22Z%22%7D,%7B%22expNo%22%3A%2220210105_addFilterRule%22,%22expGroup%22%3A%22Z%22%7D,%7B%22expNo%22%3A%2220210107_reInvokeRankModel%22,%22expGroup%22%3A%22Z%22%7D,%7B%22expNo%22%3A%2220210119_dynamicCitySize%22,%22expGroup%22%3A%22Z%22%7D,%7B%22expNo%22%3A%2220210125_doubleCitySize%22,%22expGroup%22%3A%22Z%22%7D,%7B%22expNo%22%3A%2220210226_filterByCityRatio%22,%22expGroup%22%3A%22Z%22%7D,%7B%22expNo%22%3A%2220210608_tfftMoreTransCity%22,%22expGroup%22%3A%22Z%22%7D,%7B%22expNo%22%3A%2220210611_newTransTimeLogic%22,%22expGroup%22%3A%22Z%22%7D,%7B%22expNo%22%3A%2220210629_filterRemainTicket%22,%22expGroup%22%3A%22Z%22%7D,%7B%22expNo%22%3A%2220210813_appUseModel%22,%22expGroup%22%3A%22Z%22%7D,%7B%22expNo%22%3A%2220210831_grabticketfiltration%22,%22expGroup%22%3A%22Z%22%7D%5D,%22requestId%22%3A%220df5b0e059d020f50dcb0a938a06d146%22%7D"
                 window.location.href =

@@ -1,16 +1,19 @@
 {
     // "eslint.format.enable": true,
     "editor.formatOnSave": true, // IDE保存时自动格式化
-    "editor.codeActionsOnSave": { // eslint保存时自动修复
-        "source.fixAll.eslint": true
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": "explicit"
     },
-    "[json]": { // json文件格式化
+    "[json]": {
+        // json文件格式化
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
-    "[javascript]": { // js文件格式化
+    "[javascript]": {
+        // js文件格式化
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
-    "[typescript]": { // ts文件格式化
+    "[typescript]": {
+        // ts文件格式化
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "[css]": {
@@ -19,9 +22,10 @@
     "[less]": {
         "editor.defaultFormatter": "vscode.css-language-features"
     },
-    "[html]": { // ts文件格式化
+    "[html]": {
+        // ts文件格式化
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
-    "files.eol": "\n",
+    "files.eol": "\n"
     // "diffEditor.ignoreTrimWhitespace": false
 }

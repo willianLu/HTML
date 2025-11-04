@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+        <title>小程序web测试</title>
+        <style>
+            * {
+                margin: 0;
+                border: 0;
+            }
+            button {
+                display: block;
+                margin: 12px auto;
+                cursor: pointer;
+            }
+            .test {
+                margin: 0 16px;
+                padding: 16px;
+                background-color: #f4f4f4;
+            }
+        </style>
+        <script src="https://res.wx.qq.com/open/js/jweixin-1.3.2.js"></script>
+        <script src="./js/vconsole.min.js"></script>
+    </head>
+    <body>
+        <div>
+            <button onClick="handleTest()">跳转</button>
+        </div>
+        <div class="test"></div>
+        <script>
+            let isMiniProgram = false
+            wx.miniProgram.getEnv((res) => {
+                if (res.miniprogram) {
+                    isMiniProgram = true
+                    console.log('当前在小程序环境中', wx)
+                    window.WeixinJSBridge.on('onPageStateChange', function (res) {
+                        if (res.active === 'true' || res.active === true) {
+                            console.log('[ 页面onShow事件 ]')
+                            setTimeout(() => {
+                                console.log('[ 检测支付 ]')
+                            }, 1000)
+                        }
+                    })
+                    // 监听页面状态变化
+                } else {
+                    console.log('不在小程序环境中')
+                }
+            })
+
+            const vConsole = new window.VConsole()
+            console.log('[ 分析 ]', window.navigator)
+            function handleTest() {
+                console.log('[ 我在点击 ]', isMiniProgram)
+                wx.miniProgram.navigateTo({
+                    url: '/pages_common/chart/chart',
+                })
+            }
+        </script>
+    </body>
+</html>

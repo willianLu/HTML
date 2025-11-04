@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>WEB 组件</title>
+    </head>
+    <body>
+        <div>
+            <my-button></my-button>
+        </div>
+        <script>
+            class MyButton extends HTMLElement {
+                constructor() {
+                    super()
+                    const shadowRoot = this.attachShadow({ mode: 'open' })
+                    shadowRoot.innerHTML = `
+                    <style>
+                        button {
+                        background-color: #4CAF50;
+                        border: none;
+                        color: white;
+                        text-align: center;
+                        text-decoration: none;
+                        display: inline-block;
+                        font-size: 16px;
+                        margin: 4px 2px;
+                        cursor: pointer;
+                        padding: 10px 24px;
+                        border-radius: 4px;
+                        }
+                    </style>
+                    <button>Click Me!</button>
+                    `
+                    shadowRoot.querySelector('button').addEventListener('click', () => {
+                        alert('按钮被点击了！')
+                    })
+                }
+            }
+            customElements.define('my-button', MyButton)
+        </script>
+    </body>
+</html>
