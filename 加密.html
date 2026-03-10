@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+        <title>机密处理</title>
+    </head>
+
+    <body>
+        <script>
+            class FrontendObfuscator {
+                constructor() {
+                    this.key = null
+                    this.lastRequestTime = 0
+                }
+
+                // 获取密钥
+                getKey() {
+                    const key = { keyId: '9b6473c913da49b98823562cd3af7858', timestamp: 1768189875, randomChars: 'wcwFhYLsQFqX', expiresAt: 1768191675 }
+                    this.key = key
+                    return key
+                }
+
+                // 生成签名
+                generateSignature(key) {
+                    const data = `${key.keyId}:${key.timestamp}:${key.randomChars}`
+                    // 注意：前端不应该有服务器秘钥，这里使用前端签名
+                    // 实际生产环境应该使用不同的签名机制
+                    return this.simpleHash(data)
+                }
+
+                // 简单哈希函数（前端安全版本）
+                simpleHash(str) {
+                    let hash = 0
+                    for (let i = 0; i < str.length; i++) {
+                        const char = str.charCodeAt(i)
+                        hash = (hash << 5) - hash + char
+                        hash = hash & hash // 转换为32位整数
+                    }
+                    return Math.abs(hash).toString(36)
+                }
+
+                // 混淆数据
+                obfuscateData(data, key) {
+                    console.log('[ 混淆数据 ]', key)
+                    if (!key || !key.randomChars) {
+                        throw new Error('Key not available')
+                    }
+
+                    // 1. XOR加密
+                    const xorEncrypted = this.xorEncrypt(data, key.keyId)
+
+                    // 2. Base64编码
+                    const base64Data = unescape(encodeURIComponent(xorEncrypted))
+
+                    console.log('base64Data', base64Data)
+
+                    // 3. 反转字符串
+                    const reversed = base64Data.split('').reverse().join('')
+
+                    // 4. 插入随机字符
+                    const withRandomChars = this.insertRandomChars(reversed, key.randomChars)
+
+                    return withRandomChars
+                }
+
+                // XOR加密
+                xorEncrypt(data, key) {
+                    let result = ''
+                    const keyLength = key.length
+
+                    for (let i = 0; i < data.length; i++) {
+                        const charCode = data.charCodeAt(i) ^ key.charCodeAt(i % keyLength)
+                        result += String.fromCharCode(charCode)
+                    }
+
+                    return result
+                }
+
+                // 插入随机字符
+                insertRandomChars(data, randomChars) {
+                    let result = ''
+                    const randomCharsArray = randomChars.split('')
+                    let randomIndex = 0
+
+                    // 每2-4个字符插入一个随机字符
+                    for (let i = 0; i < data.length; i++) {
+                        result += data[i]
+
+                        // 随机决定是否插入
+                        if (Math.random() > 0.7 && i < data.length - 1) {
+                            result += randomCharsArray[randomIndex % randomCharsArray.length]
+                            randomIndex++
+                        }
+                    }
+
+                    // 在开头和结尾也插入一些
+                    const prefix = randomCharsArray.slice(0, 2).join('')
+                    const suffix = randomCharsArray.slice(2, 4).join('')
+
+                    return prefix + result + suffix
+                }
+
+                // 发送混淆数据
+                getData(data) {
+                    try {
+                        // 获取密钥
+                        const key = this.getKey()
+                        if (!key) {
+                            throw new Error('Failed to get encryption key')
+                        }
+
+                        // 生成签名
+                        const signature = this.generateSignature(key)
+
+                        // 混淆数据
+                        const obfuscatedData = this.obfuscateData(data, key)
+                        const result = {
+                            keyId: key.keyId,
+                            obfuscatedData: obfuscatedData,
+                            signature: signature,
+                        }
+                        console.log('[ 处理后的数据 ]', result)
+                        return result
+                    } catch (error) {
+                        console.error('Failed to send data:', error)
+                        throw error
+                    }
+                }
+            }
+
+            // 使用示例
+            const obfuscator = new FrontendObfuscator()
+            // 监听表单提交
+            setTimeout(() => {
+                const data = 'Hello World!'
+                obfuscator.getData(data)
+            }, 2000)
+        </script>
+    </body>
+</html>

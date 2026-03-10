@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -21,76 +21,111 @@
             main {
                 margin: 0 auto;
                 width: 680px;
-                font-size: 20px;
+                /* font-size: 20px; */
                 /* line-height: 32px; */
-                line-height: normal;
+                /* line-height: normal; */
             }
         </style>
     </head>
     <body>
-        <main class="main">天有不测风云，人有旦夕祸福。蜈蚣百足，行不及蛇；雄鸡两翼，飞不过鸦。马有千里之程，无骑不能自往；人有冲天之志，非运不能自通。We switch from an expect call to a match expression to move from crashing on an error to handling the error. Remember that parse returns a Result type and Result is an enum that has the variants Ok and Err. We’re using a match expression here, as we did with the Ordering result of the cmp method.</main>
-        <div class="other">
-            <img src="https://picsum.photos/200/300" alt="" />
-            <div>其他内容啊，坎坎坷坷接口接口。</div>
-        </div>
+        <main class="main">
+            天有不测风云，人有旦夕祸福。蜈蚣百足，行不及蛇；雄鸡两翼，飞不过鸦。马有千里之程，无骑不能自往；人有冲天之志，非运不能自通。We switch from an expect call to a match expression to move 😀 😀 😀 from crashing on an error to handling the error. Remember that parse returns a Result type and Result is an enum that has the variants Ok and Err. We’re using a match expression here, as we did with the Ordering result of the cmp
+            method.(100%)、安徽省灵璧中学(100%)、宿城第一中学宿马学校(100%)、安徽省来安县第三中学(100%)、萧县中学(100%)、亳州市第三十二中学(100%)、安徽省当涂第一中学(100%)、颍上县耿棚中学(100%)、安徽省太和中学(100%)、安徽省阜阳一中培训中心(100%)、涡阳县第四中学(100%)、阜阳第一中学（2平台）(100%)、安徽省全椒中学(100%)、安徽省定远英华中学(100%)、亳州第三完全中学(100%)、定远二中学校补习班(100%)、涡阳育萃复读中心(100%)、凤台一中西校区(100%)、砀山铁路中学(100%)、淮北市龙兴中学(100%)、淮北市第七中学(100%)、砀山县西城中学(100%)、阜阳市大田中学(100%)、蚌埠第一中学(100%)、亳州第二高级中学(100%)、安徽省六安市金安区毛坦厂镇六安金安高级中学(100%)、淮北实验高中(100%)、阜阳市红旗中学复习指导中心(100%)、安徽省明光中学(100%)、安徽省宿城第一中学(100%)、滁州实验中学(100%)、滁州市第二中学(100%)、利辛县五育中学(100%)、安徽省淮北市第一中学(100%)、安徽省亳州市利辛县第十中学(100%)、霍邱县第一中学城南分校(100%)、南谯区碧桂园(100%)、滁州市博世高级中学(100%)、明光中学补习班(100%)、长丰北城衡安学校(100%)、淮南一中(100%)、灵璧一中复习班(100%)、安徽省泗县第一中学(100%)、六安市毛坦厂中学北校区(100%)、滁州凤阳英华中学(100%)、蒙城县第一中学(10
+        </main>
         <script>
             function handleInit() {
                 const el = document.querySelector('.main')
                 console.log('[ 原始内容 ]', [el])
                 if (isPureTextNode(el)) {
+                    parsePureText(el, [50, 160])
+                    parsePureText(el, 50)
                     parsePureText(el, 12)
-                    parsePureText(el, 22)
-                    parsePureText(el, 32)
-                    parsePureText(el, 44)
-                    parsePureText(el, 52)
-                    parsePureText(el, 66)
-                    parsePureText(el, 72)
-                    parsePureText(el, 88)
-                    parsePureText(el, 98)
-                    parsePureText(el, 110)
-                    parsePureText(el, 120)
                 }
             }
             handleInit()
-            function parsePureText(el, height) {
+            function parsePureText(el, useHeight) {
                 const originalText = el.textContent
                 const lineHeight = getLineHeight(el)
-                console.log('[ 行高 ]', lineHeight)
+                if (!Array.isArray(useHeight)) {
+                    useHeight = [useHeight]
+                }
+                let idx = 0
+                // 计算大概的行数
                 const row = Math.ceil(el.offsetHeight / lineHeight)
+                // 计算每一行大概的字数
                 const rTextCount = Math.floor(originalText.length / row)
-                const cRow = Math.floor(height / lineHeight)
                 // 创建Range对象来测量文本
                 const range = document.createRange()
+                // 段落数据
                 const paragraphs = []
-                let end = cRow < row ? cRow * rTextCount : originalText.length
-                let isEnd = end && cRow < row ? false : true
-                // 是否正向
-                let inc = 0
-                while (!isEnd) {
-                    range.setStart(el.firstChild, 0)
-                    range.setEnd(el.firstChild, end)
-                    const rect = range.getBoundingClientRect()
-                    if ((inc === 1 && rect.height > height) || (inc === -1 && rect.height <= height)) {
-                        isEnd = true
-                        end += inc === 1 ? -1 : 0
-                        break
+                // 段落计算的起点
+                let start = 0
+                // 段落计算的结束点
+                let end = 0
+                let autoHeight = 0
+                function handleSplitText() {
+                    // 如果段落高度小于行高，则按行高拆分
+                    let height = useHeight[idx] < lineHeight ? lineHeight : useHeight[idx]
+                    // 计算每个段落大概的行数
+                    const pRow = Math.floor(height / lineHeight)
+                    // 计算每个段落大概的字数
+                    const pTextCount = pRow * rTextCount
+                    if (end === 0) {
+                        end = pRow < row ? pRow * rTextCount : originalText.length - 1
+                    } else {
+                        end += pTextCount
                     }
-                    if (inc === 0) {
-                        inc = rect.height > height ? -1 : 1
+                    // 结束点不能超出字符数量
+                    if (end > originalText.length - 1) {
+                        end = originalText.length - 1
                     }
-                    end += inc
+                    let isEnd = false
+                    // 是否正向
+                    let inc = 0
+                    let pHeight = 0
+                    while (!isEnd) {
+                        let rect = {}
+                        if (inc <= 0 || end <= originalText.length - 1) {
+                            range.setStart(el.childNodes[0], start)
+                            range.setEnd(el.childNodes[0], end)
+                            rect = range.getBoundingClientRect()
+                            rect.height = Math.ceil(rect.height / lineHeight) * lineHeight
+                        }
+                        if ((inc > 0 && end >= originalText.length - 1) || (inc === 1 && rect.height > height) || (inc === -1 && rect.height <= height)) {
+                            isEnd = true
+                            end += inc === 1 && end < originalText.length - 1 ? -1 : 0
+                            let cHeight = 0
+                            if (inc === 1 && rect.height > height) {
+                                cHeight = pHeight
+                            } else if (inc === -1 && rect.height <= height) {
+                                cHeight = rect.height
+                            }
+                            if (rect.height) {
+                                autoHeight += cHeight
+                            }
+                            paragraphs.push({
+                                start,
+                                end: end ? end - 1 : 0,
+                                text: originalText.substring(start, end),
+                                height: cHeight ? cHeight : el.offsetHeight - autoHeight,
+                            })
+                            start = end
+                            break
+                        }
+                        if (inc === 0) {
+                            inc = rect.height > height ? -1 : 1
+                        }
+                        pHeight = rect.height
+                        end += inc
+                    }
+                    if (start < originalText.length - 1) {
+                        if (idx < useHeight.length - 1) {
+                            idx += 1
+                        }
+                        handleSplitText()
+                    }
                 }
-
-                paragraphs.push({
-                    start: 0,
-                    end: end ? end - 1 : 0,
-                    text: originalText.substring(0, end),
-                })
-                paragraphs.push({
-                    start: end,
-                    end: cRow < row ? originalText.length - 1 : end,
-                    text: originalText.substring(end),
-                })
+                handleSplitText()
                 console.log('分段结果:', paragraphs)
             }
             function getLineHeight(el) {
@@ -98,8 +133,8 @@
                 const lineHeight = style.lineHeight
                 if (lineHeight === 'normal') {
                     const range = document.createRange()
-                    range.setStart(el.firstChild, 0)
-                    range.setEnd(el.firstChild, 1)
+                    range.setStart(el.childNodes[0], 0)
+                    range.setEnd(el.childNodes[0], 1)
                     const rect = range.getBoundingClientRect()
                     return rect.height
                 }

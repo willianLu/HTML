@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+        <title>文本处理</title>
+    </head>
+    <body>
+        <script>
+            // Helper functions for Base64 URL-safe encoding/decoding
+            function binaryToBase64Url(binary) {
+                let base64 = btoa(binary)
+                // 替换 URL 不安全的字符，并移除末尾的填充符
+                base64 = base64.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/g, '')
+                return base64
+            }
+
+            function base64UrlToBinary(base64url) {
+                // 恢复 URL 安全字符，并添加 Base64 填充符
+                let base64 = base64url.replace(/-/g, '+').replace(/_/g, '/')
+                const pad = base64.length % 4
+                if (pad === 2) base64 += '=='
+                else if (pad === 3) base64 += '='
+                return atob(base64)
+            }
+
+            // LZW 压缩函数 (操作字节字符串，字典大小限制为 4096，即 12 位编码)
+            function lzwCompress(inputByteString) {
+                const MAX_DICT_SIZE = 4096 // 限制字典大小，确保 LZW 码不超过 12 位
+                const dict = new Map()
+                let dictSize = 256 // 初始字典包含所有 256 个单字节字符
+                for (let i = 0; i < 256; i++) {
+                    dict.set(String.fromCharCode(i), i)
+                }
+
+                let w = ''
+                const result = []
+                for (let i = 0; i < inputByteString.length; i++) {
+                    const c = inputByteString.charAt(i) // 这里的 c 是一个字节字符 (0-255)
+                    const wc = w + c
+                    if (dict.has(wc)) {
+                        w = wc
+                    } else {
+                        result.push(dict.get(w))
+                        if (dictSize < MAX_DICT_SIZE) {
+                            // 字典未满时才添加新条目
+                            dict.set(wc, dictSize++)
+                        }
+                        w = c
+                    }
+                }
+                if (w !== '') {
+                    result.push(dict.get(w))
+                }
+                return result
+            }
+
+            // LZW 解压缩函数 (操作 LZW 码数组，字典大小限制与压缩时一致)
+            function lzwDecompress(codes) {
+                if (!codes.length) return ''
+                const MAX_DICT_SIZE = 4096 // 字典大小限制与压缩时一致
+                const dict = new Map()
+                let dictSize = 256
+                for (let i = 0; i < 256; i++) {
+                    dict.set(i, String.fromCharCode(i))
+                }
+
+                let w = String.fromCharCode(codes[0]) // 第一个码总是单字节字符
+                let result = w
+                for (let i = 1; i < codes.length; i++) {
+                    const k = codes[i]
+                    let entry
+                    if (dict.has(k)) {
+                        entry = dict.get(k)
+                    } else if (k === dictSize) {
+                        // LZW 特殊情况：当前码是前一个输出 + 前一个输出的第一个字符
+                        entry = w + w.charAt(0)
+                    } else {
+                        throw new Error('Bad LZW code: ' + k) // 遇到无效 LZW 码，表示压缩或解压出错
+                    }
+                    result += entry
+                    if (dictSize < MAX_DICT_SIZE) {
+                        // 字典未满时才添加新条目
+                        dict.set(dictSize++, w + entry.charAt(0))
+                    }
+                    w = entry
+                }
+                return result
+            }
+
+            /**
+             * 将文本压缩并编码为 URL 安全的短 hash 字符串。
+             * 支持所有 Unicode 字符。
+             * @param {string} text 原始文本
+             * @returns {string} 短 hash 字符串
+             */
+            function textToShortHash(text) {
+                if (text.length === 0) return ''
+
+                // 1. 将原始文本转换为 UTF-8 字节序列
+                const encoder = new TextEncoder()
+                const utf8Bytes = encoder.encode(text)
+                let byteString = ''
+                for (let i = 0; i < utf8Bytes.length; i++) {
+                    byteString += String.fromCharCode(utf8Bytes[i]) // 将字节转换为 0-255 范围的字符
+                }
+
+                // 2. 对字节字符串进行 LZW 压缩，得到 LZW 码数组
+                const codes = lzwCompress(byteString)
+
+                // 3. 将 LZW 码数组序列化为二进制字符串
+                // 每个 LZW 码（最大 4095，即 12 位）存储为两个字节
+                let binary = ''
+                for (let i = 0; i < codes.length; i++) {
+                    const code = codes[i]
+                    // 确保 LZW 码在 12 位范围内，并拆分为高 8 位和低 8 位
+                    binary += String.fromCharCode((code >> 8) & 0xff) // 高字节
+                    binary += String.fromCharCode(code & 0xff) // 低字节
+                }
+
+                // 4. 将二进制字符串进行 Base64 URL-safe 编码
+                return binaryToBase64Url(binary)
+            }
+
+            /**
+             * 将短 hash 字符串解码并解压缩回原始文本。
+             * @param {string} shortHash 短 hash 字符串
+             * @returns {string} 原始文本
+             */
+            function shortHashToText(shortHash) {
+                if (!shortHash) return ''
+
+                // 1. 将 Base64 URL-safe 编码解码为二进制字符串
+                const binary = base64UrlToBinary(shortHash)
+
+                // 2. 将二进制字符串反序列化为 LZW 码数组
+                const codes = []
+                for (let i = 0; i < binary.length; i += 2) {
+                    const hi = binary.charCodeAt(i) // 高字节
+                    const lo = binary.charCodeAt(i + 1) // 低字节
+                    codes.push((hi << 8) | lo) // 组合成 16 位 LZW 码
+                }
+
+                // 3. 对 LZW 码数组进行 LZW 解压缩，得到 UTF-8 字节字符串
+                const byteString = lzwDecompress(codes)
+
+                // 4. 将 UTF-8 字节字符串转换回原始文本
+                const utf8Bytes = new Uint8Array(byteString.length)
+                for (let i = 0; i < byteString.length; i++) {
+                    utf8Bytes[i] = byteString.charCodeAt(i) // 将字节字符转换为字节值
+                }
+                const decoder = new TextDecoder()
+                return decoder.decode(utf8Bytes)
+            }
+
+            const text = '天山雪云常不开，千峰万岭雪崔嵬。北风夜卷赤亭口，一夜天山雪更厚。能兼汉月照银山，复逐胡风过铁关。交河城边鸟飞绝，轮台路上马蹄滑。晻霭寒氛万里凝，阑干阴崖千丈冰。将军狐裘卧不暖，都护宝刀冻欲断。正是天山雪下时，送君走马归京师。雪中何以赠君别，惟有青青松树枝。'
+            const hash = textToShortHash(text)
+            console.log(hash)
+
+            const original = shortHashToText(hash)
+            console.log(original)
+        </script>
+    </body>
+</html>
